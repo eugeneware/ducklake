@@ -15,6 +15,7 @@
 
 namespace duckdb {
 class DuckLakeFieldData;
+class DuckLakeMetadataManager;
 struct DuckLakeFunctionInfo;
 
 enum class InlinedVirtualColumn { NONE, COLUMN_ROW_ID, COLUMN_EMPTY };
@@ -39,6 +40,7 @@ public:
 	void AddVirtualColumn(column_t virtual_column_id) override;
 
 private:
+	string GetInlinedFilter(DuckLakeMetadataManager &metadata_manager) const;
 	bool TryEvaluateExpression(ClientContext &context, idx_t virtual_col_idx, Vector &input_vector,
 	                           const LogicalType &input_type, Vector &output_vector);
 

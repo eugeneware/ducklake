@@ -492,7 +492,8 @@ public:
 
 	virtual idx_t GetNextColumnId(TableIndex table_id);
 	virtual unique_ptr<QueryResult> ReadInlinedData(DuckLakeSnapshot snapshot, const string &inlined_table_name,
-	                                                const vector<string> &columns_to_read);
+	                                                const vector<string> &columns_to_read,
+	                                                const vector<LogicalType> &types, const string &filter);
 	virtual unique_ptr<QueryResult> ReadInlinedDataInsertions(DuckLakeSnapshot start_snapshot,
 	                                                          DuckLakeSnapshot end_snapshot,
 	                                                          const string &inlined_table_name,
@@ -555,6 +556,8 @@ protected:
 	enum class StatsCastType : uint8_t { ORDERING, MIN, MAX };
 
 	virtual string GetLatestSnapshotQuery() const;
+	virtual string GenerateInlinedDataQuery(const string &table_name, const vector<string> &columns_to_read,
+	                                        const string &filter, const string &metadata_table_prefix);
 
 	static string GenerateFileColumnStatsCTEBody(const CTERequirement &req, TableIndex table_id,
 	                                             const string &metadata_table_prefix);

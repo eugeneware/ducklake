@@ -3689,17 +3689,33 @@ static string GetProjection(const vector<string> &columns_to_read) {
 
 unique_ptr<QueryResult> DuckLakeMetadataManager::ReadInlinedData(DuckLakeSnapshot snapshot,
                                                                  const string &inlined_table_name,
-                                                                 const vector<string> &columns_to_read) {
-	auto projection = GetProjection(columns_to_read);
+                                                                 const vector<string> &columns_to_read,
+                                                                 const vector<LogicalType> &types,
+                                                                 const string &filter) {
+	vector<string> projection;
+	for (idx_t i = 0; i < columns_to_read.size(); i++) {
+		auto column = filter.empty() ? columns_to_read[i] : StringUtil::Format("col%d", i + 1);
+		projection.push_back(CastColumnToTarget(column, types[i]));
+	}
+	if (filter.empty()) {
+		return Query(snapshot, GenerateInlinedDataQuery(inlined_table_name, projection, filter, "{METADATA_CATALOG}"));
+	}
+	auto source = GenerateInlinedDataQuery(inlined_table_name, columns_to_read, filter, "{METADATA_CATALOG}");
+	return Query(snapshot, StringUtil::Format("SELECT %s FROM (%s) inlined_data", GetProjection(projection), source));
+}
+
+string DuckLakeMetadataManager::GenerateInlinedDataQuery(const string &table_name,
+                                                         const vector<string> &columns_to_read, const string &filter,
+                                                         const string &metadata_table_prefix) {
 	auto col_names = InlinedColNames();
-	auto result = Query(snapshot, StringUtil::Format(R"(
+	return StringUtil::Format(R"(
 SELECT %s
-FROM {METADATA_CATALOG}.%s inlined_data
-WHERE {SNAPSHOT_ID} >= %s AND ({SNAPSHOT_ID} < %s OR %s IS NULL)
-ORDER BY %s;)",
-	                                                 projection, inlined_table_name, col_names.begin_snapshot,
-	                                                 col_names.end_snapshot, col_names.end_snapshot, col_names.row_id));
-	return result;
+FROM %s.%s
+WHERE {SNAPSHOT_ID} >= %s AND ({SNAPSHOT_ID} < %s OR %s IS NULL)%s
+ORDER BY %s)",
+	                          GetProjection(columns_to_read), metadata_table_prefix, SQLIdentifier(table_name),
+	                          col_names.begin_snapshot, col_names.end_snapshot, col_names.end_snapshot,
+	                          filter.empty() ? "" : " AND (" + filter + ")", col_names.row_id);
 }
 
 unique_ptr<QueryResult> DuckLakeMetadataManager::ReadInlinedDataChanges(DuckLakeSnapshot start_snapshot,

@@ -7,8 +7,109 @@
 #include "storage/ducklake_delete_filter.hpp"
 #include "duckdb/common/vector_operations/vector_operations.hpp"
 #include "duckdb/common/sql_identifier.hpp"
+#include "duckdb/planner/expression/bound_operator_expression.hpp"
+#include "duckdb/planner/expression/bound_reference_expression.hpp"
 
 namespace duckdb {
+
+static string InlinedIntegerFilter(const Expression &expression, const string &column, const LogicalType &type) {
+	if (auto child = ExpressionFilter::GetOptionalFilterChild(expression)) {
+		return InlinedIntegerFilter(*child, column, type);
+	}
+	auto is_column = [&](const Expression &expr) {
+		return expr.GetExpressionClass() == ExpressionClass::BOUND_REF &&
+		       expr.Cast<BoundReferenceExpression>().Index() == 0 && expr.GetReturnType() == type;
+	};
+	auto is_constant = [&](const Expression &expr) {
+		return expr.GetExpressionClass() == ExpressionClass::BOUND_CONSTANT && expr.GetReturnType() == type;
+	};
+	if (BoundComparisonExpression::IsComparison(expression)) {
+		auto &comparison = expression.Cast<BoundFunctionExpression>();
+		auto &left = BoundComparisonExpression::Left(comparison);
+		auto &right = BoundComparisonExpression::Right(comparison);
+		if (!((is_column(left) && is_constant(right)) || (is_constant(left) && is_column(right)))) {
+			return string();
+		}
+	} else if (expression.GetExpressionClass() == ExpressionClass::BOUND_OPERATOR) {
+		auto &op = expression.Cast<BoundOperatorExpression>();
+		if (op.GetChildren().empty() || !is_column(*op.GetChildren()[0])) {
+			return string();
+		}
+		switch (expression.GetExpressionType()) {
+		case ExpressionType::COMPARE_IN:
+			for (idx_t i = 1; i < op.GetChildren().size(); i++) {
+				if (!is_constant(*op.GetChildren()[i])) {
+					return string();
+				}
+			}
+			break;
+		case ExpressionType::OPERATOR_IS_NULL:
+		case ExpressionType::OPERATOR_IS_NOT_NULL:
+			break;
+		default:
+			return string();
+		}
+	} else if (expression.GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION) {
+		auto &conjunction = expression.Cast<BoundConjunctionExpression>();
+		vector<string> children;
+		for (auto &child : conjunction.GetChildren()) {
+			auto filter = InlinedIntegerFilter(*child, column, type);
+			if (filter.empty()) {
+				if (expression.GetExpressionType() == ExpressionType::CONJUNCTION_OR) {
+					return string();
+				}
+				continue;
+			}
+			children.push_back("(" + filter + ")");
+		}
+		return StringUtil::Join(children,
+		                        expression.GetExpressionType() == ExpressionType::CONJUNCTION_OR ? " OR " : " AND ");
+	} else {
+		return string();
+	}
+	return ExpressionFilter(expression.Copy()).ToString(column);
+}
+
+string DuckLakeInlinedDataReader::GetInlinedFilter(DuckLakeMetadataManager &metadata_manager) const {
+	vector<string> conditions;
+	if (!filters) {
+		return string();
+	}
+	for (auto &entry : *filters) {
+		auto index = entry.GetIndex();
+		auto &filter = ExpressionFilter::GetExpressionFilter(entry.Filter(), "inlined filter pushdown");
+		if (index.GetIndex() >= column_indexes.size() || !filter.column_indexes.empty() ||
+		    expression_map.find(index) != expression_map.end()) {
+			continue;
+		}
+		auto &column = columns[column_indexes[index.GetIndex()].GetPrimaryIndex()];
+		switch (column.type.id()) {
+		case LogicalTypeId::TINYINT:
+		case LogicalTypeId::SMALLINT:
+		case LogicalTypeId::INTEGER:
+		case LogicalTypeId::BIGINT:
+			break;
+		default:
+			continue;
+		}
+		if (column.type.HasAlias() || !metadata_manager.TypeIsNativelySupported(column.type)) {
+			continue;
+		}
+		if (!column.identifier.IsNull() && column.identifier.type().id() == LogicalTypeId::INTEGER) {
+			auto identifier = IntegerValue::Get(column.identifier);
+			if (identifier == MultiFileReader::ORDINAL_FIELD_ID || identifier == MultiFileReader::ROW_ID_FIELD_ID ||
+			    identifier == MultiFileReader::LAST_UPDATED_SEQUENCE_NUMBER_ID) {
+				continue;
+			}
+		}
+		auto condition =
+		    InlinedIntegerFilter(*filter.expr, SQLIdentifier::ToString(column.name.GetIdentifierName()), column.type);
+		if (!condition.empty()) {
+			conditions.push_back("(" + condition + ")");
+		}
+	}
+	return StringUtil::Join(conditions, " AND ");
+}
 
 DuckLakeInlinedDataReader::DuckLakeInlinedDataReader(DuckLakeFunctionInfo &read_info, const OpenFileInfo &info,
                                                      string table_name_p, vector<MultiFileColumnDefinition> columns_p)
@@ -69,7 +170,8 @@ bool DuckLakeInlinedDataReader::TryInitializeScan(ClientContext &context, Global
 				}
 			}
 			auto column_name = SQLIdentifier::ToString(columns[index].name.GetIdentifierName());
-			if (read_info.scan_type != DuckLakeScanType::SCAN_FOR_FLUSH) {
+			if (read_info.scan_type != DuckLakeScanType::SCAN_FOR_FLUSH &&
+			    read_info.scan_type != DuckLakeScanType::SCAN_TABLE) {
 				// the flush source already casts its columns
 				column_name = metadata_manager.CastColumnToTarget(column_name, col.type);
 			}
@@ -103,7 +205,8 @@ bool DuckLakeInlinedDataReader::TryInitializeScan(ClientContext &context, Global
 		unique_ptr<QueryResult> query_result;
 		switch (read_info.scan_type) {
 		case DuckLakeScanType::SCAN_TABLE:
-			query_result = metadata_manager.ReadInlinedData(read_info.snapshot, table_name, columns_to_read);
+			query_result = metadata_manager.ReadInlinedData(read_info.snapshot, table_name, columns_to_read,
+			                                                expected_types, GetInlinedFilter(metadata_manager));
 			break;
 		case DuckLakeScanType::SCAN_INSERTIONS:
 			query_result = metadata_manager.ReadInlinedDataInsertions(*read_info.start_snapshot, read_info.snapshot,
@@ -137,6 +240,9 @@ bool DuckLakeInlinedDataReader::TryInitializeScan(ClientContext &context, Global
 				auto row_id_data = FlatVector::GetData<int64_t>(row_id_vector);
 				for (idx_t r = 0; r < chunk.size(); r++) {
 					auto row_id = NumericCast<idx_t>(row_id_data[r]);
+					while (current_idx < deleted_row_ids.size() && deleted_row_ids[current_idx] < row_id) {
+						current_idx++;
+					}
 					if (current_idx < deleted_row_ids.size() && deleted_row_ids[current_idx] == row_id) {
 						deleted_ordinals.push_back(ordinal_position);
 						current_idx++;

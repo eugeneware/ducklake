@@ -355,6 +355,20 @@ string PostgresMetadataManager::GetLatestSnapshotQuery() const {
 	)";
 }
 
+string PostgresMetadataManager::GenerateInlinedDataQuery(const string &table_name,
+                                                         const vector<string> &columns_to_read, const string &filter,
+                                                         const string &metadata_table_prefix) {
+	if (filter.empty()) {
+		return DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, columns_to_read, filter,
+		                                                         metadata_table_prefix);
+	}
+	auto remote_query = DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, columns_to_read, filter,
+	                                                                      "{METADATA_SCHEMA_ESCAPED}");
+	return StringUtil::Format(
+	    "SELECT * FROM postgres_query({METADATA_CATALOG_NAME_LITERAL}, %s, use_transaction = true)",
+	    SQLString(remote_query));
+}
+
 string PostgresMetadataManager::GenerateFileListQuery(DuckLakeTableEntry &table, const FilterPushdownInfo *filter_info,
                                                       const vector<DuckLakeFileListDynamicFilter> &dynamic_filters,
                                                       const vector<idx_t> &runtime_filter_stats_columns,
