@@ -1,0 +1,106 @@
+{
+  "duckdb": "5070de3585e846718fac121b5b149f4236e6a58a",
+  "postgres_scanner": "f9db66ec5a5c35a30ce868d2b7233ffc0a21a08e",
+  "sqlite_scanner": "ca01682537b9bedfe785083547a1a8c253ced658",
+  "postgresql": "17.11",
+  "build_type": "MinSizeRel",
+  "cxx_flags": "-O1 -DNDEBUG",
+  "c_flags": "-Os -DNDEBUG",
+  "compiler": "Debian clang version 20.1.8 (++20250708063551+0c9f909b7976-1~exp1~20250708183702.136)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/lib/llvm-20/bin\n",
+  "docker_image": "sha256:063bb265208687747a0f781c547e5a582ca2da07cefacb3f7421eaba3bb5859b",
+  "threads": 2,
+  "memory_limit": "3GB",
+  "rows": 100000,
+  "source_sha256": {
+    ".github/regression/inlined_filters.csv": "38a875753f7374f5630d404a79f198415dea666f688814145300ecad755db9a7",
+    ".github/regression/micro.csv": "a3064fddc6ada9f899b0402cea0995381a8e2b9a33f167afffd89faea4fbf5f5",
+    "benchmark/micro/fixtures/inlined_filters.benchmark.in": "1d1b28fcb72308a55123e8d8db5353e4f1617da8b7166d2286a264c9c072387c",
+    "benchmark/micro/read/inlined_filters/README.md": "49fa378728bf4ff70be2e8b46280f5b5d2316de0d92df452ca009eb5a624b203",
+    "benchmark/micro/read/inlined_filters/blob.benchmark": "ba9ac9eaef1d6d88b7f2b40bda9d98b57933d8ef0cb4f4eba2ae70cb758980f2",
+    "benchmark/micro/read/inlined_filters/boolean.benchmark": "4974c0144e557c005d1b97be75501d88d7854c99c7a613843beaa646edb623da",
+    "benchmark/micro/read/inlined_filters/date.benchmark": "fa5c2bdbc0f8d84d23ef06bf7301c7316cf261b615601568efe8316014d99496",
+    "benchmark/micro/read/inlined_filters/date_broad.benchmark": "d5e17afe484baa9021c5cb9b611fd1ea1eab9ddb4ccb8e6216c5285639966883",
+    "benchmark/micro/read/inlined_filters/decimal.benchmark": "60a72c9b3d4c3778fde5b0093c28853490ba3292c843bd3394fa4d782d5f34bd",
+    "benchmark/micro/read/inlined_filters/double.benchmark": "8d18ca5e2e03d93d59bdad41c49cc1d1c6c2361638631ef14e18b8eb8e9e1cd9",
+    "benchmark/micro/read/inlined_filters/float.benchmark": "26d6dc465fed0a56d0f6ce90a23b90838d6c76c4a60e67152eff94307e7bd375",
+    "benchmark/micro/read/inlined_filters/full_scan.benchmark": "d6a07650c7a02b96264133b45fa394d150c60444bbad199d04992f04fb4bbb3a",
+    "benchmark/micro/read/inlined_filters/integer_broad.benchmark": "5ddd3e2b8ab67c4c555e56987f60180d70bdda5d1225c0f607905b4f6b9099b0",
+    "benchmark/micro/read/inlined_filters/integer_in.benchmark": "9a980b83a352f987ba0b483a6bc00a130fbf1c4f7380bbd93bfd2c5772c00f0b",
+    "benchmark/micro/read/inlined_filters/integer_missing.benchmark": "7d095ebde8e0abc2d133960564c266ef92bca88b2834528ec4a65116f86a58d5",
+    "benchmark/micro/read/inlined_filters/integer_null.benchmark": "64cde8270957769aae7169f748ac924f940abadb4d30dafefa894281441150f8",
+    "benchmark/micro/read/inlined_filters/integer_point.benchmark": "d1f7aca6f7cb6171cf38d5d3cd2aa80bc67f4a655d4449982ba760a33b0446f5",
+    "benchmark/micro/read/inlined_filters/integer_range.benchmark": "1fe562cc524fb7a1996f455055895f580f85d705d0bfd22cd22ebac20596526a",
+    "benchmark/micro/read/inlined_filters/integer_source.benchmark": "def3af59087de5dbf281833312bb406fb11edd0b4ca1401e8d586ae16a24b9ca",
+    "benchmark/micro/read/inlined_filters/integer_wide.benchmark": "4a31b8ca8bf93875fc07d573b15379bb59f6454ff93dda847283d033c3b381a1",
+    "benchmark/micro/read/inlined_filters/nested.benchmark": "4c1f3434f43a4b38a396809b092ead30dd708f07b05be11bdf184cb511b39cfa",
+    "benchmark/micro/read/inlined_filters/residual_and.benchmark": "03c14c6ed382a947dce8453eb25fd2298aa578c94b39f0ac52f92141a68a3e29",
+    "benchmark/micro/read/inlined_filters/residual_or.benchmark": "a7eb7c3fc1a54eb2ec19c6da92e2ce907a13cfccb19d0b2df608e8e84cb2fdfc",
+    "benchmark/micro/read/inlined_filters/runtime_join.benchmark": "158866a7294610ded30e836cb0e6f03217013ed9234791bfb39e27176ca7a5ea",
+    "benchmark/micro/read/inlined_filters/source_timestamp.benchmark": "c5fe514976a7cd6b264e4c4438899f4ac2ed4acd9cecf105d1443a682e1f38f5",
+    "benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark": "3cd717db56cc918a087fed50c697a4c3b5d4a2c4c326a66c3036c574c0cd87f7",
+    "benchmark/micro/read/inlined_filters/timestamp.benchmark": "93868deeb4c242ecc19592f599da0e930c0839bb9ca978b366319b6f843a7dc6",
+    "benchmark/micro/read/inlined_filters/timestamptz.benchmark": "d750a5023711f2b3129db49081407585409d0ee9b81588a607e6cbefbcb00035",
+    "benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark": "de33ac577093b6aa3a2bffcfa75824bf47efd138733eb6e33962ad8ccd6133f3",
+    "benchmark/micro/read/inlined_filters/varchar.benchmark": "ee1d3551083ca73219b2491830b0ae06020afc398025ca6eec322e91f9b5b335",
+    "benchmark/micro/read/inlined_filters/varchar_broad.benchmark": "ecb87b39687003824bc8ff6d8a81f2fbbfa6e0eaa4a9edc4bd67879d0973fadc",
+    "src/include/metadata_manager/postgres_metadata_manager.hpp": "7849a942432efc6ff50bc40cdc5f5565f15833227b07370010f5df6aee8c24fd",
+    "src/include/storage/ducklake_inlined_data_reader.hpp": "b82bf025e6f4c614b9a97037678ed9a4b8bcd84455e995917fcc690565bf0adf",
+    "src/include/storage/ducklake_metadata_manager.hpp": "f039ecc949ac960714d184bc69b3de7948143a4a4fe4091f0cae7c10e0ac87dc",
+    "src/metadata_manager/postgres_metadata_manager.cpp": "9adb756142295095f40211ef1db4ebc245fab3dd75b1079f9b083287fa8afda8",
+    "src/storage/CMakeLists.txt": "9fb5a77b81811d0efa08dec421401280f8e3e3156423f60d94f7a7995f3b3ebf",
+    "src/storage/ducklake_inlined_data_reader.cpp": "9a041701107fe5ac128e48df68507b5df9bb68c3cbbb0c00ab81cb9104fe752b",
+    "src/storage/ducklake_inlined_filter.cpp": "2a38a646a3b8ff67c3b7d2c5344f49e275bbd20e9698aa1d4ff4144940583c1c",
+    "src/storage/ducklake_metadata_manager.cpp": "159fdd52ef33916b8b99a1e14157ffbaad6098cab6d7d664fd32a5a69abb5255",
+    "test/sql/data_inlining/inlined_filter_literals.test": "f93ffb330b9135a615deeeeef918c6ade25763e57b480c86536982a2b2b2e649",
+    "test/sql/data_inlining/inlined_filter_semantics.test": "81fe39224114240610510235501b8df720481c2713dfbd398f698e91c1529a96",
+    "test/sql/data_inlining/inlined_integer_filter_pushdown.test": "637bf4f374e0111e71aa082a8688f08d0b39316b41e168042c61204779632467",
+    "test/sql/data_inlining/inlined_integer_filter_types.test": "3d369db9081eb5508a2dbfb1ccc26b105f97ad6ec58a279e743fd447ff9151a9",
+    "test/sql/data_inlining/inlined_scalar_filter_edges.test": "f1403cc7be263b4f16355b99145358545e48a1f4dab1f3e1d11b6c1c72ac9cf0",
+    "test/sql/data_inlining/inlined_scalar_filter_pushdown.test": "047e1273d54b1b3d26af14ffb19187e64a087d148089001e39dac801780eefc0",
+    "test/sql/data_inlining/inlined_temporal_filter_stats.test": "026e488fe01dcd2a912c169827e3734201d63a51ae17151cc345cf8a9782ac4e",
+    "test/sql/issues/issue_843_postgres_legacy_inlined_types.test": "1a45ba2f37a48fba3e0bf832647df924d3f040397cb0cf658cee8546e7481e8c"
+  },
+  "source_matches_committed_head": true,
+  "builds": {
+    "baseline": {
+      "source": "b6f14fe678b80905e1ab86d3df26e4a5fe2f15b1",
+      "sha256": {
+        "duckdb": "c9aa5cfca3e207a3b1f2f9a86f660ab8ca9d444fdf3218a7ed3c97d36cbb8082",
+        "src/libduckdb.so": "582bc75db31c5b36a000de3335a4723e74f5f104973c2143788372184cc7818f",
+        "benchmark/benchmark_runner": "f1a8f2ac88227d8f6f8f865ead086456d169c281732c941400838093664070a0",
+        "repository/v2.0.0-dev0/linux_amd64/postgres_scanner.duckdb_extension": "18efd8c13df8e16e832a93bff82b41ea9160851ab8b26157527272ecab0fee98",
+        "repository/v2.0.0-dev0/linux_amd64/sqlite_scanner.duckdb_extension": "414640661e5496427595b2b7e7ca23251638dda30a08da40deddd4e47a317c52"
+      }
+    },
+    "integer": {
+      "source": "7d1d8df7175421bec7893a9d919027accab8b851",
+      "sha256": {
+        "duckdb": "9ae4be7053940780e32e4fe5b78b63203c25de3de4b201192c494b1fd686f5b5",
+        "src/libduckdb.so": "2e89683c4a2428aa303dd14248191c5e49ec075a97be570d15724fcc52d6b1e7",
+        "benchmark/benchmark_runner": "26c5eb43302a40850e071772b6c741724a1f58910850088e16e5a68f1c0674bb",
+        "repository/v2.0.0-dev0/linux_amd64/postgres_scanner.duckdb_extension": "18efd8c13df8e16e832a93bff82b41ea9160851ab8b26157527272ecab0fee98",
+        "repository/v2.0.0-dev0/linux_amd64/sqlite_scanner.duckdb_extension": "414640661e5496427595b2b7e7ca23251638dda30a08da40deddd4e47a317c52"
+      }
+    },
+    "refined": {
+      "source": "73dde9e279a56cdb7034fb82c0cef023f5689446",
+      "sha256": {
+        "duckdb": "158fde9d2ea6e120dc339d5a2a92a126f3b3c6e2d6c4615d423c8afae6821254",
+        "src/libduckdb.so": "c9c23a4150ca018cfddfa103b9334536c13414b3000c6c4ed827cc2d66f80f69",
+        "benchmark/benchmark_runner": "682211a16332d5d2e580c856be396a02e0e959c85c391866b25dbf805b292b27",
+        "repository/v2.0.0-dev0/linux_amd64/postgres_scanner.duckdb_extension": "18efd8c13df8e16e832a93bff82b41ea9160851ab8b26157527272ecab0fee98",
+        "repository/v2.0.0-dev0/linux_amd64/sqlite_scanner.duckdb_extension": "414640661e5496427595b2b7e7ca23251638dda30a08da40deddd4e47a317c52"
+      }
+    },
+    "review-fixed": {
+      "source": "c970d6284e7d79e0ea4b451d48d30b2281ee3261",
+      "sha256": {
+        "duckdb": "0665705cc4414c96d1930ebf28f8646e06c9e4c9a941e7eda886a37c45631bf8",
+        "src/libduckdb.so": "06dc38113c414de4b7af24beef622557c4b3d9d4e1accbc5fdfe7b363422e966",
+        "benchmark/benchmark_runner": "a064c1d6226604837583c4e213614e9523b62c74699020357af2656ec565fd0f",
+        "repository/v2.0.0-dev0/linux_amd64/postgres_scanner.duckdb_extension": "18efd8c13df8e16e832a93bff82b41ea9160851ab8b26157527272ecab0fee98",
+        "repository/v2.0.0-dev0/linux_amd64/sqlite_scanner.duckdb_extension": "414640661e5496427595b2b7e7ca23251638dda30a08da40deddd4e47a317c52"
+      }
+    }
+  }
+}

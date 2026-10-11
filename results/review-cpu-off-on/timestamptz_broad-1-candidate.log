@@ -1,0 +1,20 @@
+[
+    {
+        "name": "DUCKLAKE_SCAN",
+        "children": [],
+        "extra_info": {
+            "Table": "lake.main.events",
+            "Projections": [
+                "id",
+                "payload"
+            ],
+            "Filters": "(tz < '2026-07-02 12:00:00+00'::TIMESTAMP WITH TIME ZONE)",
+            "Estimated Cardinality": "20000"
+        }
+    }
+]
+Run Time (s): real 0.161 user 0.059356 sys 0.034795
+Run Time (s): real 0.173 user 0.055698 sys 0.070424
+Run Time (s): real 0.180 user 0.067617 sys 0.043394
+Run Time (s): real 0.163 user 0.053801 sys 0.043789
+Run Time (s): real 0.167 user 0.064092 sys 0.028252

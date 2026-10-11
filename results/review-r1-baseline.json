@@ -1,0 +1,30 @@
+{
+  "name": "review-r1-baseline",
+  "fixture": "/job/review-legacy.test",
+  "command": [
+    "/job/baseline/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-config",
+    "/job/postgres.json",
+    "--test-dir",
+    "/tmp/upstream-sqltest-1ger4h0j"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 1.51,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 26,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-29-43Z--cobalt-rhombus-85/_stdin_"
+    }
+  ]
+}

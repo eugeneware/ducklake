@@ -1,0 +1,33 @@
+[
+    {
+        "name": "DUCKLAKE_SCAN",
+        "children": [],
+        "extra_info": {
+            "Table": "lake.main.events",
+            "Projections": [
+                "id",
+                "source_id",
+                "optional_id",
+                "flag",
+                "amount",
+                "single_value",
+                "double_value",
+                "label",
+                "bytes",
+                "event_date",
+                "ts",
+                "tz",
+                "children",
+                "nested",
+                "payload"
+            ],
+            "Filters": "(id = 73)",
+            "Estimated Cardinality": "1"
+        }
+    }
+]
+Run Time (s): real 0.034 user 0.011001 sys 0.004531
+Run Time (s): real 0.036 user 0.023768 sys 0.010432
+Run Time (s): real 0.040 user 0.018665 sys 0.006786
+Run Time (s): real 0.040 user 0.016713 sys 0.007415
+Run Time (s): real 0.028 user 0.014625 sys 0.005191

@@ -1,0 +1,4 @@
+Debian clang version 20.1.8 (++20250708063551+0c9f909b7976-1~exp1~20250708183702.136)
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/lib/llvm-20/bin

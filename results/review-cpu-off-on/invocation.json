@@ -1,0 +1,789 @@
+{
+  "settings": {
+    "source": "/src",
+    "old": "/job/baseline",
+    "new": "/job/review-fixed",
+    "output": "/job/evidence/review-cpu-off-on",
+    "threads": 2,
+    "memory": "3GB",
+    "rows": 100000,
+    "runs_per_block": 5
+  },
+  "binary_sha256": {
+    "baseline": {
+      "duckdb": "c9aa5cfca3e207a3b1f2f9a86f660ab8ca9d444fdf3218a7ed3c97d36cbb8082",
+      "src/libduckdb.so": "582bc75db31c5b36a000de3335a4723e74f5f104973c2143788372184cc7818f",
+      "benchmark/benchmark_runner": "f1a8f2ac88227d8f6f8f865ead086456d169c281732c941400838093664070a0"
+    },
+    "candidate": {
+      "duckdb": "0665705cc4414c96d1930ebf28f8646e06c9e4c9a941e7eda886a37c45631bf8",
+      "src/libduckdb.so": "06dc38113c414de4b7af24beef622557c4b3d9d4e1accbc5fdfe7b363422e966",
+      "benchmark/benchmark_runner": "a064c1d6226604837583c4e213614e9523b62c74699020357af2656ec565fd0f"
+    }
+  },
+  "commands": [
+    {
+      "label": "verify-integer_wide-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/integer_wide.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-integer_wide-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/integer_wide.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "integer_wide-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "integer_wide-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "integer_wide-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "integer_wide-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "integer_wide-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "integer_wide-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "integer_wide-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "integer_wide-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "verify-float-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/float.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-float-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/float.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "float-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "float-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "float-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "float-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "float-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "float-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "float-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "float-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "verify-varchar-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/varchar.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-varchar-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/varchar.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "varchar-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "varchar-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "varchar-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "varchar-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "varchar-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "varchar-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "varchar-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "varchar-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "verify-timestamp-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/timestamp.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-timestamp-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/timestamp.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "timestamp-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamp-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamp-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamp-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamp-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamp-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamp-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamp-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "verify-source_timestamp_count-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-source_timestamp_count-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "source_timestamp_count-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "verify-date_broad-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/date_broad.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-date_broad-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/date_broad.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "date_broad-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "date_broad-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "date_broad-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "date_broad-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "date_broad-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "date_broad-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "date_broad-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "date_broad-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "verify-timestamptz_broad-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-timestamptz_broad-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "timestamptz_broad-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "verify-full_scan-baseline",
+      "command": [
+        "/job/baseline/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/full_scan.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "verify-full_scan-candidate",
+      "command": [
+        "/job/review-fixed/benchmark/benchmark_runner",
+        "benchmark/micro/read/inlined_filters/full_scan.benchmark",
+        "--root-dir",
+        "/tmp/inline-cpu-2v9jxasa/benchmarks",
+        "--threads=2",
+        "--memory_limit=3GB",
+        "--rows",
+        "100000",
+        "--timed-runs",
+        "1"
+      ]
+    },
+    {
+      "label": "full_scan-0-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "full_scan-1-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "full_scan-2-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "full_scan-3-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "full_scan-4-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "full_scan-5-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "full_scan-6-candidate",
+      "command": [
+        "/job/review-fixed/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    },
+    {
+      "label": "full_scan-7-baseline",
+      "command": [
+        "/job/baseline/duckdb",
+        "-batch",
+        ":memory:"
+      ]
+    }
+  ],
+  "scope": "DuckDB CLI user+system CPU; excludes PostgreSQL server CPU",
+  "order": [
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline",
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline"
+  ]
+}

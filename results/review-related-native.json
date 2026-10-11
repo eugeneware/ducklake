@@ -1,0 +1,130 @@
+{
+  "name": "review-related-native",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--test-dir",
+    "/src",
+    "--reporter",
+    "compact",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--test-config",
+    "/job/native-config.json",
+    "--input-file",
+    "/job/expanded-related-tests.txt"
+  ],
+  "returncode": 0,
+  "selected_tests": 223,
+  "seconds": 252.42,
+  "counts": {
+    "ok": 216,
+    "skip-requirement": 7
+  },
+  "tests_with_passing_assertions": 216,
+  "assertions_passed": 4413,
+  "assertions_failed": 0,
+  "skipped_statements": 4,
+  "tests_without_assertions": [],
+  "runtime_skips": [
+    {
+      "test": "test/sql/data_inlining/data_inlining_encryption.test",
+      "reason": "require httpfs"
+    },
+    {
+      "test": "test/sql/data_inlining/data_inlining_flush_partitioned_deletes_encrypted.test",
+      "reason": "require httpfs"
+    },
+    {
+      "test": "test/sql/delete/delete_metadata.test",
+      "reason": "require httpfs"
+    },
+    {
+      "test": "test/sql/deletion_inlining/test_deletion_inlining_encryption.test",
+      "reason": "require httpfs"
+    },
+    {
+      "test": "test/sql/deletion_inlining/test_deletion_inlining_encryption_merge.test",
+      "reason": "require httpfs"
+    },
+    {
+      "test": "test/sql/sorted_table/merge_adjacent_sorted_spatial_hilbert.test",
+      "reason": "require spatial"
+    },
+    {
+      "test": "test/sql/transaction/transaction_conflict_inlining.test",
+      "reason": "require httpfs"
+    }
+  ],
+  "nonpassing": [
+    {
+      "event": "end",
+      "name": "test/sql/data_inlining/data_inlining_encryption.test",
+      "status": "skip-requirement",
+      "passes": 0,
+      "fails": 0,
+      "skip-mode": 0,
+      "data": "require httpfs",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-35-39Z--ivory-facet-87/test_sql_data_inlining_data_inlining_encryption_test"
+    },
+    {
+      "event": "end",
+      "name": "test/sql/data_inlining/data_inlining_flush_partitioned_deletes_encrypted.test",
+      "status": "skip-requirement",
+      "passes": 0,
+      "fails": 0,
+      "skip-mode": 0,
+      "data": "require httpfs",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-35-39Z--ivory-facet-87/test_sql_data_inlining_data_inlining_flush_partitioned_deletes_encrypted_test"
+    },
+    {
+      "event": "end",
+      "name": "test/sql/delete/delete_metadata.test",
+      "status": "skip-requirement",
+      "passes": 0,
+      "fails": 0,
+      "skip-mode": 0,
+      "data": "require httpfs",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-35-39Z--ivory-facet-87/test_sql_delete_delete_metadata_test"
+    },
+    {
+      "event": "end",
+      "name": "test/sql/deletion_inlining/test_deletion_inlining_encryption.test",
+      "status": "skip-requirement",
+      "passes": 0,
+      "fails": 0,
+      "skip-mode": 0,
+      "data": "require httpfs",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-35-39Z--ivory-facet-87/test_sql_deletion_inlining_test_deletion_inlining_encryption_test"
+    },
+    {
+      "event": "end",
+      "name": "test/sql/deletion_inlining/test_deletion_inlining_encryption_merge.test",
+      "status": "skip-requirement",
+      "passes": 0,
+      "fails": 0,
+      "skip-mode": 0,
+      "data": "require httpfs",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-35-39Z--ivory-facet-87/test_sql_deletion_inlining_test_deletion_inlining_encryption_merge_test"
+    },
+    {
+      "event": "end",
+      "name": "test/sql/sorted_table/merge_adjacent_sorted_spatial_hilbert.test",
+      "status": "skip-requirement",
+      "passes": 0,
+      "fails": 0,
+      "skip-mode": 0,
+      "data": "require spatial",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-35-39Z--ivory-facet-87/test_sql_sorted_table_merge_adjacent_sorted_spatial_hilbert_test"
+    },
+    {
+      "event": "end",
+      "name": "test/sql/transaction/transaction_conflict_inlining.test",
+      "status": "skip-requirement",
+      "passes": 0,
+      "fails": 0,
+      "skip-mode": 0,
+      "data": "require httpfs",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-35-39Z--ivory-facet-87/test_sql_transaction_transaction_conflict_inlining_test"
+    }
+  ]
+}

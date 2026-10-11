@@ -1,0 +1,29 @@
+{
+  "name": "review-stats-native",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--test-dir",
+    "/src",
+    "--reporter",
+    "compact",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--test-config",
+    "/job/native-config.json",
+    "--input-file",
+    "/job/review-stats-tests.txt"
+  ],
+  "returncode": 0,
+  "selected_tests": 51,
+  "seconds": 40.3,
+  "counts": {
+    "ok": 51
+  },
+  "tests_with_passing_assertions": 51,
+  "assertions_passed": 1263,
+  "assertions_failed": 0,
+  "skipped_statements": 0,
+  "tests_without_assertions": [],
+  "runtime_skips": [],
+  "nonpassing": []
+}

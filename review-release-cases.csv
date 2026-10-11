@@ -1,0 +1,8 @@
+benchmark/micro/read/inlined_filters/integer_wide.benchmark
+benchmark/micro/read/inlined_filters/float.benchmark
+benchmark/micro/read/inlined_filters/varchar.benchmark
+benchmark/micro/read/inlined_filters/timestamp.benchmark
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark
+benchmark/micro/read/inlined_filters/date_broad.benchmark
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark
+benchmark/micro/read/inlined_filters/full_scan.benchmark

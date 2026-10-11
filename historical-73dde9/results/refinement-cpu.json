@@ -1,0 +1,1374 @@
+{
+  "integer_wide": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.022371
+        },
+        {
+          "wall_seconds": 0.03,
+          "cpu_seconds": 0.019836
+        },
+        {
+          "wall_seconds": 0.026,
+          "cpu_seconds": 0.0169
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.019368
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.018501999999999998
+        },
+        {
+          "wall_seconds": 0.038,
+          "cpu_seconds": 0.021423
+        },
+        {
+          "wall_seconds": 0.04,
+          "cpu_seconds": 0.026132
+        },
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.020699
+        },
+        {
+          "wall_seconds": 0.036,
+          "cpu_seconds": 0.020937
+        },
+        {
+          "wall_seconds": 0.038,
+          "cpu_seconds": 0.023687
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.020658
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.020736
+        },
+        {
+          "wall_seconds": 0.03,
+          "cpu_seconds": 0.020617
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.022557
+        },
+        {
+          "wall_seconds": 0.034,
+          "cpu_seconds": 0.029142
+        },
+        {
+          "wall_seconds": 0.041,
+          "cpu_seconds": 0.025532
+        },
+        {
+          "wall_seconds": 0.039,
+          "cpu_seconds": 0.023702
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.022725
+        },
+        {
+          "wall_seconds": 0.036,
+          "cpu_seconds": 0.025415
+        },
+        {
+          "wall_seconds": 0.037,
+          "cpu_seconds": 0.024325
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.034,
+        "cpu_seconds": 0.020818
+      },
+      "candidate": {
+        "wall_seconds": 0.0345,
+        "cpu_seconds": 0.023213499999999998
+      }
+    }
+  },
+  "boolean": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.181,
+          "cpu_seconds": 0.13941900000000002
+        },
+        {
+          "wall_seconds": 0.157,
+          "cpu_seconds": 0.089168
+        },
+        {
+          "wall_seconds": 0.155,
+          "cpu_seconds": 0.091487
+        },
+        {
+          "wall_seconds": 0.152,
+          "cpu_seconds": 0.100407
+        },
+        {
+          "wall_seconds": 0.136,
+          "cpu_seconds": 0.083281
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.10328599999999999
+        },
+        {
+          "wall_seconds": 0.154,
+          "cpu_seconds": 0.094031
+        },
+        {
+          "wall_seconds": 0.178,
+          "cpu_seconds": 0.135224
+        },
+        {
+          "wall_seconds": 0.171,
+          "cpu_seconds": 0.10769300000000001
+        },
+        {
+          "wall_seconds": 0.16,
+          "cpu_seconds": 0.11635399999999999
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.03,
+          "cpu_seconds": 0.010409
+        },
+        {
+          "wall_seconds": 0.03,
+          "cpu_seconds": 0.016109
+        },
+        {
+          "wall_seconds": 0.034,
+          "cpu_seconds": 0.016627
+        },
+        {
+          "wall_seconds": 0.029,
+          "cpu_seconds": 0.016475
+        },
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.016246999999999998
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.015667
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.019882999999999998
+        },
+        {
+          "wall_seconds": 0.029,
+          "cpu_seconds": 0.015896
+        },
+        {
+          "wall_seconds": 0.027,
+          "cpu_seconds": 0.012775
+        },
+        {
+          "wall_seconds": 0.029,
+          "cpu_seconds": 0.014322000000000001
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.1585,
+        "cpu_seconds": 0.10184649999999999
+      },
+      "candidate": {
+        "wall_seconds": 0.03,
+        "cpu_seconds": 0.0160025
+      }
+    }
+  },
+  "decimal": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.182,
+          "cpu_seconds": 0.16224899999999998
+        },
+        {
+          "wall_seconds": 0.159,
+          "cpu_seconds": 0.143934
+        },
+        {
+          "wall_seconds": 0.16,
+          "cpu_seconds": 0.12992199999999998
+        },
+        {
+          "wall_seconds": 0.153,
+          "cpu_seconds": 0.136043
+        },
+        {
+          "wall_seconds": 0.168,
+          "cpu_seconds": 0.130618
+        },
+        {
+          "wall_seconds": 0.189,
+          "cpu_seconds": 0.16455399999999998
+        },
+        {
+          "wall_seconds": 0.171,
+          "cpu_seconds": 0.122333
+        },
+        {
+          "wall_seconds": 0.161,
+          "cpu_seconds": 0.13775500000000002
+        },
+        {
+          "wall_seconds": 0.146,
+          "cpu_seconds": 0.132567
+        },
+        {
+          "wall_seconds": 0.152,
+          "cpu_seconds": 0.131128
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.036,
+          "cpu_seconds": 0.015394999999999999
+        },
+        {
+          "wall_seconds": 0.037,
+          "cpu_seconds": 0.020399
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.015786
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.015441999999999999
+        },
+        {
+          "wall_seconds": 0.037,
+          "cpu_seconds": 0.017206
+        },
+        {
+          "wall_seconds": 0.038,
+          "cpu_seconds": 0.016826
+        },
+        {
+          "wall_seconds": 0.042,
+          "cpu_seconds": 0.025467
+        },
+        {
+          "wall_seconds": 0.04,
+          "cpu_seconds": 0.015054
+        },
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.010787
+        },
+        {
+          "wall_seconds": 0.032,
+          "cpu_seconds": 0.010648000000000001
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.1605,
+        "cpu_seconds": 0.134305
+      },
+      "candidate": {
+        "wall_seconds": 0.0365,
+        "cpu_seconds": 0.015614
+      }
+    }
+  },
+  "float": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.159,
+          "cpu_seconds": 0.10087399999999999
+        },
+        {
+          "wall_seconds": 0.165,
+          "cpu_seconds": 0.09854399999999999
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.090385
+        },
+        {
+          "wall_seconds": 0.155,
+          "cpu_seconds": 0.089482
+        },
+        {
+          "wall_seconds": 0.148,
+          "cpu_seconds": 0.09565699999999999
+        },
+        {
+          "wall_seconds": 0.181,
+          "cpu_seconds": 0.13812
+        },
+        {
+          "wall_seconds": 0.138,
+          "cpu_seconds": 0.10537099999999999
+        },
+        {
+          "wall_seconds": 0.15,
+          "cpu_seconds": 0.090617
+        },
+        {
+          "wall_seconds": 0.132,
+          "cpu_seconds": 0.075458
+        },
+        {
+          "wall_seconds": 0.137,
+          "cpu_seconds": 0.080581
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.010444000000000002
+        },
+        {
+          "wall_seconds": 0.027,
+          "cpu_seconds": 0.009669
+        },
+        {
+          "wall_seconds": 0.032,
+          "cpu_seconds": 0.013564999999999999
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.012872000000000001
+        },
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.016167
+        },
+        {
+          "wall_seconds": 0.043,
+          "cpu_seconds": 0.010284999999999999
+        },
+        {
+          "wall_seconds": 0.032,
+          "cpu_seconds": 0.015223
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.014935
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.018634
+        },
+        {
+          "wall_seconds": 0.032,
+          "cpu_seconds": 0.015638
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.1525,
+        "cpu_seconds": 0.093137
+      },
+      "candidate": {
+        "wall_seconds": 0.032,
+        "cpu_seconds": 0.014249999999999999
+      }
+    }
+  },
+  "double": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.177,
+          "cpu_seconds": 0.108021
+        },
+        {
+          "wall_seconds": 0.163,
+          "cpu_seconds": 0.103823
+        },
+        {
+          "wall_seconds": 0.155,
+          "cpu_seconds": 0.089422
+        },
+        {
+          "wall_seconds": 0.175,
+          "cpu_seconds": 0.13570500000000002
+        },
+        {
+          "wall_seconds": 0.141,
+          "cpu_seconds": 0.10300300000000001
+        },
+        {
+          "wall_seconds": 0.186,
+          "cpu_seconds": 0.13283899999999998
+        },
+        {
+          "wall_seconds": 0.156,
+          "cpu_seconds": 0.122001
+        },
+        {
+          "wall_seconds": 0.159,
+          "cpu_seconds": 0.099354
+        },
+        {
+          "wall_seconds": 0.159,
+          "cpu_seconds": 0.090892
+        },
+        {
+          "wall_seconds": 0.159,
+          "cpu_seconds": 0.092651
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.034,
+          "cpu_seconds": 0.011747
+        },
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.021107
+        },
+        {
+          "wall_seconds": 0.034,
+          "cpu_seconds": 0.014655000000000001
+        },
+        {
+          "wall_seconds": 0.032,
+          "cpu_seconds": 0.011519999999999999
+        },
+        {
+          "wall_seconds": 0.025,
+          "cpu_seconds": 0.010239
+        },
+        {
+          "wall_seconds": 0.028,
+          "cpu_seconds": 0.00963
+        },
+        {
+          "wall_seconds": 0.03,
+          "cpu_seconds": 0.015548
+        },
+        {
+          "wall_seconds": 0.029,
+          "cpu_seconds": 0.012945
+        },
+        {
+          "wall_seconds": 0.032,
+          "cpu_seconds": 0.015074999999999998
+        },
+        {
+          "wall_seconds": 0.036,
+          "cpu_seconds": 0.01826
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.159,
+        "cpu_seconds": 0.103413
+      },
+      "candidate": {
+        "wall_seconds": 0.032,
+        "cpu_seconds": 0.0138
+      }
+    }
+  },
+  "varchar": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.164,
+          "cpu_seconds": 0.110756
+        },
+        {
+          "wall_seconds": 0.173,
+          "cpu_seconds": 0.145235
+        },
+        {
+          "wall_seconds": 0.165,
+          "cpu_seconds": 0.10948
+        },
+        {
+          "wall_seconds": 0.182,
+          "cpu_seconds": 0.110862
+        },
+        {
+          "wall_seconds": 0.175,
+          "cpu_seconds": 0.10979699999999999
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.10542699999999999
+        },
+        {
+          "wall_seconds": 0.187,
+          "cpu_seconds": 0.14833600000000002
+        },
+        {
+          "wall_seconds": 0.165,
+          "cpu_seconds": 0.11517000000000001
+        },
+        {
+          "wall_seconds": 0.139,
+          "cpu_seconds": 0.089229
+        },
+        {
+          "wall_seconds": 0.157,
+          "cpu_seconds": 0.120387
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.009716
+        },
+        {
+          "wall_seconds": 0.03,
+          "cpu_seconds": 0.009837
+        },
+        {
+          "wall_seconds": 0.031,
+          "cpu_seconds": 0.010067
+        },
+        {
+          "wall_seconds": 0.044,
+          "cpu_seconds": 0.01132
+        },
+        {
+          "wall_seconds": 0.045,
+          "cpu_seconds": 0.019572
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.011272
+        },
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.011247
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.015262999999999999
+        },
+        {
+          "wall_seconds": 0.039,
+          "cpu_seconds": 0.024159
+        },
+        {
+          "wall_seconds": 0.033,
+          "cpu_seconds": 0.011522000000000001
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.165,
+        "cpu_seconds": 0.11080899999999999
+      },
+      "candidate": {
+        "wall_seconds": 0.034,
+        "cpu_seconds": 0.011296
+      }
+    }
+  },
+  "blob": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.147,
+          "cpu_seconds": 0.089635
+        },
+        {
+          "wall_seconds": 0.181,
+          "cpu_seconds": 0.148622
+        },
+        {
+          "wall_seconds": 0.162,
+          "cpu_seconds": 0.12732100000000002
+        },
+        {
+          "wall_seconds": 0.2,
+          "cpu_seconds": 0.11965999999999999
+        },
+        {
+          "wall_seconds": 0.173,
+          "cpu_seconds": 0.108184
+        },
+        {
+          "wall_seconds": 0.183,
+          "cpu_seconds": 0.13489400000000001
+        },
+        {
+          "wall_seconds": 0.156,
+          "cpu_seconds": 0.088897
+        },
+        {
+          "wall_seconds": 0.171,
+          "cpu_seconds": 0.109054
+        },
+        {
+          "wall_seconds": 0.154,
+          "cpu_seconds": 0.10113
+        },
+        {
+          "wall_seconds": 0.157,
+          "cpu_seconds": 0.105826
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.038,
+          "cpu_seconds": 0.013264999999999999
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.014953000000000001
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.015477
+        },
+        {
+          "wall_seconds": 0.036,
+          "cpu_seconds": 0.015404000000000001
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.014787000000000002
+        },
+        {
+          "wall_seconds": 0.04,
+          "cpu_seconds": 0.021078
+        },
+        {
+          "wall_seconds": 0.036,
+          "cpu_seconds": 0.01575
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.014754
+        },
+        {
+          "wall_seconds": 0.036,
+          "cpu_seconds": 0.01651
+        },
+        {
+          "wall_seconds": 0.035,
+          "cpu_seconds": 0.014716
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.1665,
+        "cpu_seconds": 0.108619
+      },
+      "candidate": {
+        "wall_seconds": 0.035500000000000004,
+        "cpu_seconds": 0.015178500000000001
+      }
+    }
+  },
+  "date": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.187,
+          "cpu_seconds": 0.149972
+        },
+        {
+          "wall_seconds": 0.175,
+          "cpu_seconds": 0.109771
+        },
+        {
+          "wall_seconds": 0.16,
+          "cpu_seconds": 0.087905
+        },
+        {
+          "wall_seconds": 0.136,
+          "cpu_seconds": 0.108066
+        },
+        {
+          "wall_seconds": 0.145,
+          "cpu_seconds": 0.088808
+        },
+        {
+          "wall_seconds": 0.18,
+          "cpu_seconds": 0.14044099999999998
+        },
+        {
+          "wall_seconds": 0.17,
+          "cpu_seconds": 0.109249
+        },
+        {
+          "wall_seconds": 0.157,
+          "cpu_seconds": 0.113872
+        },
+        {
+          "wall_seconds": 0.132,
+          "cpu_seconds": 0.105021
+        },
+        {
+          "wall_seconds": 0.134,
+          "cpu_seconds": 0.091713
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.063,
+          "cpu_seconds": 0.014534
+        },
+        {
+          "wall_seconds": 0.071,
+          "cpu_seconds": 0.028970999999999997
+        },
+        {
+          "wall_seconds": 0.065,
+          "cpu_seconds": 0.019443
+        },
+        {
+          "wall_seconds": 0.065,
+          "cpu_seconds": 0.018697
+        },
+        {
+          "wall_seconds": 0.064,
+          "cpu_seconds": 0.018918
+        },
+        {
+          "wall_seconds": 0.067,
+          "cpu_seconds": 0.020727000000000002
+        },
+        {
+          "wall_seconds": 0.067,
+          "cpu_seconds": 0.02157
+        },
+        {
+          "wall_seconds": 0.067,
+          "cpu_seconds": 0.019764
+        },
+        {
+          "wall_seconds": 0.065,
+          "cpu_seconds": 0.019652
+        },
+        {
+          "wall_seconds": 0.063,
+          "cpu_seconds": 0.013680000000000001
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.1585,
+        "cpu_seconds": 0.10865749999999999
+      },
+      "candidate": {
+        "wall_seconds": 0.065,
+        "cpu_seconds": 0.0195475
+      }
+    }
+  },
+  "timestamp": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.159,
+          "cpu_seconds": 0.100651
+        },
+        {
+          "wall_seconds": 0.136,
+          "cpu_seconds": 0.09095800000000001
+        },
+        {
+          "wall_seconds": 0.15,
+          "cpu_seconds": 0.095348
+        },
+        {
+          "wall_seconds": 0.168,
+          "cpu_seconds": 0.09562699999999999
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.099141
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.13859
+        },
+        {
+          "wall_seconds": 0.153,
+          "cpu_seconds": 0.090622
+        },
+        {
+          "wall_seconds": 0.165,
+          "cpu_seconds": 0.121908
+        },
+        {
+          "wall_seconds": 0.138,
+          "cpu_seconds": 0.101674
+        },
+        {
+          "wall_seconds": 0.166,
+          "cpu_seconds": 0.105623
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.108,
+          "cpu_seconds": 0.022452
+        },
+        {
+          "wall_seconds": 0.106,
+          "cpu_seconds": 0.022411
+        },
+        {
+          "wall_seconds": 0.106,
+          "cpu_seconds": 0.027979
+        },
+        {
+          "wall_seconds": 0.105,
+          "cpu_seconds": 0.018682
+        },
+        {
+          "wall_seconds": 0.106,
+          "cpu_seconds": 0.019754
+        },
+        {
+          "wall_seconds": 0.104,
+          "cpu_seconds": 0.018734
+        },
+        {
+          "wall_seconds": 0.117,
+          "cpu_seconds": 0.021894
+        },
+        {
+          "wall_seconds": 0.104,
+          "cpu_seconds": 0.019320999999999998
+        },
+        {
+          "wall_seconds": 0.105,
+          "cpu_seconds": 0.01891
+        },
+        {
+          "wall_seconds": 0.104,
+          "cpu_seconds": 0.014664
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.1585,
+        "cpu_seconds": 0.09989600000000001
+      },
+      "candidate": {
+        "wall_seconds": 0.1055,
+        "cpu_seconds": 0.0195375
+      }
+    }
+  },
+  "timestamptz": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.175,
+          "cpu_seconds": 0.14982299999999998
+        },
+        {
+          "wall_seconds": 0.162,
+          "cpu_seconds": 0.095685
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.113054
+        },
+        {
+          "wall_seconds": 0.172,
+          "cpu_seconds": 0.122416
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.093725
+        },
+        {
+          "wall_seconds": 0.179,
+          "cpu_seconds": 0.116117
+        },
+        {
+          "wall_seconds": 0.164,
+          "cpu_seconds": 0.110281
+        },
+        {
+          "wall_seconds": 0.171,
+          "cpu_seconds": 0.09432099999999999
+        },
+        {
+          "wall_seconds": 0.161,
+          "cpu_seconds": 0.096483
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.094134
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.108,
+          "cpu_seconds": 0.02079
+        },
+        {
+          "wall_seconds": 0.107,
+          "cpu_seconds": 0.018494
+        },
+        {
+          "wall_seconds": 0.112,
+          "cpu_seconds": 0.021765
+        },
+        {
+          "wall_seconds": 0.107,
+          "cpu_seconds": 0.020537
+        },
+        {
+          "wall_seconds": 0.109,
+          "cpu_seconds": 0.020471
+        },
+        {
+          "wall_seconds": 0.109,
+          "cpu_seconds": 0.019361
+        },
+        {
+          "wall_seconds": 0.108,
+          "cpu_seconds": 0.020815
+        },
+        {
+          "wall_seconds": 0.107,
+          "cpu_seconds": 0.022659
+        },
+        {
+          "wall_seconds": 0.107,
+          "cpu_seconds": 0.020319999999999998
+        },
+        {
+          "wall_seconds": 0.107,
+          "cpu_seconds": 0.019694
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.163,
+        "cpu_seconds": 0.103382
+      },
+      "candidate": {
+        "wall_seconds": 0.1075,
+        "cpu_seconds": 0.020504
+      }
+    }
+  },
+  "source_timestamp_count": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.071,
+          "cpu_seconds": 0.045421
+        },
+        {
+          "wall_seconds": 0.067,
+          "cpu_seconds": 0.044606
+        },
+        {
+          "wall_seconds": 0.066,
+          "cpu_seconds": 0.048428
+        },
+        {
+          "wall_seconds": 0.064,
+          "cpu_seconds": 0.050821000000000005
+        },
+        {
+          "wall_seconds": 0.053,
+          "cpu_seconds": 0.049325
+        },
+        {
+          "wall_seconds": 0.061,
+          "cpu_seconds": 0.039378
+        },
+        {
+          "wall_seconds": 0.075,
+          "cpu_seconds": 0.060645000000000004
+        },
+        {
+          "wall_seconds": 0.058,
+          "cpu_seconds": 0.053129
+        },
+        {
+          "wall_seconds": 0.048,
+          "cpu_seconds": 0.038524
+        },
+        {
+          "wall_seconds": 0.068,
+          "cpu_seconds": 0.048150000000000005
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.063,
+          "cpu_seconds": 0.039387
+        },
+        {
+          "wall_seconds": 0.077,
+          "cpu_seconds": 0.053921
+        },
+        {
+          "wall_seconds": 0.077,
+          "cpu_seconds": 0.056583
+        },
+        {
+          "wall_seconds": 0.062,
+          "cpu_seconds": 0.051228
+        },
+        {
+          "wall_seconds": 0.065,
+          "cpu_seconds": 0.043335
+        },
+        {
+          "wall_seconds": 0.082,
+          "cpu_seconds": 0.061988
+        },
+        {
+          "wall_seconds": 0.078,
+          "cpu_seconds": 0.051113000000000006
+        },
+        {
+          "wall_seconds": 0.074,
+          "cpu_seconds": 0.051948999999999995
+        },
+        {
+          "wall_seconds": 0.071,
+          "cpu_seconds": 0.051764
+        },
+        {
+          "wall_seconds": 0.076,
+          "cpu_seconds": 0.05209
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.065,
+        "cpu_seconds": 0.048289
+      },
+      "candidate": {
+        "wall_seconds": 0.075,
+        "cpu_seconds": 0.0518565
+      }
+    }
+  },
+  "date_broad": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.181,
+          "cpu_seconds": 0.119526
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.110381
+        },
+        {
+          "wall_seconds": 0.171,
+          "cpu_seconds": 0.09682199999999999
+        },
+        {
+          "wall_seconds": 0.163,
+          "cpu_seconds": 0.142282
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.104625
+        },
+        {
+          "wall_seconds": 0.192,
+          "cpu_seconds": 0.136673
+        },
+        {
+          "wall_seconds": 0.16,
+          "cpu_seconds": 0.113523
+        },
+        {
+          "wall_seconds": 0.164,
+          "cpu_seconds": 0.111448
+        },
+        {
+          "wall_seconds": 0.166,
+          "cpu_seconds": 0.12301400000000001
+        },
+        {
+          "wall_seconds": 0.148,
+          "cpu_seconds": 0.102635
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.162,
+          "cpu_seconds": 0.109935
+        },
+        {
+          "wall_seconds": 0.166,
+          "cpu_seconds": 0.11843100000000001
+        },
+        {
+          "wall_seconds": 0.162,
+          "cpu_seconds": 0.100413
+        },
+        {
+          "wall_seconds": 0.155,
+          "cpu_seconds": 0.107982
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.110168
+        },
+        {
+          "wall_seconds": 0.166,
+          "cpu_seconds": 0.101665
+        },
+        {
+          "wall_seconds": 0.162,
+          "cpu_seconds": 0.108473
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.09010399999999999
+        },
+        {
+          "wall_seconds": 0.186,
+          "cpu_seconds": 0.110456
+        },
+        {
+          "wall_seconds": 0.183,
+          "cpu_seconds": 0.119286
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.165,
+        "cpu_seconds": 0.1124855
+      },
+      "candidate": {
+        "wall_seconds": 0.166,
+        "cpu_seconds": 0.109204
+      }
+    }
+  },
+  "timestamptz_broad": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.168,
+          "cpu_seconds": 0.10177900000000001
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.118426
+        },
+        {
+          "wall_seconds": 0.193,
+          "cpu_seconds": 0.142959
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.105238
+        },
+        {
+          "wall_seconds": 0.168,
+          "cpu_seconds": 0.10977999999999999
+        },
+        {
+          "wall_seconds": 0.189,
+          "cpu_seconds": 0.127471
+        },
+        {
+          "wall_seconds": 0.163,
+          "cpu_seconds": 0.102874
+        },
+        {
+          "wall_seconds": 0.184,
+          "cpu_seconds": 0.15529500000000002
+        },
+        {
+          "wall_seconds": 0.167,
+          "cpu_seconds": 0.107514
+        },
+        {
+          "wall_seconds": 0.169,
+          "cpu_seconds": 0.112785
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.178,
+          "cpu_seconds": 0.125629
+        },
+        {
+          "wall_seconds": 0.175,
+          "cpu_seconds": 0.098069
+        },
+        {
+          "wall_seconds": 0.173,
+          "cpu_seconds": 0.11103199999999999
+        },
+        {
+          "wall_seconds": 0.191,
+          "cpu_seconds": 0.113368
+        },
+        {
+          "wall_seconds": 0.19,
+          "cpu_seconds": 0.121987
+        },
+        {
+          "wall_seconds": 0.174,
+          "cpu_seconds": 0.11035199999999999
+        },
+        {
+          "wall_seconds": 0.16,
+          "cpu_seconds": 0.093024
+        },
+        {
+          "wall_seconds": 0.164,
+          "cpu_seconds": 0.081615
+        },
+        {
+          "wall_seconds": 0.159,
+          "cpu_seconds": 0.09381199999999999
+        },
+        {
+          "wall_seconds": 0.168,
+          "cpu_seconds": 0.095132
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.169,
+        "cpu_seconds": 0.11128249999999999
+      },
+      "candidate": {
+        "wall_seconds": 0.1735,
+        "cpu_seconds": 0.1042105
+      }
+    }
+  },
+  "full_scan": {
+    "samples": {
+      "baseline": [
+        {
+          "wall_seconds": 0.167,
+          "cpu_seconds": 0.091029
+        },
+        {
+          "wall_seconds": 0.174,
+          "cpu_seconds": 0.142424
+        },
+        {
+          "wall_seconds": 0.17,
+          "cpu_seconds": 0.107402
+        },
+        {
+          "wall_seconds": 0.146,
+          "cpu_seconds": 0.120475
+        },
+        {
+          "wall_seconds": 0.171,
+          "cpu_seconds": 0.11590900000000001
+        },
+        {
+          "wall_seconds": 0.17,
+          "cpu_seconds": 0.139104
+        },
+        {
+          "wall_seconds": 0.158,
+          "cpu_seconds": 0.103307
+        },
+        {
+          "wall_seconds": 0.14,
+          "cpu_seconds": 0.097214
+        },
+        {
+          "wall_seconds": 0.135,
+          "cpu_seconds": 0.09362
+        },
+        {
+          "wall_seconds": 0.14,
+          "cpu_seconds": 0.095472
+        }
+      ],
+      "candidate": [
+        {
+          "wall_seconds": 0.161,
+          "cpu_seconds": 0.097404
+        },
+        {
+          "wall_seconds": 0.163,
+          "cpu_seconds": 0.11702699999999999
+        },
+        {
+          "wall_seconds": 0.121,
+          "cpu_seconds": 0.08445
+        },
+        {
+          "wall_seconds": 0.145,
+          "cpu_seconds": 0.100381
+        },
+        {
+          "wall_seconds": 0.142,
+          "cpu_seconds": 0.122211
+        },
+        {
+          "wall_seconds": 0.155,
+          "cpu_seconds": 0.106187
+        },
+        {
+          "wall_seconds": 0.149,
+          "cpu_seconds": 0.103127
+        },
+        {
+          "wall_seconds": 0.133,
+          "cpu_seconds": 0.099442
+        },
+        {
+          "wall_seconds": 0.155,
+          "cpu_seconds": 0.112996
+        },
+        {
+          "wall_seconds": 0.153,
+          "cpu_seconds": 0.09425800000000001
+        }
+      ]
+    },
+    "medians": {
+      "baseline": {
+        "wall_seconds": 0.1625,
+        "cpu_seconds": 0.10535449999999999
+      },
+      "candidate": {
+        "wall_seconds": 0.151,
+        "cpu_seconds": 0.101754
+      }
+    }
+  }
+}

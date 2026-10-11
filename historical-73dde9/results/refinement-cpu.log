@@ -1,0 +1,14 @@
+{"case": "integer_wide", "medians": {"baseline": {"wall_seconds": 0.034, "cpu_seconds": 0.020818}, "candidate": {"wall_seconds": 0.0345, "cpu_seconds": 0.023213499999999998}}}
+{"case": "boolean", "medians": {"baseline": {"wall_seconds": 0.1585, "cpu_seconds": 0.10184649999999999}, "candidate": {"wall_seconds": 0.03, "cpu_seconds": 0.0160025}}}
+{"case": "decimal", "medians": {"baseline": {"wall_seconds": 0.1605, "cpu_seconds": 0.134305}, "candidate": {"wall_seconds": 0.0365, "cpu_seconds": 0.015614}}}
+{"case": "float", "medians": {"baseline": {"wall_seconds": 0.1525, "cpu_seconds": 0.093137}, "candidate": {"wall_seconds": 0.032, "cpu_seconds": 0.014249999999999999}}}
+{"case": "double", "medians": {"baseline": {"wall_seconds": 0.159, "cpu_seconds": 0.103413}, "candidate": {"wall_seconds": 0.032, "cpu_seconds": 0.0138}}}
+{"case": "varchar", "medians": {"baseline": {"wall_seconds": 0.165, "cpu_seconds": 0.11080899999999999}, "candidate": {"wall_seconds": 0.034, "cpu_seconds": 0.011296}}}
+{"case": "blob", "medians": {"baseline": {"wall_seconds": 0.1665, "cpu_seconds": 0.108619}, "candidate": {"wall_seconds": 0.035500000000000004, "cpu_seconds": 0.015178500000000001}}}
+{"case": "date", "medians": {"baseline": {"wall_seconds": 0.1585, "cpu_seconds": 0.10865749999999999}, "candidate": {"wall_seconds": 0.065, "cpu_seconds": 0.0195475}}}
+{"case": "timestamp", "medians": {"baseline": {"wall_seconds": 0.1585, "cpu_seconds": 0.09989600000000001}, "candidate": {"wall_seconds": 0.1055, "cpu_seconds": 0.0195375}}}
+{"case": "timestamptz", "medians": {"baseline": {"wall_seconds": 0.163, "cpu_seconds": 0.103382}, "candidate": {"wall_seconds": 0.1075, "cpu_seconds": 0.020504}}}
+{"case": "source_timestamp_count", "medians": {"baseline": {"wall_seconds": 0.065, "cpu_seconds": 0.048289}, "candidate": {"wall_seconds": 0.075, "cpu_seconds": 0.0518565}}}
+{"case": "date_broad", "medians": {"baseline": {"wall_seconds": 0.165, "cpu_seconds": 0.1124855}, "candidate": {"wall_seconds": 0.166, "cpu_seconds": 0.109204}}}
+{"case": "timestamptz_broad", "medians": {"baseline": {"wall_seconds": 0.169, "cpu_seconds": 0.11128249999999999}, "candidate": {"wall_seconds": 0.1735, "cpu_seconds": 0.1042105}}}
+{"case": "full_scan", "medians": {"baseline": {"wall_seconds": 0.1625, "cpu_seconds": 0.10535449999999999}, "candidate": {"wall_seconds": 0.151, "cpu_seconds": 0.101754}}}

@@ -1,0 +1,8 @@
+{"case": "integer_wide", "medians": {"baseline": {"wall_seconds": 0.3395, "cpu_seconds": 0.3218295}, "candidate": {"wall_seconds": 0.039, "cpu_seconds": 0.023847}}}
+{"case": "float", "medians": {"baseline": {"wall_seconds": 0.156, "cpu_seconds": 0.097166}, "candidate": {"wall_seconds": 0.03, "cpu_seconds": 0.014278}}}
+{"case": "varchar", "medians": {"baseline": {"wall_seconds": 0.1615, "cpu_seconds": 0.102432}, "candidate": {"wall_seconds": 0.0325, "cpu_seconds": 0.0152075}}}
+{"case": "timestamp", "medians": {"baseline": {"wall_seconds": 0.161, "cpu_seconds": 0.1088485}, "candidate": {"wall_seconds": 0.1015, "cpu_seconds": 0.0193315}}}
+{"case": "source_timestamp_count", "medians": {"baseline": {"wall_seconds": 0.1155, "cpu_seconds": 0.0995375}, "candidate": {"wall_seconds": 0.0715, "cpu_seconds": 0.05014}}}
+{"case": "date_broad", "medians": {"baseline": {"wall_seconds": 0.167, "cpu_seconds": 0.110943}, "candidate": {"wall_seconds": 0.1695, "cpu_seconds": 0.106925}}}
+{"case": "timestamptz_broad", "medians": {"baseline": {"wall_seconds": 0.1675, "cpu_seconds": 0.119559}, "candidate": {"wall_seconds": 0.172, "cpu_seconds": 0.104286}}}
+{"case": "full_scan", "medians": {"baseline": {"wall_seconds": 0.1615, "cpu_seconds": 0.11138999999999999}, "candidate": {"wall_seconds": 0.142, "cpu_seconds": 0.0884195}}}

@@ -1,0 +1,1 @@
+duckdb_extension_statically_link(postgres_scanner sqlite_scanner)

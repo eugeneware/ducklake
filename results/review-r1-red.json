@@ -1,0 +1,31 @@
+{
+  "name": "review-r1-red",
+  "fixture": "/job/review-legacy.test",
+  "command": [
+    "/job/refined/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-config",
+    "/job/postgres.json",
+    "--test-dir",
+    "/tmp/upstream-sqltest-hpym0re2"
+  ],
+  "returncode": 1,
+  "passed": false,
+  "seconds": 1.12,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "error",
+      "passes": 13,
+      "fails": 1,
+      "skip-mode": 0,
+      "data": "<stdin>:62",
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T04-29-45Z--coral-sphere-00/_stdin_"
+    }
+  ]
+}

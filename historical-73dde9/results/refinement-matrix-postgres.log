@@ -1,0 +1,1581 @@
+PostgreSQL databases: ducklake_regression_064b196c2bd64aaea04891c67e281c5e_base (base) and ducklake_regression_064b196c2bd64aaea04891c67e281c5e_pr (PR)
+benchmark cache: isolated Base and PR directories
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.028259
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.032006
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.029474
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.023957
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.022025
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.025041
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.031742
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.032551
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.032523
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.021157
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.029861
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.028045
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.033294
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.028109
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.020908
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.028326
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.030617
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.028764
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.030636
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.029632
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.026480
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.031822
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.030484
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.030075
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.028793
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.027717
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.025712
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.032127
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.031416
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.029409
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.034873
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.026133
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.020358
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.032656
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.020796
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_point.benchmark	1	0.029344
+benchmark/micro/read/inlined_filters/integer_point.benchmark	2	0.030556
+benchmark/micro/read/inlined_filters/integer_point.benchmark	3	0.030934
+benchmark/micro/read/inlined_filters/integer_point.benchmark	4	0.031685
+benchmark/micro/read/inlined_filters/integer_point.benchmark	5	0.029490
+
+samples: benchmark/micro/read/inlined_filters/integer_point.benchmark: 20 pairs | median change -2.7% | within ±3%; no change
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.040410
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.042546
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.039363
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.026154
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.029319
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.037885
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.041175
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.040484
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.039666
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.041040
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.042435
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.044201
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.040636
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.042887
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.031051
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.038615
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.039956
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.037667
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.035566
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.040959
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.036765
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.040969
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.039611
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.037903
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.041427
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.040297
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.041360
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.041982
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.043502
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.038174
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.039798
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.043897
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.041479
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.039949
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.040123
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	1	0.035648
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	2	0.033254
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	3	0.033100
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	4	0.042332
+benchmark/micro/read/inlined_filters/integer_wide.benchmark	5	0.037019
+
+samples: benchmark/micro/read/inlined_filters/integer_wide.benchmark: 20 pairs | median change +6.7% | slower
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.028038
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.035423
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.031869
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.032541
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.032805
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.029105
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.035243
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.032685
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.032454
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.036235
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.027601
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.035460
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.034583
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.033678
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.035156
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.027392
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.030960
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.029841
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.033253
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.023831
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.030399
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.030262
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.029997
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.031761
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.028628
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.033731
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.035703
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.034383
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.033158
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.031705
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.026637
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.026272
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.030966
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.033072
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.034307
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_range.benchmark	1	0.026177
+benchmark/micro/read/inlined_filters/integer_range.benchmark	2	0.031161
+benchmark/micro/read/inlined_filters/integer_range.benchmark	3	0.032578
+benchmark/micro/read/inlined_filters/integer_range.benchmark	4	0.033454
+benchmark/micro/read/inlined_filters/integer_range.benchmark	5	0.032443
+
+samples: benchmark/micro/read/inlined_filters/integer_range.benchmark: 20 pairs | median change +7.6% | slower
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.028039
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.027295
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.027390
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.036761
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.035664
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.034895
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.038562
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.038931
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.035969
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.038628
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.032094
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.037667
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.035995
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.037709
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.037556
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.033195
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.037934
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.034827
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.034079
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.036853
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.039121
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.035873
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.030014
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.035573
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.035365
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.030210
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.041691
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.035824
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.037146
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.034271
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.031923
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.041048
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.038280
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.034679
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.039075
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_in.benchmark	1	0.031714
+benchmark/micro/read/inlined_filters/integer_in.benchmark	2	0.037576
+benchmark/micro/read/inlined_filters/integer_in.benchmark	3	0.035337
+benchmark/micro/read/inlined_filters/integer_in.benchmark	4	0.034582
+benchmark/micro/read/inlined_filters/integer_in.benchmark	5	0.037739
+
+samples: benchmark/micro/read/inlined_filters/integer_in.benchmark: 20 pairs | median change +5.7% | slower
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.003185
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002593
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002497
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002768
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.002698
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.002519
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002607
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002589
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002549
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.002860
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.002624
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002661
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002657
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002569
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.002580
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.002368
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002293
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002198
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002255
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.002233
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.002572
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002512
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002578
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002912
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.003476
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.002729
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002762
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002625
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002491
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.002649
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.002626
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002456
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002412
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002472
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.003188
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	1	0.002536
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	2	0.002622
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	3	0.002559
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	4	0.002543
+benchmark/micro/read/inlined_filters/integer_missing.benchmark	5	0.003082
+
+samples: benchmark/micro/read/inlined_filters/integer_missing.benchmark: 20 pairs | median change +1.9% | within ±3%; no change
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.032855
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.027768
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.025190
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.033737
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.035146
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.032540
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.029372
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.027161
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.031098
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.029403
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.027738
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.034482
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.035412
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.035206
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.034647
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.030600
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.035481
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.036754
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.036038
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.036472
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.030078
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.037432
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.035819
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.036242
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.036241
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.033976
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.038103
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.026502
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.038628
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.041483
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.033549
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.035772
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.036356
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.036993
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.034411
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_null.benchmark	1	0.033676
+benchmark/micro/read/inlined_filters/integer_null.benchmark	2	0.035419
+benchmark/micro/read/inlined_filters/integer_null.benchmark	3	0.030973
+benchmark/micro/read/inlined_filters/integer_null.benchmark	4	0.031437
+benchmark/micro/read/inlined_filters/integer_null.benchmark	5	0.026943
+
+samples: benchmark/micro/read/inlined_filters/integer_null.benchmark: 20 pairs | median change +0.0% | within ±3%; no change
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.172952
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.186112
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.143789
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.169381
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.173014
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.147959
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.144374
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.141639
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.139587
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.170688
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.149425
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.130380
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.142788
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.144356
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.145049
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.163207
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.163591
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.166475
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.168879
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.191417
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.160254
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.168794
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.160806
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.176007
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.182419
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.138696
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.141388
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.145055
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.135850
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.159734
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.136138
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.142690
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.149065
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.156829
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.137261
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	1	0.184192
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	2	0.179312
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	3	0.178998
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	4	0.184262
+benchmark/micro/read/inlined_filters/integer_broad.benchmark	5	0.189554
+
+samples: benchmark/micro/read/inlined_filters/integer_broad.benchmark: 20 pairs | median change -17.0% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.023727
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.023908
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.024169
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.029620
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.032599
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.033418
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.039722
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.033757
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.038613
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.037370
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.030772
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.037665
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.036519
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.035620
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.037732
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.036986
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.035698
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.036740
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.038276
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.035013
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.038176
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.044779
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.040417
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.038779
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.036975
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.036715
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.029585
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.025961
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.034913
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.026127
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.035627
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.035576
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.041829
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.035705
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.032993
+
+name	run	timing
+benchmark/micro/read/inlined_filters/integer_source.benchmark	1	0.037407
+benchmark/micro/read/inlined_filters/integer_source.benchmark	2	0.037787
+benchmark/micro/read/inlined_filters/integer_source.benchmark	3	0.035691
+benchmark/micro/read/inlined_filters/integer_source.benchmark	4	0.039717
+benchmark/micro/read/inlined_filters/integer_source.benchmark	5	0.036180
+
+samples: benchmark/micro/read/inlined_filters/integer_source.benchmark: 20 pairs | median change -3.3% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.187453
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.155754
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.175807
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.169876
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.167379
+
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.031771
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.035525
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.038921
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.037146
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.037130
+
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.037049
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.036515
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.037743
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.039479
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.036563
+
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.186987
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.177957
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.174456
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.170374
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.180856
+
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.183997
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.174617
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.174867
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.171775
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.168631
+
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.035794
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.037061
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.028945
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.034690
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.034069
+
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.032198
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.039216
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.036617
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.041361
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.034441
+
+name	run	timing
+benchmark/micro/read/inlined_filters/boolean.benchmark	1	0.185500
+benchmark/micro/read/inlined_filters/boolean.benchmark	2	0.172365
+benchmark/micro/read/inlined_filters/boolean.benchmark	3	0.170377
+benchmark/micro/read/inlined_filters/boolean.benchmark	4	0.171037
+benchmark/micro/read/inlined_filters/boolean.benchmark	5	0.189066
+
+samples: benchmark/micro/read/inlined_filters/boolean.benchmark: 20 pairs | median change -79.0% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.189648
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.176471
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.183445
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.182852
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.171590
+
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.041826
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.043927
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.037874
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.045980
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.037476
+
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.033541
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.034561
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.048902
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.035882
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.042513
+
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.183577
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.163301
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.173516
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.161712
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.170668
+
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.191139
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.164891
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.166794
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.171807
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.177763
+
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.041310
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.044478
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.031519
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.035424
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.046788
+
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.044228
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.039009
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.040222
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.035098
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.039624
+
+name	run	timing
+benchmark/micro/read/inlined_filters/decimal.benchmark	1	0.175370
+benchmark/micro/read/inlined_filters/decimal.benchmark	2	0.166715
+benchmark/micro/read/inlined_filters/decimal.benchmark	3	0.169970
+benchmark/micro/read/inlined_filters/decimal.benchmark	4	0.176756
+benchmark/micro/read/inlined_filters/decimal.benchmark	5	0.174624
+
+samples: benchmark/micro/read/inlined_filters/decimal.benchmark: 20 pairs | median change -77.1% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.184419
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.182898
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.170159
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.167699
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.173326
+
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.027150
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.033111
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.038296
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.035897
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.038721
+
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.036107
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.040589
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.032281
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.039937
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.034245
+
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.187726
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.176497
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.151477
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.178164
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.163261
+
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.180453
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.184671
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.174799
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.171390
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.173415
+
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.034199
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.034956
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.039864
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.031994
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.037878
+
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.037957
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.050896
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.036744
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.050539
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.034978
+
+name	run	timing
+benchmark/micro/read/inlined_filters/float.benchmark	1	0.163304
+benchmark/micro/read/inlined_filters/float.benchmark	2	0.174281
+benchmark/micro/read/inlined_filters/float.benchmark	3	0.177272
+benchmark/micro/read/inlined_filters/float.benchmark	4	0.167010
+benchmark/micro/read/inlined_filters/float.benchmark	5	0.172739
+
+samples: benchmark/micro/read/inlined_filters/float.benchmark: 20 pairs | median change -79.0% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.182953
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.180250
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.170318
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.153065
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.179641
+
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.029497
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.037797
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.034432
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.035780
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.031820
+
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.027172
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.036079
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.029525
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.034523
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.027119
+
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.198190
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.181201
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.162882
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.181613
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.177894
+
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.180918
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.167485
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.178026
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.174100
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.180361
+
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.036113
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.033095
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.035849
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.035562
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.036471
+
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.032388
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.033825
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.034813
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.039474
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.038437
+
+name	run	timing
+benchmark/micro/read/inlined_filters/double.benchmark	1	0.177754
+benchmark/micro/read/inlined_filters/double.benchmark	2	0.173603
+benchmark/micro/read/inlined_filters/double.benchmark	3	0.174048
+benchmark/micro/read/inlined_filters/double.benchmark	4	0.172263
+benchmark/micro/read/inlined_filters/double.benchmark	5	0.169149
+
+samples: benchmark/micro/read/inlined_filters/double.benchmark: 20 pairs | median change -80.5% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.187343
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.179071
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.178881
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.168885
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.179543
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.036538
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.040465
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.043395
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.042823
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.035036
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.033590
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.038665
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.042677
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.038828
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.039890
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.188149
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.180708
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.204606
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.175874
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.186031
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.167299
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.168588
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.170818
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.163915
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.176411
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.031077
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.031181
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.043073
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.046884
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.050107
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.033205
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.043108
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.042989
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.035906
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.042737
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar.benchmark	1	0.198503
+benchmark/micro/read/inlined_filters/varchar.benchmark	2	0.184122
+benchmark/micro/read/inlined_filters/varchar.benchmark	3	0.168391
+benchmark/micro/read/inlined_filters/varchar.benchmark	4	0.177165
+benchmark/micro/read/inlined_filters/varchar.benchmark	5	0.180081
+
+samples: benchmark/micro/read/inlined_filters/varchar.benchmark: 20 pairs | median change -77.6% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.188443
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.212315
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.202477
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.197522
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.187678
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.157802
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.172013
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.157462
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.158993
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.152042
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.170933
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.167286
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.168168
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.149351
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.153768
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.204470
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.188234
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.179035
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.185094
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.189683
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.210127
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.177378
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.195088
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.175569
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.185626
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.178801
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.158810
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.147307
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.139019
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.155150
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.157756
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.168429
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.166184
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.166544
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.166533
+
+name	run	timing
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	1	0.190392
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	2	0.189279
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	3	0.185859
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	4	0.183199
+benchmark/micro/read/inlined_filters/varchar_broad.benchmark	5	0.199021
+
+samples: benchmark/micro/read/inlined_filters/varchar_broad.benchmark: 20 pairs | median change -15.9% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.183457
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.160850
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.183779
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.180693
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.177864
+
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.034550
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.045988
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.035974
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.042618
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.042801
+
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.037933
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.040216
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.040765
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.044747
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.036338
+
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.189824
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.175791
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.182732
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.169588
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.172468
+
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.164199
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.168420
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.176816
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.168588
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.185036
+
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.032844
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.043535
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.042473
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.043307
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.042547
+
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.030975
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.036131
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.036286
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.029164
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.029147
+
+name	run	timing
+benchmark/micro/read/inlined_filters/blob.benchmark	1	0.184592
+benchmark/micro/read/inlined_filters/blob.benchmark	2	0.170246
+benchmark/micro/read/inlined_filters/blob.benchmark	3	0.175071
+benchmark/micro/read/inlined_filters/blob.benchmark	4	0.178848
+benchmark/micro/read/inlined_filters/blob.benchmark	5	0.158815
+
+samples: benchmark/micro/read/inlined_filters/blob.benchmark: 20 pairs | median change -77.8% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.197601
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.184272
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.176628
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.161910
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.174525
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.065638
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.079489
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.069883
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.073369
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.077743
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.067049
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.077131
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.077589
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.067986
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.077930
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.194902
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.177810
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.178087
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.167235
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.172934
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.202702
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.176830
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.195384
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.183981
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.176503
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.065824
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.082955
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.079817
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.079261
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.078211
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.067169
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.078817
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.077805
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.078107
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.063469
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date.benchmark	1	0.161181
+benchmark/micro/read/inlined_filters/date.benchmark	2	0.182506
+benchmark/micro/read/inlined_filters/date.benchmark	3	0.180997
+benchmark/micro/read/inlined_filters/date.benchmark	4	0.182642
+benchmark/micro/read/inlined_filters/date.benchmark	5	0.168750
+
+samples: benchmark/micro/read/inlined_filters/date.benchmark: 20 pairs | median change -56.4% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.221518
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.190834
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.180532
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.181626
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.183517
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.192143
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.176021
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.197608
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.194325
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.193062
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.191185
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.201564
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.197387
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.193042
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.190920
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.208737
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.187402
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.194966
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.181938
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.191952
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.211986
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.202029
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.161286
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.182859
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.195643
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.189369
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.182764
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.190042
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.187858
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.185524
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.187380
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.184943
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.193498
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.191620
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.186374
+
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.213591
+benchmark/micro/read/inlined_filters/date_broad.benchmark	2	0.188672
+benchmark/micro/read/inlined_filters/date_broad.benchmark	3	0.189290
+benchmark/micro/read/inlined_filters/date_broad.benchmark	4	0.172905
+benchmark/micro/read/inlined_filters/date_broad.benchmark	5	0.188482
+
+samples: benchmark/micro/read/inlined_filters/date_broad.benchmark: 20 pairs | median change +1.1% | within ±3%; no change
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.189320
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.167572
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.178733
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.188258
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.161960
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.103595
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.111201
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.115375
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.107836
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.108344
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.101964
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.107709
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.103504
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.102816
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.104175
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.183876
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.180575
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.183301
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.176985
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.179503
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.189311
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.162688
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.206197
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.184463
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.172308
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.103545
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.108979
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.103846
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.109806
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.103494
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.103089
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.116189
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.115889
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.103943
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.101874
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamp.benchmark	1	0.187829
+benchmark/micro/read/inlined_filters/timestamp.benchmark	2	0.186978
+benchmark/micro/read/inlined_filters/timestamp.benchmark	3	0.178157
+benchmark/micro/read/inlined_filters/timestamp.benchmark	4	0.179391
+benchmark/micro/read/inlined_filters/timestamp.benchmark	5	0.182864
+
+samples: benchmark/micro/read/inlined_filters/timestamp.benchmark: 20 pairs | median change -42.7% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.181010
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.202489
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.194815
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.180808
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.177176
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.105725
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.110955
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.112102
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.112027
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.105013
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.105668
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.119464
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.106901
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.117006
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.120033
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.181804
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.186988
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.194851
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.182880
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.180168
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.190911
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.176415
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.175641
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.175329
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.183960
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.105876
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.108251
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.105928
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.106974
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.106576
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.108140
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.106469
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.117048
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.105476
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.112739
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	1	0.188179
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	2	0.180177
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	3	0.176266
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	4	0.173525
+benchmark/micro/read/inlined_filters/timestamptz.benchmark	5	0.187249
+
+samples: benchmark/micro/read/inlined_filters/timestamptz.benchmark: 20 pairs | median change -40.7% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.203381
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.192584
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.188180
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.189614
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.198781
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.191330
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.197391
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.196798
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.191637
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.216990
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.199572
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.195235
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.200484
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.188865
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.209287
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.213797
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.188412
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.201867
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.177500
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.198271
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.240064
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.195875
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.205235
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.184638
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.171769
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.197419
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.195642
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.194156
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.208280
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.215140
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.209663
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.202047
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.205433
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.201138
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.211408
+
+name	run	timing
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	1	0.199724
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	2	0.186521
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	3	0.208118
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	4	0.194777
+benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark	5	0.202816
+
+samples: benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark: 20 pairs | median change +1.5% | within ±3%; no change
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.030275
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.037556
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.030831
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.041748
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.039174
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.036543
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.037058
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.038780
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.040994
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.043344
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.035363
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.034671
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.040454
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.041743
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.037728
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.038893
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.040654
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.039688
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.040508
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.039004
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.039445
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.033907
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.039628
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.039476
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.039756
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.038357
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.041720
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.038161
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.043801
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.041474
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.034679
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.036463
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.039772
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.034114
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.041254
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	1	0.035341
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	2	0.043074
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	3	0.043014
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	4	0.041965
+benchmark/micro/read/inlined_filters/source_timestamp.benchmark	5	0.038050
+
+samples: benchmark/micro/read/inlined_filters/source_timestamp.benchmark: 20 pairs | median change -2.3% | within ±3%; no change
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.025667
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.031528
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.030900
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.033953
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.034331
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.028693
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.032126
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.035746
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.031647
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.034520
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.028968
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.030837
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.032888
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.034748
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.034352
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.025900
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.032642
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.027162
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.033414
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.031765
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.028998
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.028399
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.028796
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.029280
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.031828
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.029035
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.027613
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.026747
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.030518
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.032762
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.032801
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.033963
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.034422
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.031635
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.031461
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_and.benchmark	1	0.030008
+benchmark/micro/read/inlined_filters/residual_and.benchmark	2	0.031265
+benchmark/micro/read/inlined_filters/residual_and.benchmark	3	0.030688
+benchmark/micro/read/inlined_filters/residual_and.benchmark	4	0.036983
+benchmark/micro/read/inlined_filters/residual_and.benchmark	5	0.030815
+
+samples: benchmark/micro/read/inlined_filters/residual_and.benchmark: 20 pairs | median change +3.3% | slower
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.187331
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.173133
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.166969
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.167580
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.165925
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.160890
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.130691
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.151965
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.163263
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.153866
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.141421
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.161400
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.153338
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.149966
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.154783
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.176740
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.170057
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.172322
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.152614
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.161455
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.176164
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.169612
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.168171
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.158016
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.175587
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.149025
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.151969
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.150345
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.150182
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.146436
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.186588
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.163200
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.150549
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.145502
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.141836
+
+name	run	timing
+benchmark/micro/read/inlined_filters/residual_or.benchmark	1	0.178993
+benchmark/micro/read/inlined_filters/residual_or.benchmark	2	0.171283
+benchmark/micro/read/inlined_filters/residual_or.benchmark	3	0.163280
+benchmark/micro/read/inlined_filters/residual_or.benchmark	4	0.181088
+benchmark/micro/read/inlined_filters/residual_or.benchmark	5	0.167703
+
+samples: benchmark/micro/read/inlined_filters/residual_or.benchmark: 20 pairs | median change -10.9% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.207371
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.196539
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.200889
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.213590
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.189805
+
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.181893
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.179271
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.179242
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.202360
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.186400
+
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.220377
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.185943
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.181655
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.181312
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.196133
+
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.209126
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.202843
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.224656
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.203037
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.225522
+
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.202235
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.197697
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.222826
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.189617
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.194772
+
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.186811
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.195350
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.181527
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.189322
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.179400
+
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.175630
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.204903
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.204005
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.179521
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.175122
+
+name	run	timing
+benchmark/micro/read/inlined_filters/nested.benchmark	1	0.203607
+benchmark/micro/read/inlined_filters/nested.benchmark	2	0.193201
+benchmark/micro/read/inlined_filters/nested.benchmark	3	0.185496
+benchmark/micro/read/inlined_filters/nested.benchmark	4	0.183751
+benchmark/micro/read/inlined_filters/nested.benchmark	5	0.188433
+
+samples: benchmark/micro/read/inlined_filters/nested.benchmark: 20 pairs | median change -8.8% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.182390
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.184344
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.163260
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.160820
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.162123
+
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.145132
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.143883
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.157596
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.145601
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.142941
+
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.160513
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.153369
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.149776
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.157564
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.156961
+
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.169698
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.165366
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.169581
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.176970
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.164487
+
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.179143
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.164978
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.166797
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.166369
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.164031
+
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.176060
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.151690
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.151968
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.147593
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.130020
+
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.154178
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.145684
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.144977
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.149525
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.137356
+
+name	run	timing
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	1	0.173891
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	2	0.163251
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	3	0.166566
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	4	0.165220
+benchmark/micro/read/inlined_filters/runtime_join.benchmark	5	0.197248
+
+samples: benchmark/micro/read/inlined_filters/runtime_join.benchmark: 20 pairs | median change -10.1% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.202914
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.165877
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.194685
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.172712
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.175365
+
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.178810
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.176931
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.160569
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.164020
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.155412
+
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.201771
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.175135
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.155326
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.162431
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.159270
+
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.193472
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.167569
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.155142
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.192126
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.180988
+
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.183963
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.187775
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.186743
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.185220
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.177329
+
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.173145
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.170709
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.154841
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.144526
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.159110
+
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.173551
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.172603
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.164877
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.164222
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.148233
+
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.203615
+benchmark/micro/read/inlined_filters/full_scan.benchmark	2	0.184078
+benchmark/micro/read/inlined_filters/full_scan.benchmark	3	0.185741
+benchmark/micro/read/inlined_filters/full_scan.benchmark	4	0.164477
+benchmark/micro/read/inlined_filters/full_scan.benchmark	5	0.179460
+
+samples: benchmark/micro/read/inlined_filters/full_scan.benchmark: 20 pairs | median change -10.8% | faster
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.081979
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.071589
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.070235
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.060314
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.068706
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.079327
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.074887
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.074828
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.073053
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.075779
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.083316
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.073768
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.068797
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.078158
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.073690
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.075394
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.073851
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.072094
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.074159
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.071401
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.080707
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.046600
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.056792
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.062311
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.057886
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.081467
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.075759
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.068792
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.065296
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.072843
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.077723
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.075432
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.074135
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.074333
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.070982
+
+name	run	timing
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	1	0.076595
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	2	0.065676
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	3	0.063815
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	4	0.061761
+benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark	5	0.063299
+
+samples: benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark: 20 pairs | median change +7.4% | slower
+
+[90msuite: benchmark/micro/read/inlined_filters/ (27 benchmarks)[0m
+[90msampling: fixed; 20 samples per binary (--samples=20)[0m
+[90mquery regression: median change ≥ +10.0% (warning)[0m
+[90mCI failure: geomean change ≥ +10.0% or ≥ +50.0 ms[0m
+
+[90mUNCHANGED (±3%)[0m
+[90m6 benchmarks[0m
+
+FASTER
+benchmark               base median                   PR median                     delta median        runs
+----------------------  ----------------------------  ----------------------------  ------------------  ----
+integer_source           36.9 ms [90m[ 23.7 ms… 44.8 ms][0m   35.6 ms [90m[ 26.0 ms… 41.8 ms][0m  [32m  -1.2 ms ( -3.3%)[0m    20
+nested                  201.6 ms [90m[183.8 ms…225.5 ms][0m  183.9 ms [90m[175.1 ms…220.4 ms][0m  [32m -17.6 ms ( -8.8%)[0m    20
+runtime_join            166.5 ms [90m[160.8 ms…197.2 ms][0m  149.7 ms [90m[130.0 ms…176.1 ms][0m  [32m -16.8 ms (-10.1%)[0m    20
+full_scan               184.0 ms [90m[155.1 ms…203.6 ms][0m  164.1 ms [90m[144.5 ms…201.8 ms][0m  [32m -19.9 ms (-10.8%)[0m    20
+residual_or             169.8 ms [90m[152.6 ms…187.3 ms][0m  151.3 ms [90m[130.7 ms…186.6 ms][0m  [32m -18.6 ms (-10.9%)[0m    20
+varchar_broad           188.9 ms [90m[175.6 ms…212.3 ms][0m  158.9 ms [90m[139.0 ms…178.8 ms][0m  [32m -30.0 ms (-15.9%)[0m    20
+integer_broad           173.0 ms [90m[143.8 ms…191.4 ms][0m  143.6 ms [90m[130.4 ms…170.7 ms][0m  [32m -29.4 ms (-17.0%)[0m    20
+timestamptz             181.4 ms [90m[173.5 ms…202.5 ms][0m  107.6 ms [90m[105.0 ms…120.0 ms][0m  [32m -73.8 ms (-40.7%)[0m    20
+timestamp               181.7 ms [90m[162.0 ms…206.2 ms][0m  104.1 ms [90m[101.9 ms…116.2 ms][0m  [32m -77.7 ms (-42.7%)[0m    20
+date                    177.9 ms [90m[161.2 ms…202.7 ms][0m   77.7 ms [90m[ 63.5 ms… 83.0 ms][0m  [32m-100.3 ms (-56.4%)[0m    20
+decimal                 174.1 ms [90m[161.7 ms…191.1 ms][0m   39.9 ms [90m[ 31.5 ms… 48.9 ms][0m  [32m-134.1 ms (-77.1%)[0m    20
+varchar                 179.0 ms [90m[163.9 ms…204.6 ms][0m   40.2 ms [90m[ 31.1 ms… 50.1 ms][0m  [32m-138.8 ms (-77.6%)[0m    20
+blob                    176.3 ms [90m[158.8 ms…189.8 ms][0m   39.1 ms [90m[ 29.1 ms… 46.0 ms][0m  [32m-137.2 ms (-77.8%)[0m    20
+boolean                 174.5 ms [90m[155.8 ms…189.1 ms][0m   36.6 ms [90m[ 28.9 ms… 41.4 ms][0m  [32m-137.9 ms (-79.0%)[0m    20
+float                   173.8 ms [90m[151.5 ms…187.7 ms][0m   36.4 ms [90m[ 27.2 ms… 50.9 ms][0m  [32m-137.4 ms (-79.0%)[0m    20
+double                  177.8 ms [90m[153.1 ms…198.2 ms][0m   34.7 ms [90m[ 27.1 ms… 39.5 ms][0m  [32m-143.2 ms (-80.5%)[0m    20
+
+SLOWER (+3%…<+10%)
+benchmark               base median                   PR median                     delta median        runs
+----------------------  ----------------------------  ----------------------------  ------------------  ----
+residual_and             30.9 ms [90m[ 25.7 ms… 37.0 ms][0m   31.9 ms [90m[ 26.7 ms… 35.7 ms][0m  [31m  +1.0 ms ( +3.3%)[0m    20
+integer_in               35.4 ms [90m[ 27.3 ms… 39.1 ms][0m   37.4 ms [90m[ 30.2 ms… 41.7 ms][0m  [31m  +2.0 ms ( +5.7%)[0m    20
+integer_wide             38.3 ms [90m[ 26.2 ms… 42.5 ms][0m   40.8 ms [90m[ 31.1 ms… 44.2 ms][0m  [31m  +2.6 ms ( +6.7%)[0m    20
+source_timestamp_count   69.5 ms [90m[ 46.6 ms… 82.0 ms][0m   74.6 ms [90m[ 65.3 ms… 83.3 ms][0m  [31m  +5.1 ms ( +7.4%)[0m    20
+integer_range            31.1 ms [90m[ 23.8 ms… 35.4 ms][0m   33.4 ms [90m[ 26.3 ms… 36.2 ms][0m  [31m  +2.4 ms ( +7.6%)[0m    20
+
+geomean: 90.9 ms -> 59.0 ms  [32m-31.9 ms (-35.1%)[0m  [90m(20 samples)[0m
+result: [32mpassed; no query regressions[0m

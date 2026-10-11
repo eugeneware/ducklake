@@ -1,0 +1,2 @@
+{"case": "integer_wide", "medians": {"baseline": {"wall_seconds": 0.035500000000000004, "cpu_seconds": 0.020391}, "candidate": {"wall_seconds": 0.0375, "cpu_seconds": 0.0240505}}}
+{"case": "source_timestamp_count", "medians": {"baseline": {"wall_seconds": 0.065, "cpu_seconds": 0.0499985}, "candidate": {"wall_seconds": 0.07, "cpu_seconds": 0.0513435}}}

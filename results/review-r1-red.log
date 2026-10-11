@@ -1,0 +1,27 @@
+
+[0/1] (0%): <stdin><stdin>:62: failed: explicitly
+
+[1/1] (100%): <stdin> took 1.093s
+Failed 1 test case, failed 1 assertion.
+
+[TEST_EVENT] {"event":"begin","name":"<stdin>","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-29-45Z--coral-sphere-00/_stdin_"}
+
+1. <stdin>:62
+================================================================================
+Wrong row count in query! (<stdin>:62)!
+Expected 1 rows, but got 0 rows
+================================================================================
+SELECT id FROM dl.t WHERE f = 0.1::FLOAT;
+================================================================================
+Expected result:
+================================================================================
+1
+
+================================================================================
+Actual result:
+================================================================================
+id	
+INTEGER	
+[ Rows: 0]
+
+[TEST_EVENT] {"event":"end","name":"<stdin>","status":"error","passes":13,"fails":1,"skip-mode":0,"data":"<stdin>:62","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-29-45Z--coral-sphere-00/_stdin_"}

@@ -1,0 +1,2 @@
+name	run	timing
+benchmark/micro/read/inlined_filters/date_broad.benchmark	1	0.180608

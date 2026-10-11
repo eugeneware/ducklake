@@ -1,0 +1,157 @@
+
+[0/50] (0%): test/sql/stats/alter_type_stats_reseed.test[TEST_EVENT] {"event":"begin","name":"test/sql/stats/alter_type_stats_reseed.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_alter_type_stats_reseed_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/alter_type_stats_reseed.test","status":"ok","passes":60,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_alter_type_stats_reseed_test"}
+
+[1/50] (2%): test/sql/stats/alter_type_stats_reseed.test took 3.352s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/cardinality.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_cardinality_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/cardinality.test","status":"ok","passes":4,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_cardinality_test"}
+
+[2/50] (4%): test/sql/stats/cardinality.test took 0.606s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/complex_filter_pushdown.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_complex_filter_pushdown_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/complex_filter_pushdown.test","status":"ok","passes":30,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_complex_filter_pushdown_test"}
+
+[3/50] (6%): test/sql/stats/complex_filter_pushdown.test took 1.093s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/count_not_null_optimization_time_travel.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_not_null_optimization_time_travel_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/count_not_null_optimization_time_travel.test","status":"ok","passes":15,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_not_null_optimization_time_travel_test"}
+
+[4/50] (8%): test/sql/stats/count_not_null_optimization_time_travel.test took 1.037s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/count_star_optimization_basic.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_star_optimization_basic_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/count_star_optimization_basic.test","status":"ok","passes":41,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_star_optimization_basic_test"}
+
+[5/50] (10%): test/sql/stats/count_star_optimization_basic.test took 1.678s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/count_star_optimization_inlined.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_star_optimization_inlined_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/count_star_optimization_inlined.test","status":"ok","passes":29,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_star_optimization_inlined_test"}
+
+[6/50] (12%): test/sql/stats/count_star_optimization_inlined.test took 1.670s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/count_star_optimization_time_travel.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_star_optimization_time_travel_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/count_star_optimization_time_travel.test","status":"ok","passes":11,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_count_star_optimization_time_travel_test"}
+
+[7/50] (14%): test/sql/stats/count_star_optimization_time_travel.test took 0.774s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/empty_table_stats_cache.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_empty_table_stats_cache_test"}
+Replacing deprecated ${DATA_PATH} in test test/sql/stats/empty_table_stats_cache.test - please replace with {DATA_PATH}
+Replacing deprecated ${DUCKLAKE_CONNECTION} in test test/sql/stats/empty_table_stats_cache.test - please replace with {DUCKLAKE_CONNECTION}
+Replacing deprecated string __TEST_DIR__ in path "ATTACH 'ducklake:postgres:dbname=ducklakedb' AS ducklake (DATA_PATH '__TEST_DIR__/ducklake_empty_stats_files')" - please replace with {TEST_DIR}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/empty_table_stats_cache.test","status":"ok","passes":16,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_empty_table_stats_cache_test"}
+
+[8/50] (16%): test/sql/stats/empty_table_stats_cache.test took 0.862s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/file_list_metadata_query.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_file_list_metadata_query_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/file_list_metadata_query.test","status":"ok","passes":37,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_file_list_metadata_query_test"}
+
+[9/50] (18%): test/sql/stats/file_list_metadata_query.test took 1.547s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/filter_pushdown.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/filter_pushdown.test","status":"ok","passes":27,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_test"}
+
+[10/50] (20%): test/sql/stats/filter_pushdown.test took 0.973s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/filter_pushdown_all_null_files.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_all_null_files_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/filter_pushdown_all_null_files.test","status":"ok","passes":9,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_all_null_files_test"}
+
+[11/50] (22%): test/sql/stats/filter_pushdown_all_null_files.test took 0.670s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/filter_pushdown_float_nan.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_float_nan_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/filter_pushdown_float_nan.test","status":"ok","passes":4,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_float_nan_test"}
+
+[12/50] (24%): test/sql/stats/filter_pushdown_float_nan.test took 0.586s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/filter_pushdown_unprintable_constant.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_unprintable_constant_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/filter_pushdown_unprintable_constant.test","status":"ok","passes":7,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_pushdown_unprintable_constant_test"}
+
+[13/50] (26%): test/sql/stats/filter_pushdown_unprintable_constant.test took 0.617s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/filter_stress.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_stress_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/filter_stress.test","status":"ok","passes":47,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_filter_stress_test"}
+
+[14/50] (28%): test/sql/stats/filter_stress.test took 1.693s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/float_to_double_retype_stats.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_float_to_double_retype_stats_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/float_to_double_retype_stats.test","status":"ok","passes":104,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_float_to_double_retype_stats_test"}
+
+[15/50] (30%): test/sql/stats/float_to_double_retype_stats.test took 5.728s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/float_to_double_retype_stats_concurrent.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_float_to_double_retype_stats_concurrent_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/float_to_double_retype_stats_concurrent.test","status":"ok","passes":8,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_float_to_double_retype_stats_concurrent_test"}
+
+[16/50] (32%): test/sql/stats/float_to_double_retype_stats_concurrent.test took 0.939s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/global_stats.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_global_stats_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/global_stats.test","status":"ok","passes":55,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_global_stats_test"}
+
+[17/50] (34%): test/sql/stats/global_stats.test took 2.364s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/global_stats_transactions.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_global_stats_transactions_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/global_stats_transactions.test","status":"ok","passes":13,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_global_stats_transactions_test"}
+
+[18/50] (36%): test/sql/stats/global_stats_transactions.test took 0.983s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_nested_leaf_rewrite_corruption.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_nested_leaf_rewrite_corruption_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_nested_leaf_rewrite_corruption.test","status":"ok","passes":12,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_nested_leaf_rewrite_corruption_test"}
+
+[19/50] (38%): test/sql/stats/min_max_nested_leaf_rewrite_corruption.test took 1.067s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_optimization_basic.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_basic_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_optimization_basic.test","status":"ok","passes":24,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_basic_test"}
+
+[20/50] (40%): test/sql/stats/min_max_optimization_basic.test took 1.657s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_optimization_compaction.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_compaction_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_optimization_compaction.test","status":"ok","passes":43,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_compaction_test"}
+
+[21/50] (42%): test/sql/stats/min_max_optimization_compaction.test took 3.213s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_optimization_deletes.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_deletes_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_optimization_deletes.test","status":"ok","passes":23,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_deletes_test"}
+
+[22/50] (44%): test/sql/stats/min_max_optimization_deletes.test took 1.328s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_optimization_inlined.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_inlined_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_optimization_inlined.test","status":"ok","passes":11,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_inlined_test"}
+
+[23/50] (46%): test/sql/stats/min_max_optimization_inlined.test took 0.720s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_optimization_time_travel.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_time_travel_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_optimization_time_travel.test","status":"ok","passes":21,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_time_travel_test"}
+
+[24/50] (48%): test/sql/stats/min_max_optimization_time_travel.test took 0.702s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_optimization_truncated_strings.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_truncated_strings_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_optimization_truncated_strings.test","status":"ok","passes":13,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_optimization_truncated_strings_test"}
+
+[25/50] (50%): test/sql/stats/min_max_optimization_truncated_strings.test took 0.846s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/min_max_string_truncated.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_string_truncated_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/min_max_string_truncated.test","status":"ok","passes":7,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_min_max_string_truncated_test"}
+
+[26/50] (52%): test/sql/stats/min_max_string_truncated.test took 0.742s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/nested_filter_pushdown.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_nested_filter_pushdown_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/nested_filter_pushdown.test","status":"ok","passes":14,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_nested_filter_pushdown_test"}
+
+[27/50] (54%): test/sql/stats/nested_filter_pushdown.test took 1.013s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/prefix_range_file_pruning.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_prefix_range_file_pruning_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/prefix_range_file_pruning.test","status":"ok","passes":54,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_prefix_range_file_pruning_test"}
+
+[28/50] (56%): test/sql/stats/prefix_range_file_pruning.test took 1.692s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns.test","status":"ok","passes":25,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_test"}
+
+[29/50] (57%): test/sql/stats/skip_stats_columns.test took 1.091s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns_add_files.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_add_files_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns_add_files.test","status":"ok","passes":24,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_add_files_test"}
+
+[30/50] (60%): test/sql/stats/skip_stats_columns_add_files.test took 1.530s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns_errors.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_errors_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns_errors.test","status":"ok","passes":21,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_errors_test"}
+
+[31/50] (62%): test/sql/stats/skip_stats_columns_errors.test took 1.307s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns_inlining.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_inlining_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns_inlining.test","status":"ok","passes":9,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_inlining_test"}
+
+[32/50] (64%): test/sql/stats/skip_stats_columns_inlining.test took 0.752s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns_malformed.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_malformed_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns_malformed.test","status":"ok","passes":12,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_malformed_test"}
+
+[33/50] (66%): test/sql/stats/skip_stats_columns_malformed.test took 0.811s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns_nested.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_nested_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns_nested.test","status":"ok","passes":19,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_nested_test"}
+
+[34/50] (68%): test/sql/stats/skip_stats_columns_nested.test took 1.438s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns_rewrite.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_rewrite_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns_rewrite.test","status":"ok","passes":17,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_rewrite_test"}
+
+[35/50] (70%): test/sql/stats/skip_stats_columns_rewrite.test took 1.240s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/skip_stats_columns_transaction.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_transaction_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/skip_stats_columns_transaction.test","status":"ok","passes":31,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_skip_stats_columns_transaction_test"}
+
+[36/50] (72%): test/sql/stats/skip_stats_columns_transaction.test took 1.492s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/stats_exactness_inlined.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_stats_exactness_inlined_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/stats_exactness_inlined.test","status":"ok","passes":7,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_stats_exactness_inlined_test"}
+
+[37/50] (74%): test/sql/stats/stats_exactness_inlined.test took 0.722s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/table_stats_null_totals.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_table_stats_null_totals_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/table_stats_null_totals.test","status":"ok","passes":36,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_table_stats_null_totals_test"}
+
+[38/50] (76%): test/sql/stats/table_stats_null_totals.test took 2.173s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/table_stats_null_totals_retry.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_table_stats_null_totals_retry_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/table_stats_null_totals_retry.test","status":"ok","passes":11,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_table_stats_null_totals_retry_test"}
+
+[39/50] (78%): test/sql/stats/table_stats_null_totals_retry.test took 1.099s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/table_stats_without_column_stats.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_table_stats_without_column_stats_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/table_stats_without_column_stats.test","status":"ok","passes":6,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_table_stats_without_column_stats_test"}
+
+[40/50] (80%): test/sql/stats/table_stats_without_column_stats.test took 0.549s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/timestamptz_retype_committed_stats.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_timestamptz_retype_committed_stats_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/timestamptz_retype_committed_stats.test","status":"ok","passes":23,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_timestamptz_retype_committed_stats_test"}
+
+[41/50] (82%): test/sql/stats/timestamptz_retype_committed_stats.test took 1.956s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/timestamptz_retype_stats_time_zone.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_timestamptz_retype_stats_time_zone_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/timestamptz_retype_stats_time_zone.test","status":"ok","passes":30,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_timestamptz_retype_stats_time_zone_test"}
+
+[42/50] (84%): test/sql/stats/timestamptz_retype_stats_time_zone.test took 1.327s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/timestamptz_retype_topn_time_zone.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_timestamptz_retype_topn_time_zone_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/timestamptz_retype_topn_time_zone.test","status":"ok","passes":53,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_timestamptz_retype_topn_time_zone_test"}
+
+[43/50] (86%): test/sql/stats/timestamptz_retype_topn_time_zone.test took 2.430s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/topn_file_pruning.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_topn_file_pruning_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/topn_file_pruning.test","status":"ok","passes":21,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_topn_file_pruning_test"}
+
+[44/50] (88%): test/sql/stats/topn_file_pruning.test took 0.829s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/variant_mixed_type_stats.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_mixed_type_stats_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/variant_mixed_type_stats.test","status":"ok","passes":49,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_mixed_type_stats_test"}
+
+[45/50] (90%): test/sql/stats/variant_mixed_type_stats.test took 1.601s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/variant_shredded_stats.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_shredded_stats_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/variant_shredded_stats.test","status":"ok","passes":35,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_shredded_stats_test"}
+
+[46/50] (92%): test/sql/stats/variant_shredded_stats.test took 2.458s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/variant_stats_large_counts.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_large_counts_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/variant_stats_large_counts.test","status":"ok","passes":8,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_large_counts_test"}
+
+[47/50] (94%): test/sql/stats/variant_stats_large_counts.test took 0.860s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/variant_stats_quote_rewrite.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_quote_rewrite_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/variant_stats_quote_rewrite.test","status":"ok","passes":9,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_quote_rewrite_test"}
+
+[48/50] (96%): test/sql/stats/variant_stats_quote_rewrite.test took 0.663s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/variant_stats_quoted_field.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_quoted_field_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/variant_stats_quoted_field.test","status":"ok","passes":5,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_quoted_field_test"}
+
+[49/50] (98%): test/sql/stats/variant_stats_quoted_field.test took 0.614s[TEST_EVENT] {"event":"begin","name":"test/sql/stats/variant_stats_special_chars.test","temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_special_chars_test"}
+[TEST_EVENT] {"event":"end","name":"test/sql/stats/variant_stats_special_chars.test","status":"ok","passes":9,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T04-39-51Z--cyan-girder-83/test_sql_stats_variant_stats_special_chars_test"}
+
+[50/50] (100%): test/sql/stats/variant_stats_special_chars.test took 0.672s
+Passed all 50 test cases with 1759 assertions.
+
