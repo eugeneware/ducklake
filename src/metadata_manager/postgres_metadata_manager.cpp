@@ -177,7 +177,8 @@ string PostgresMetadataManager::InlinedFilterToSQL(const Expression &expression,
 		target_type = "BYTEA";
 	} else if (target_type.empty()) {
 		return string();
-	} else if (!TypeIsNativelySupported(type)) {
+	} else {
+		// Compare in the logical type, including FLOAT stored as DOUBLE PRECISION in older catalogs.
 		filter_column = "CAST(" + column + " AS " + target_type + ")";
 	}
 	if (expression.GetExpressionType() == ExpressionType::OPERATOR_IS_NULL ||
