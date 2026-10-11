@@ -1,0 +1,30 @@
+{
+  "name": "architecture-postgres-filter_literals",
+  "fixture": "/src/test/sql/data_inlining/inlined_filter_literals.test",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-config",
+    "/job/postgres.json",
+    "--test-dir",
+    "/tmp/upstream-sqltest-hffqyd0z"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 0.56,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 8,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T05-34-40Z--scarlet-lattice-29/_stdin_"
+    }
+  ]
+}

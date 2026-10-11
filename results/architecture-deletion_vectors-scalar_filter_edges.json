@@ -1,0 +1,30 @@
+{
+  "name": "architecture-deletion_vectors-scalar_filter_edges",
+  "fixture": "/src/test/sql/data_inlining/inlined_scalar_filter_edges.test",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-config",
+    "/job/deletion_vectors.json",
+    "--test-dir",
+    "/tmp/upstream-sqltest-ugas3auo"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 13.28,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 313,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T05-34-20Z--sienna-spindle-23/_stdin_"
+    }
+  ]
+}

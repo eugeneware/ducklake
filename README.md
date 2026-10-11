@@ -1,14 +1,16 @@
 # DuckLake inline-filter PR 1: review evidence
 
 Evidence for [eugeneware/ducklake#1](https://github.com/eugeneware/ducklake/pull/1),
-corrected source `c970d6284e7d79e0ea4b451d48d30b2281ee3261`.
+current source `bd815213f32bb7d8750c1a0a0f69b17a8eba8874`. The first review-pass results for `c970d628` are retained with their original source labels.
 This branch contains reproducibility artifacts, separate from the implementation series.
 
 ## Results
 
-- [Correctness](CORRECTNESS.md): the legacy regression's baseline-pass/old-head-fail/fixed-head-pass sequence, 42 focused invocations, and the native/PostgreSQL statistics and related suites.
-- [CPU](CPU.md): feature-off versus corrected head, 20 samples per binary/case, with separate `-O1` and normal Release `-O3` measurements and raw logs.
-- [Latency](LATENCY.md): both complete 27-case `-O1` comparisons passed the unchanged gate, as did the eight-case Release confirmation. Costs, including the broad timestamp regression, remain visible.
+- [Current architecture follow-up](ARCHITECTURE.md): contracts, expired-row regression, exact-head correctness and performance evidence.
+
+- [First review correctness, c970d628](CORRECTNESS.md): the legacy regression's baseline-pass/old-head-fail/fixed-head-pass sequence, 42 focused invocations, and the native/PostgreSQL statistics and related suites.
+- [First review CPU, c970d628](CPU.md): feature-off versus corrected head, 20 samples per binary/case, with separate `-O1` and normal Release `-O3` measurements and raw logs.
+- [First review latency, c970d628](LATENCY.md): both complete 27-case `-O1` comparisons passed the unchanged gate, as did the eight-case Release confirmation. Costs, including the broad timestamp regression, remain visible.
 - [MinSizeRel manifest](results/review-build-manifest.json) and [Release manifest](results/review-release-build-manifest.json): source pins, exact flags, source/binary hashes and measurement settings.
 
 Full GitHub Actions status is tracked on the PR. These local results do not waive
@@ -18,7 +20,8 @@ the catalog, sanitizer or platform jobs that are still running.
 
 - Feature-off DuckLake base: `b6f14fe678b80905e1ab86d3df26e4a5fe2f15b1`.
 - Reviewed head before these fixes: `73dde9e279a56cdb7034fb82c0cef023f5689446`.
-- Corrected head: `c970d6284e7d79e0ea4b451d48d30b2281ee3261`.
+- First review corrections: `c970d6284e7d79e0ea4b451d48d30b2281ee3261`.
+- Current architecture follow-up: `bd815213f32bb7d8750c1a0a0f69b17a8eba8874`.
 - Historical integer-only prototype: `7d1d8df7175421bec7893a9d919027accab8b851`.
 - DuckDB: `5070de3585e846718fac121b5b149f4236e6a58a` (`v2.0.0-dev0`).
 - PostgreSQL 17.11; scanner pins and binary/source hashes are in the build manifests.

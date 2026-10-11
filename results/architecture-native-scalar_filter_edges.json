@@ -1,0 +1,28 @@
+{
+  "name": "architecture-native-scalar_filter_edges",
+  "fixture": "/src/test/sql/data_inlining/inlined_scalar_filter_edges.test",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-dir",
+    "/tmp/upstream-sqltest-fp50bg0r"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 8.98,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 313,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T05-33-14Z--scarlet-node-70/_stdin_"
+    }
+  ]
+}

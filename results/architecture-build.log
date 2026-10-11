@@ -1,0 +1,81 @@
+[1/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_commit.cpp.o
+[2/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/base_metadata_function.cpp.o
+[3/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_current_snapshot.cpp.o
+[4/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_cleanup_files.cpp.o
+[5/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_expire_snapshots.cpp.o
+[6/54] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/ducklake_util.cpp.o
+[7/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_flush_inlined_data.cpp.o
+[8/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_add_data_files.cpp.o
+[9/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_last_committed_snapshot.cpp.o
+[10/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_list_files.cpp.o
+[11/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_set_commit_message.cpp.o
+[12/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_set_option.cpp.o
+[13/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_snapshots.cpp.o
+[14/54] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/ducklake_metadata_manager_v1_1.cpp.o
+[15/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_options.cpp.o
+[16/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_compaction_functions.cpp.o
+[17/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_settings.cpp.o
+[18/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_table_info.cpp.o
+[19/54] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_table_insertions.cpp.o
+[20/54] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/postgres_metadata_manager.cpp.o
+[21/54] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/quack_metadata_manager.cpp.o
+[22/54] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/sqlite_metadata_manager.cpp.o
+[23/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_checkpoint.cpp.o
+[24/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_default_functions.cpp.o
+[25/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_inline_data.cpp.o
+[26/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_inlined_filter.cpp.o
+[27/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_inlined_data_reader.cpp.o
+[28/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_catalog.cpp.o
+[29/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_schema_entry.cpp.o
+[30/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_transaction_manager.cpp.o
+[31/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_catalog_set.cpp.o
+[32/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_insert.cpp.o
+[33/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_storage.cpp.o
+[34/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_sort_data.cpp.o
+[35/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_partition_data.cpp.o
+[36/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_multi_file_list.cpp.o
+[37/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_delete.cpp.o
+[38/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_multi_file_reader.cpp.o
+[39/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_staged_commit.cpp.o
+[40/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_initializer.cpp.o
+[41/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_server_side_commit.cpp.o
+[42/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_update.cpp.o
+[43/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_metadata_manager.cpp.o
+[44/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_table_entry.cpp.o
+[45/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_scan.cpp.o
+[46/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_view_entry.cpp.o
+[47/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_transaction.cpp.o
+[48/54] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_transaction_state.cpp.o
+In file included from /src/src/storage/ducklake_transaction_state.cpp:1:
+In file included from /src/src/include/storage/ducklake_transaction_state.hpp:11:
+In file included from /src/src/include/storage/ducklake_stats.hpp:11:
+In file included from /src/src/include/storage/ducklake_extra_stats.hpp:11:
+In file included from /src/src/include/common/ducklake_types.hpp:11:
+In file included from /src/duckdb/src/include/duckdb/common/common.hpp:11:
+In file included from /src/duckdb/src/include/duckdb/common/constants.hpp:11:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/memory:67:
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_tempbuf.h:263:8: warning: 'get_temporary_buffer<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>' is deprecated [-Wdeprecated-declarations]
+  263 |                 std::get_temporary_buffer<value_type>(_M_original_len));
+      |                      ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_algo.h:4996:15: note: in instantiation of member function 'std::_Temporary_buffer<__gnu_cxx::__normal_iterator<std::reference_wrapper<duckdb::DuckLakeSchemaEntry> *, std::vector<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>>, std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>::_Temporary_buffer' requested here
+ 4996 |       _TmpBuf __buf(__first, (__last - __first + 1) / 2);
+      |               ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_algo.h:5070:23: note: in instantiation of function template specialization 'std::__stable_sort<__gnu_cxx::__normal_iterator<std::reference_wrapper<duckdb::DuckLakeSchemaEntry> *, std::vector<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>>, __gnu_cxx::__ops::_Iter_comp_iter<(lambda at /src/src/storage/ducklake_transaction_state.cpp:1741:19)>>' requested here
+ 5070 |       _GLIBCXX_STD_A::__stable_sort(__first, __last,
+      |                       ^
+/src/src/storage/ducklake_transaction_state.cpp:1740:7: note: in instantiation of function template specialization 'std::stable_sort<__gnu_cxx::__normal_iterator<std::reference_wrapper<duckdb::DuckLakeSchemaEntry> *, std::vector<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>>, (lambda at /src/src/storage/ducklake_transaction_state.cpp:1741:19)>' requested here
+ 1740 |         std::stable_sort(ordered_schemas.begin(), ordered_schemas.end(),
+      |              ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_tempbuf.h:99:5: note: 'get_temporary_buffer<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>' has been explicitly marked deprecated here
+   99 |     _GLIBCXX17_DEPRECATED
+      |     ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/x86_64-linux-gnu/c++/12/bits/c++config.h:119:34: note: expanded from macro '_GLIBCXX17_DEPRECATED'
+  119 | # define _GLIBCXX17_DEPRECATED [[__deprecated__]]
+      |                                  ^
+1 warning generated.
+[49/54] Linking CXX static library extension/ducklake/libducklake_extension.a
+[50/54] Linking CXX shared library extension/ducklake/ducklake.duckdb_extension
+[51/54] Linking CXX executable duckdb
+[52/54] Linking CXX shared library src/libduckdb.so
+[53/54] Linking CXX executable test/unittest
+[54/54] Linking CXX executable benchmark/benchmark_runner

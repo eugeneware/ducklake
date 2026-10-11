@@ -1,0 +1,30 @@
+{
+  "name": "architecture-deletion_vectors-temporal_filter_stats",
+  "fixture": "/src/test/sql/data_inlining/inlined_temporal_filter_stats.test",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-config",
+    "/job/deletion_vectors.json",
+    "--test-dir",
+    "/tmp/upstream-sqltest-6n3c3yyi"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 0.85,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 27,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T05-34-17Z--violet-disc-65/_stdin_"
+    }
+  ]
+}

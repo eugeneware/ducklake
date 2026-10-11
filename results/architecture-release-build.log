@@ -1,0 +1,207 @@
+fatal: not a git repository: /src/duckdb/../../repository/.git/worktrees/source/modules/duckdb
+CMake Warning at CMakeLists.txt:513 (message):
+  git is available (at /usr/bin/git) but has failed to execute 'log -1
+  --format=%H'.  Consider providing DUCKDB_COMMIT
+
+
+fatal: not a git repository: /src/duckdb/../../repository/.git/worktrees/source/modules/duckdb
+-- git hash 0123456789, version v2.0.0-dev0, extension folder 0123456789
+-- Build workers: compile= link_release=4 link_non_release=2
+-- Extensions will be deployed to: /src/build/review-release/repository
+-- Load extension 'ducklake' from '/src' @ b6f14fe678
+-- Load extension 'icu' from '/src/duckdb/extensions' @ 0123456789
+-- Load extension 'json' from '/src/duckdb/extensions' @ 0123456789
+-- Load extension 'tpch' from '/src/duckdb/extensions' @ 0123456789
+-- Load extension 'sqlite_scanner' from https://github.com/duckdb/duckdb-sqlite @ ca01682537
+-- Load extension 'postgres_scanner' from https://github.com/duckdb/duckdb-postgres @ f9db66ec5a
+-- Load extension 'core_functions' from '/src/duckdb/extensions' @ 0123456789
+-- Load extension 'parquet' from '/src/duckdb/extensions' @ 0123456789
+CMake Warning at extension/extension_build_tools.cmake:971 (message):
+  Extension 'ducklake' has a vcpkg.json, but build was not run with VCPKG.
+  If build fails, check out VCPKG build instructions in
+  'duckdb/extension/README.md' or try manually installing the dependencies in
+  /src/vcpkg.json
+Call Stack (most recent call first):
+  CMakeLists.txt:1256 (include)
+
+
+CMake Warning at extension/extension_build_tools.cmake:971 (message):
+  Extension 'sqlite_scanner' has a vcpkg.json, but build was not run with
+  VCPKG.  If build fails, check out VCPKG build instructions in
+  'duckdb/extension/README.md' or try manually installing the dependencies in
+  /src/build/review-release/_deps/sqlite_scanner_extension_fc-src//vcpkg.json
+Call Stack (most recent call first):
+  CMakeLists.txt:1256 (include)
+
+
+CMake Warning at extension/extension_build_tools.cmake:971 (message):
+  Extension 'postgres_scanner' has a vcpkg.json, but build was not run with
+  VCPKG.  If build fails, check out VCPKG build instructions in
+  'duckdb/extension/README.md' or try manually installing the dependencies in
+  /src/build/review-release/_deps/postgres_scanner_extension_fc-src//vcpkg.json
+Call Stack (most recent call first):
+  CMakeLists.txt:1256 (include)
+
+
+-- Linked into DuckDB: extensions [ducklake, icu, json, tpch, sqlite_scanner, postgres_scanner, core_functions, parquet], capabilities [httplib, loadable_extensions, local_extension_repository]
+-- Tests loaded for extensions: [sqlite_scanner]
+-- DuckDB CLI Release architecture flags: -march=x86-64-v3 -mtune=generic
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /src/build/review-release
+[1/104] Building C object extension/ducklake/CMakeFiles/ducklake_extension.dir/build/review-release/codegen/link/ducklake_describe.c.o
+[2/104] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/ducklake_version.cpp.o
+[3/104] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/ducklake_data_file.cpp.o
+[4/104] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/ducklake_snapshot.cpp.o
+[5/104] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/ducklake_types.cpp.o
+[6/104] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/ducklake_name_map.cpp.o
+[7/104] Building CXX object extension/ducklake/src/CMakeFiles/ducklake_library.dir/ducklake_extension.cpp.o
+[8/104] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/parquet_file_scanner.cpp.o
+[9/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/base_metadata_function.cpp.o
+[10/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_commit.cpp.o
+[11/104] Building CXX object extension/ducklake/src/common/CMakeFiles/ducklake_common.dir/ducklake_util.cpp.o
+[12/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_cleanup_files.cpp.o
+[13/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_expire_snapshots.cpp.o
+[14/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_current_snapshot.cpp.o
+[15/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_add_data_files.cpp.o
+[16/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_last_committed_snapshot.cpp.o
+[17/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_list_files.cpp.o
+[18/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_set_commit_message.cpp.o
+[19/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_flush_inlined_data.cpp.o
+[20/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_set_option.cpp.o
+[21/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_table_changes.cpp.o
+[22/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_murmur3.cpp.o
+[23/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_compaction_functions.cpp.o
+[24/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_snapshots.cpp.o
+[25/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_options.cpp.o
+[26/104] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/ducklake_metadata_manager_v1_1.cpp.o
+[27/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_settings.cpp.o
+[28/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_table_insertions.cpp.o
+[29/104] Building CXX object extension/ducklake/src/functions/CMakeFiles/ducklake_functions.dir/ducklake_table_info.cpp.o
+[30/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_field_data.cpp.o
+[31/104] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/quack_metadata_manager.cpp.o
+[32/104] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/postgres_metadata_manager.cpp.o
+[33/104] Building CXX object extension/ducklake/src/metadata_manager/CMakeFiles/ducklake_metadata_manager.dir/sqlite_metadata_manager.cpp.o
+[34/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_checkpoint.cpp.o
+[35/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_inlined_data.cpp.o
+[36/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_default_functions.cpp.o
+[37/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_delete_filter.cpp.o
+In file included from /src/src/storage/ducklake_delete_filter.cpp:1:
+In file included from /src/src/include/storage/ducklake_delete_filter.hpp:11:
+In file included from /src/duckdb/src/include/duckdb/common/multi_file/multi_file_reader.hpp:11:
+In file included from /src/duckdb/src/include/duckdb/common/enums/file_glob_options.hpp:11:
+In file included from /src/duckdb/src/include/duckdb/common/constants.hpp:11:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/memory:67:
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_tempbuf.h:263:8: warning: 'get_temporary_buffer<unsigned long>' is deprecated [-Wdeprecated-declarations]
+  263 |                 std::get_temporary_buffer<value_type>(_M_original_len));
+      |                      ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_algo.h:2519:15: note: in instantiation of member function 'std::_Temporary_buffer<__gnu_cxx::__normal_iterator<unsigned long *, std::vector<unsigned long>>, unsigned long>::_Temporary_buffer' requested here
+ 2519 |       _TmpBuf __buf(__first, std::min(__len1, __len2));
+      |               ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_algo.h:2563:12: note: in instantiation of function template specialization 'std::__inplace_merge<__gnu_cxx::__normal_iterator<unsigned long *, std::vector<unsigned long>>, __gnu_cxx::__ops::_Iter_less_iter>' requested here
+ 2563 |       std::__inplace_merge(__first, __middle, __last,
+      |            ^
+/src/src/storage/ducklake_delete_filter.cpp:259:8: note: in instantiation of function template specialization 'std::inplace_merge<__gnu_cxx::__normal_iterator<unsigned long *, std::vector<unsigned long>>>' requested here
+  259 |                 std::inplace_merge(delete_data->deleted_rows.begin(), delete_data->deleted_rows.begin() + mid_idx,
+      |                      ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_tempbuf.h:99:5: note: 'get_temporary_buffer<unsigned long>' has been explicitly marked deprecated here
+   99 |     _GLIBCXX17_DEPRECATED
+      |     ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/x86_64-linux-gnu/c++/12/bits/c++config.h:119:34: note: expanded from macro '_GLIBCXX17_DEPRECATED'
+  119 | # define _GLIBCXX17_DEPRECATED [[__deprecated__]]
+      |                                  ^
+1 warning generated.
+[38/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_log_type.cpp.o
+[39/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_inlined_filter.cpp.o
+[40/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_merge_into.cpp.o
+[41/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_inline_data.cpp.o
+[42/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_catalog.cpp.o
+[43/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_inlined_data_reader.cpp.o
+[44/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_transaction_manager.cpp.o
+[45/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_schema_entry.cpp.o
+[46/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_deletion_vector.cpp.o
+[47/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_catalog_set.cpp.o
+[48/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_insert.cpp.o
+[49/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_storage.cpp.o
+[50/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_puffin.cpp.o
+[51/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_secret.cpp.o
+[52/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_partition_data.cpp.o
+[53/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_multi_file_list.cpp.o
+[54/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_sort_data.cpp.o
+[55/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_stats.cpp.o
+[56/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_delete.cpp.o
+[57/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_multi_file_reader.cpp.o
+[58/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_staged_commit.cpp.o
+[59/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_initializer.cpp.o
+[60/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_scan.cpp.o
+[61/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_update.cpp.o
+[62/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_server_side_commit.cpp.o
+[63/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_transaction_changes.cpp.o
+[64/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_table_entry.cpp.o
+[65/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_metadata_manager.cpp.o
+[66/104] Building CXX object extension/ducklake/src/storage/statistics/CMakeFiles/ducklake_statistics.dir/ducklake_geo_stats.cpp.o
+[67/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_view_entry.cpp.o
+[68/104] Building CXX object extension/ducklake/src/storage/statistics/CMakeFiles/ducklake_statistics.dir/ducklake_variant_stats.cpp.o
+[69/104] Building CXX object extension/sqlite_scanner/src/storage/CMakeFiles/sqlite_ext_storage.dir/sqlite_transaction.cpp.o
+[70/104] Building CXX object extension/sqlite_scanner/src/CMakeFiles/sqlite_ext_library.dir/sqlite_db.cpp.o
+[71/104] Linking CXX static library extension/sqlite_scanner/libsqlite_scanner_extension.a
+[72/104] Linking CXX shared library extension/sqlite_scanner/sqlite_scanner.duckdb_extension
+[73/104] Building CXX object extension/postgres_scanner/src/CMakeFiles/postgres_ext_library.dir/postgres_query.cpp.o
+[74/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_transaction.cpp.o
+[75/104] Building CXX object extension/postgres_scanner/src/CMakeFiles/postgres_ext_library.dir/postgres_extension.cpp.o
+[76/104] Building CXX object extension/postgres_scanner/src/CMakeFiles/postgres_ext_library.dir/postgres_scanner.cpp.o
+[77/104] Building CXX object extension/ducklake/src/storage/CMakeFiles/ducklake_storage.dir/ducklake_transaction_state.cpp.o
+In file included from /src/src/storage/ducklake_transaction_state.cpp:1:
+In file included from /src/src/include/storage/ducklake_transaction_state.hpp:11:
+In file included from /src/src/include/storage/ducklake_stats.hpp:11:
+In file included from /src/src/include/storage/ducklake_extra_stats.hpp:11:
+In file included from /src/src/include/common/ducklake_types.hpp:11:
+In file included from /src/duckdb/src/include/duckdb/common/common.hpp:11:
+In file included from /src/duckdb/src/include/duckdb/common/constants.hpp:11:
+In file included from /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/memory:67:
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_tempbuf.h:263:8: warning: 'get_temporary_buffer<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>' is deprecated [-Wdeprecated-declarations]
+  263 |                 std::get_temporary_buffer<value_type>(_M_original_len));
+      |                      ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_algo.h:4996:15: note: in instantiation of member function 'std::_Temporary_buffer<__gnu_cxx::__normal_iterator<std::reference_wrapper<duckdb::DuckLakeSchemaEntry> *, std::vector<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>>, std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>::_Temporary_buffer' requested here
+ 4996 |       _TmpBuf __buf(__first, (__last - __first + 1) / 2);
+      |               ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_algo.h:5070:23: note: in instantiation of function template specialization 'std::__stable_sort<__gnu_cxx::__normal_iterator<std::reference_wrapper<duckdb::DuckLakeSchemaEntry> *, std::vector<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>>, __gnu_cxx::__ops::_Iter_comp_iter<(lambda at /src/src/storage/ducklake_transaction_state.cpp:1741:19)>>' requested here
+ 5070 |       _GLIBCXX_STD_A::__stable_sort(__first, __last,
+      |                       ^
+/src/src/storage/ducklake_transaction_state.cpp:1740:7: note: in instantiation of function template specialization 'std::stable_sort<__gnu_cxx::__normal_iterator<std::reference_wrapper<duckdb::DuckLakeSchemaEntry> *, std::vector<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>>, (lambda at /src/src/storage/ducklake_transaction_state.cpp:1741:19)>' requested here
+ 1740 |         std::stable_sort(ordered_schemas.begin(), ordered_schemas.end(),
+      |              ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_tempbuf.h:99:5: note: 'get_temporary_buffer<std::reference_wrapper<duckdb::DuckLakeSchemaEntry>>' has been explicitly marked deprecated here
+   99 |     _GLIBCXX17_DEPRECATED
+      |     ^
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/x86_64-linux-gnu/c++/12/bits/c++config.h:119:34: note: expanded from macro '_GLIBCXX17_DEPRECATED'
+  119 | # define _GLIBCXX17_DEPRECATED [[__deprecated__]]
+      |                                  ^
+1 warning generated.
+[78/104] Linking CXX static library extension/ducklake/libducklake_extension.a
+[79/104] Building CXX object extension/postgres_scanner/src/CMakeFiles/postgres_ext_library.dir/postgres_storage.cpp.o
+[80/104] Linking CXX shared library extension/ducklake/ducklake.duckdb_extension
+[81/104] Building CXX object extension/postgres_scanner/src/CMakeFiles/postgres_ext_library.dir/postgres_utils.cpp.o
+[82/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_clear_cache.cpp.o
+[83/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_catalog.cpp.o
+[84/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_catalog_set.cpp.o
+[85/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_connection_pool.cpp.o
+[86/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_delete.cpp.o
+[87/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_index.cpp.o
+[88/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_index_set.cpp.o
+[89/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_insert.cpp.o
+[90/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_optimizer.cpp.o
+[91/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_merge_into.cpp.o
+[92/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_schema_entry.cpp.o
+[93/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_schema_set.cpp.o
+[94/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_secret_storage.cpp.o
+[95/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_table_entry.cpp.o
+[96/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_table_set.cpp.o
+[97/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_type_set.cpp.o
+[98/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_transaction.cpp.o
+[99/104] Building CXX object extension/postgres_scanner/src/storage/CMakeFiles/postgres_ext_storage.dir/postgres_update.cpp.o
+[100/104] Linking CXX static library extension/postgres_scanner/libpostgres_scanner_extension.a
+[101/104] Linking CXX shared library extension/postgres_scanner/postgres_scanner.duckdb_extension
+[102/104] Linking CXX executable duckdb
+[103/104] Linking CXX shared library src/libduckdb.so
+[104/104] Linking CXX executable benchmark/benchmark_runner

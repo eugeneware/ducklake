@@ -1,0 +1,29 @@
+{
+  "name": "architecture-stats-postgres",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--test-dir",
+    "/src",
+    "--reporter",
+    "compact",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--test-config",
+    "/job/postgres.json",
+    "--input-file",
+    "/job/review-stats-tests.txt"
+  ],
+  "returncode": 0,
+  "selected_tests": 50,
+  "seconds": 45.57,
+  "counts": {
+    "ok": 50
+  },
+  "tests_with_passing_assertions": 50,
+  "assertions_passed": 1199,
+  "assertions_failed": 0,
+  "skipped_statements": 0,
+  "tests_without_assertions": [],
+  "runtime_skips": [],
+  "nonpassing": []
+}

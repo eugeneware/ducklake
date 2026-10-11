@@ -1,5 +1,7 @@
 # Client CPU: feature-off base → corrected head
 
+These results apply to **c970d6284e7d79e0ea4b451d48d30b2281ee3261**. See [the architecture follow-up](ARCHITECTURE.md) for the current revision.
+
 Clang 20.1.8, matching MinSizeRel `-O1 -DNDEBUG` C++ builds. 100,000 rows; two threads; 3 GB memory. Twenty CLI timer samples per binary and query. These are **not Release measurements**.
 
 CPU is DuckDB client user + system time; PostgreSQL server CPU is unmeasured. Wall times here come from the same CLI runs, separately from the regression runner’s latency matrix.

@@ -1,0 +1,9 @@
+
+[0/1] (0%): <stdin>
+[1/1] (100%): <stdin> took 2.683s
+Passed 1 test case with 39 assertions.
+
+* Test "test/sql/general/metadata_parameters.test" was already present in skipped test list
+Run python3 scripts/cleanup_config_skip_tests.py to clean up
+[TEST_EVENT] {"event":"begin","name":"<stdin>","temp_dir":"duckdb_unittest_tempdir/2026-10-11T05-33-46Z--ochre-rhombus-48/_stdin_"}
+[TEST_EVENT] {"event":"end","name":"<stdin>","status":"ok","passes":39,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T05-33-46Z--ochre-rhombus-48/_stdin_"}

@@ -1,0 +1,28 @@
+{
+  "name": "architecture-native-filter_literals",
+  "fixture": "/src/test/sql/data_inlining/inlined_filter_literals.test",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-dir",
+    "/tmp/upstream-sqltest-1hb0y41b"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 0.37,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 8,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T05-33-12Z--khaki-node-49/_stdin_"
+    }
+  ]
+}

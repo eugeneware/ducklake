@@ -1,0 +1,2 @@
+name	run	timing
+benchmark/micro/read/inlined_filters/full_scan.benchmark	1	0.199313

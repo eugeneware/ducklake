@@ -1,0 +1,7 @@
+
+[0/1] (0%): <stdin>
+[1/1] (100%): <stdin> took 13.466s
+Passed 1 test case with 313 assertions.
+
+[TEST_EVENT] {"event":"begin","name":"<stdin>","temp_dir":"duckdb_unittest_tempdir/2026-10-11T05-33-56Z--coral-arch-54/_stdin_"}
+[TEST_EVENT] {"event":"end","name":"<stdin>","status":"ok","passes":313,"fails":0,"skip-mode":0,"temp_dir":"duckdb_unittest_tempdir/2026-10-11T05-33-56Z--coral-arch-54/_stdin_"}

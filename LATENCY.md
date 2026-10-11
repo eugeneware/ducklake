@@ -1,5 +1,7 @@
 # MinSizeRel latency matrix: feature-off base → corrected head
 
+These results apply to **c970d6284e7d79e0ea4b451d48d30b2281ee3261**. See [the architecture follow-up](ARCHITECTURE.md) for the current revision.
+
 100,000 rows, 20 samples per binary/case, matching Clang 20 `-O1 -DNDEBUG` builds. The unchanged harness passed all 27 cases. Raw runner samples and verdicts are retained in the adjacent JSON and log files.
 
 | Query | Base ms | Corrected ms | Change in medians |

@@ -1,5 +1,7 @@
 # Corrected-head local validation
 
+These results apply to **c970d6284e7d79e0ea4b451d48d30b2281ee3261**. See [the architecture follow-up](ARCHITECTURE.md) for the current revision.
+
 Source: `c970d6284e7d79e0ea4b451d48d30b2281ee3261`; Clang 20 MinSizeRel (`-O1 -DNDEBUG`).
 
 | Scope | Passed | SQL assertions | Skips |

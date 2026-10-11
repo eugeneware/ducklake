@@ -1,0 +1,30 @@
+{
+  "name": "architecture-deletion_vectors-integer_filter_types",
+  "fixture": "/src/test/sql/data_inlining/inlined_integer_filter_types.test",
+  "command": [
+    "/src/build/experiment/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-config",
+    "/job/deletion_vectors.json",
+    "--test-dir",
+    "/tmp/upstream-sqltest-n7ucztv5"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 0.79,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 23,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T05-34-38Z--slate-ring-78/_stdin_"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[
+    {
+        "name": "UNGROUPED_AGGREGATE",
+        "children": [
+            {
+                "name": "DUCKLAKE_SCAN",
+                "children": [],
+                "extra_info": {
+                    "Table": "lake.main.events",
+                    "Projections": "",
+                    "Filters": [
+                        "(source_id = 23)",
+                        "((tz >= '2026-05-05 00:00:00+00'::TIMESTAMP WITH TIME ZONE) AND (tz < '2026-05-06 10:00:00+00'::TIMESTAMP WITH TIME ZONE))"
+                    ],
+                    "Estimated Cardinality": "1000"
+                }
+            }
+        ],
+        "extra_info": {
+            "Aggregates": "count_star()",
+            "Estimated Cardinality": "1"
+        }
+    }
+]
+Run Time (s): real 0.113 user 0.066107 sys 0.025933
+Run Time (s): real 0.120 user 0.084086 sys 0.019218
+Run Time (s): real 0.114 user 0.084512 sys 0.015639
+Run Time (s): real 0.110 user 0.072351 sys 0.018201
+Run Time (s): real 0.118 user 0.076734 sys 0.021181

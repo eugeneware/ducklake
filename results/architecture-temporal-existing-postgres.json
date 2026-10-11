@@ -1,0 +1,30 @@
+{
+  "name": "architecture-temporal-existing-postgres",
+  "fixture": "/src/test/sql/data_inlining/inlined_temporal_filter_stats.test",
+  "command": [
+    "/job/review-fixed/test/unittest",
+    "--stdin",
+    "--emit-test-events",
+    "--emit-on-skip",
+    "--reporter",
+    "compact",
+    "--test-config",
+    "/job/postgres.json",
+    "--test-dir",
+    "/tmp/upstream-sqltest-zqq61nge"
+  ],
+  "returncode": 0,
+  "passed": true,
+  "seconds": 0.62,
+  "events": [
+    {
+      "event": "end",
+      "name": "<stdin>",
+      "status": "ok",
+      "passes": 27,
+      "fails": 0,
+      "skip-mode": 0,
+      "temp_dir": "duckdb_unittest_tempdir/2026-10-11T05-28-51Z--ivory-torus-79/_stdin_"
+    }
+  ]
+}
