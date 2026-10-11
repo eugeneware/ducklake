@@ -42,6 +42,7 @@ public:
 
 protected:
 	string GetLatestSnapshotQuery() const override;
+	string InlinedFilterToSQL(const Expression &expression, const string &column, const LogicalType &type) override;
 	string GenerateInlinedDataQuery(const string &table_name, const vector<string> &columns_to_read,
 	                                const string &filter, const string &metadata_table_prefix) override;
 	string GenerateFileListQuery(DuckLakeTableEntry &table, const FilterPushdownInfo *filter_info,

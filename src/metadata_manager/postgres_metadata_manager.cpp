@@ -20,7 +20,7 @@ static string WithPostgresBinaryCollation(const string &expression) {
 	return "(" + expression + " COLLATE \"C\")";
 }
 
-static bool IsPostgresTemporalStatsType(const LogicalType &type) {
+static bool IsPostgresTemporalComparisonType(const LogicalType &type) {
 	switch (type.id()) {
 	case LogicalTypeId::DATE:
 	case LogicalTypeId::TIMESTAMP:
@@ -33,7 +33,7 @@ static bool IsPostgresTemporalStatsType(const LogicalType &type) {
 	}
 }
 
-static string GetPostgresStatsType(const LogicalType &type) {
+static string GetPostgresComparisonType(const LogicalType &type) {
 	switch (type.id()) {
 	case LogicalTypeId::BOOLEAN:
 		return "BOOLEAN";
@@ -71,12 +71,12 @@ static string GetPostgresStatsType(const LogicalType &type) {
 }
 
 static bool CanCastPostgresStatsForValueComparison(const LogicalType &type) {
-	return type.IsNumeric() || type.id() == LogicalTypeId::BOOLEAN || IsPostgresTemporalStatsType(type);
+	return type.IsNumeric() || type.id() == LogicalTypeId::BOOLEAN || IsPostgresTemporalComparisonType(type);
 }
 
 static bool CanCastPostgresTemporalValue(const Value &value, const LogicalType &type) {
 	auto string_value = value.ToString();
-	if (!HasFourDigitDatePrefix(string_value)) {
+	if (!HasFourDigitDatePrefix(string_value) || string_value.find("BC") != string::npos) {
 		return false;
 	}
 	return type.id() != LogicalTypeId::DATE || string_value.size() == 10;
@@ -92,12 +92,12 @@ string PostgresMetadataManager::CastValueToTarget(const Value &value, const Logi
 	if (!RequiresValueComparison(type) && type.id() != LogicalTypeId::VARCHAR) {
 		return string();
 	}
-	if (IsPostgresTemporalStatsType(type) && !CanCastPostgresTemporalValue(value, type)) {
+	if (IsPostgresTemporalComparisonType(type) && !CanCastPostgresTemporalValue(value, type)) {
 		return string();
 	}
 	if (type.id() == LogicalTypeId::FLOAT) {
 		// a bare number is NUMERIC, which compares with REAL bounds as DOUBLE PRECISION
-		return "CAST(" + value.ToString() + " AS " + GetPostgresStatsType(type) + ")";
+		return "CAST(" + value.ToString() + " AS " + GetPostgresComparisonType(type) + ")";
 	}
 	if (type.IsNumeric()) {
 		return value.ToString();
@@ -106,8 +106,8 @@ string PostgresMetadataManager::CastValueToTarget(const Value &value, const Logi
 	if (type.id() == LogicalTypeId::VARCHAR) {
 		return WithPostgresBinaryCollation(literal);
 	}
-	if (IsPostgresTemporalStatsType(type)) {
-		return literal + "::" + GetPostgresStatsType(type);
+	if (IsPostgresTemporalComparisonType(type)) {
+		return literal + "::" + GetPostgresComparisonType(type);
 	}
 	if (type.id() == LogicalTypeId::BOOLEAN) {
 		return literal + "::BOOLEAN";
@@ -115,7 +115,7 @@ string PostgresMetadataManager::CastValueToTarget(const Value &value, const Logi
 	return string();
 }
 
-static string PostgresSafeTemporalStatsCast(const string &stats, const LogicalType &type) {
+static string PostgresSafeTemporalCast(const string &stats, const LogicalType &type) {
 	string regex;
 	if (type.id() == LogicalTypeId::DATE) {
 		regex = "'^[0-9]{4}-(0[1-9]|1[0-2])-([0][1-9]|[12][0-9]|3[01])$'";
@@ -137,25 +137,60 @@ static string PostgresSafeTemporalStatsCast(const string &stats, const LogicalTy
 	    month, year, year, year, month);
 	auto valid_date = StringUtil::Format("%s > 0 AND %s <= %s", year, day, max_day);
 	return StringUtil::Format("(CASE WHEN %s ~ %s THEN CASE WHEN %s THEN %s::%s END END)", stats, regex, valid_date,
-	                          stats, GetPostgresStatsType(type));
+	                          stats, GetPostgresComparisonType(type));
 }
 
 string PostgresMetadataManager::CastStatsToTarget(const string &stats, const LogicalType &type,
                                                   StatsCastType cast_type) {
-	if (IsPostgresTemporalStatsType(type)) {
-		auto cast = PostgresSafeTemporalStatsCast(stats, type);
+	if (IsPostgresTemporalComparisonType(type)) {
+		auto cast = PostgresSafeTemporalCast(stats, type);
 		if (cast_type == StatsCastType::ORDERING) {
 			return cast;
 		}
-		return BoundOrInfinity(cast, GetPostgresStatsType(type), cast_type);
+		return BoundOrInfinity(cast, GetPostgresComparisonType(type), cast_type);
 	}
 	if (CanCastPostgresStatsForValueComparison(type)) {
-		return stats + "::" + GetPostgresStatsType(type);
+		return stats + "::" + GetPostgresComparisonType(type);
 	}
 	if (type.id() == LogicalTypeId::VARCHAR) {
 		return WithPostgresBinaryCollation(stats);
 	}
 	return string();
+}
+
+string PostgresMetadataManager::InlinedFilterToSQL(const Expression &expression, const string &column,
+                                                   const LogicalType &type) {
+	auto target_type = GetPostgresComparisonType(type);
+	auto filter_column = column;
+	const auto temporal = IsPostgresTemporalComparisonType(type);
+	if (type.id() == LogicalTypeId::VARCHAR || type.id() == LogicalTypeId::BLOB) {
+		target_type = "BYTEA";
+	} else if (target_type.empty()) {
+		return string();
+	} else if (!TypeIsNativelySupported(type)) {
+		filter_column = "CAST(" + column + " AS " + target_type + ")";
+	}
+	if (expression.GetExpressionType() == ExpressionType::OPERATOR_IS_NULL ||
+	    expression.GetExpressionType() == ExpressionType::OPERATOR_IS_NOT_NULL) {
+		return FormatInlinedFilter(expression, column, [](const Value &) { return string(); });
+	}
+	auto filter = FormatInlinedFilter(expression, filter_column, [&](const Value &value) {
+		if (temporal && !value.IsNull() && !CanCastPostgresTemporalValue(value, type)) {
+			return string();
+		}
+		auto literal = DuckLakeUtil::ValueToSQL(*this, *transaction.GetConnection().context, value);
+		if (type.IsIntegral()) {
+			return literal;
+		}
+		return "CAST(" + literal + " AS " + target_type + ")";
+	});
+	if (temporal && !filter.empty()) {
+		// Inline values are serialized typed values; only the year range needs guarding before the cast.
+		return StringUtil::Format("(CASE WHEN substring(%s FROM 5 FOR 1) = '-' AND strpos(%s, 'BC') = 0 "
+		                          "THEN (%s) ELSE true END)",
+		                          column, column, filter);
+	}
+	return filter;
 }
 
 PostgresMetadataManager::PostgresMetadataManager(DuckLakeTransaction &transaction)

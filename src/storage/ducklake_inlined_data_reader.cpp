@@ -7,68 +7,8 @@
 #include "storage/ducklake_delete_filter.hpp"
 #include "duckdb/common/vector_operations/vector_operations.hpp"
 #include "duckdb/common/sql_identifier.hpp"
-#include "duckdb/planner/expression/bound_operator_expression.hpp"
-#include "duckdb/planner/expression/bound_reference_expression.hpp"
 
 namespace duckdb {
-
-static string InlinedIntegerFilter(const Expression &expression, const string &column, const LogicalType &type) {
-	if (auto child = ExpressionFilter::GetOptionalFilterChild(expression)) {
-		return InlinedIntegerFilter(*child, column, type);
-	}
-	auto is_column = [&](const Expression &expr) {
-		return expr.GetExpressionClass() == ExpressionClass::BOUND_REF &&
-		       expr.Cast<BoundReferenceExpression>().Index() == 0 && expr.GetReturnType() == type;
-	};
-	auto is_constant = [&](const Expression &expr) {
-		return expr.GetExpressionClass() == ExpressionClass::BOUND_CONSTANT && expr.GetReturnType() == type;
-	};
-	if (BoundComparisonExpression::IsComparison(expression)) {
-		auto &comparison = expression.Cast<BoundFunctionExpression>();
-		auto &left = BoundComparisonExpression::Left(comparison);
-		auto &right = BoundComparisonExpression::Right(comparison);
-		if (!((is_column(left) && is_constant(right)) || (is_constant(left) && is_column(right)))) {
-			return string();
-		}
-	} else if (expression.GetExpressionClass() == ExpressionClass::BOUND_OPERATOR) {
-		auto &op = expression.Cast<BoundOperatorExpression>();
-		if (op.GetChildren().empty() || !is_column(*op.GetChildren()[0])) {
-			return string();
-		}
-		switch (expression.GetExpressionType()) {
-		case ExpressionType::COMPARE_IN:
-			for (idx_t i = 1; i < op.GetChildren().size(); i++) {
-				if (!is_constant(*op.GetChildren()[i])) {
-					return string();
-				}
-			}
-			break;
-		case ExpressionType::OPERATOR_IS_NULL:
-		case ExpressionType::OPERATOR_IS_NOT_NULL:
-			break;
-		default:
-			return string();
-		}
-	} else if (expression.GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION) {
-		auto &conjunction = expression.Cast<BoundConjunctionExpression>();
-		vector<string> children;
-		for (auto &child : conjunction.GetChildren()) {
-			auto filter = InlinedIntegerFilter(*child, column, type);
-			if (filter.empty()) {
-				if (expression.GetExpressionType() == ExpressionType::CONJUNCTION_OR) {
-					return string();
-				}
-				continue;
-			}
-			children.push_back("(" + filter + ")");
-		}
-		return StringUtil::Join(children,
-		                        expression.GetExpressionType() == ExpressionType::CONJUNCTION_OR ? " OR " : " AND ");
-	} else {
-		return string();
-	}
-	return ExpressionFilter(expression.Copy()).ToString(column);
-}
 
 string DuckLakeInlinedDataReader::GetInlinedFilter(DuckLakeMetadataManager &metadata_manager) const {
 	vector<string> conditions;
@@ -83,18 +23,6 @@ string DuckLakeInlinedDataReader::GetInlinedFilter(DuckLakeMetadataManager &meta
 			continue;
 		}
 		auto &column = columns[column_indexes[index.GetIndex()].GetPrimaryIndex()];
-		switch (column.type.id()) {
-		case LogicalTypeId::TINYINT:
-		case LogicalTypeId::SMALLINT:
-		case LogicalTypeId::INTEGER:
-		case LogicalTypeId::BIGINT:
-			break;
-		default:
-			continue;
-		}
-		if (column.type.HasAlias() || !metadata_manager.TypeIsNativelySupported(column.type)) {
-			continue;
-		}
 		if (!column.identifier.IsNull() && column.identifier.type().id() == LogicalTypeId::INTEGER) {
 			auto identifier = IntegerValue::Get(column.identifier);
 			if (identifier == MultiFileReader::ORDINAL_FIELD_ID || identifier == MultiFileReader::ROW_ID_FIELD_ID ||
@@ -102,8 +30,8 @@ string DuckLakeInlinedDataReader::GetInlinedFilter(DuckLakeMetadataManager &meta
 				continue;
 			}
 		}
-		auto condition =
-		    InlinedIntegerFilter(*filter.expr, SQLIdentifier::ToString(column.name.GetIdentifierName()), column.type);
+		auto condition = metadata_manager.GenerateInlinedFilter(
+		    *filter.expr, SQLIdentifier::ToString(column.name.GetIdentifierName()), column.type);
 		if (!condition.empty()) {
 			conditions.push_back("(" + condition + ")");
 		}
