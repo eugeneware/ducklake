@@ -1,0 +1,41 @@
+# name: benchmark/micro/fixtures/inlined_filters.benchmark.in
+# description: A partitioned lake whose rows are all inlined, with a native reference table
+# group: [fixtures]
+
+require icu
+
+argument rows 100000
+
+cache_file inlined_filters_${rows}_ready.marker
+
+init
+SET TimeZone = 'UTC';
+CREATE TEMP TABLE reference AS
+SELECT i AS id, (i % 100)::INTEGER AS source_id,
+       CASE WHEN i % 100 = 0 THEN NULL ELSE i END AS optional_id,
+       i % 100 = 0 AS flag, i::DECIMAL(18, 2) + 0.25 AS amount,
+       (i + 0.25)::FLOAT AS single_value, (i + 0.25)::DOUBLE AS double_value,
+       'key' || i AS label, encode('key' || i) AS bytes,
+       DATE '2026-05-01' + (i % 31)::INTEGER AS event_date,
+       TIMESTAMP '2026-05-01' + i * INTERVAL 1 MINUTE AS ts,
+       TIMESTAMPTZ '2026-05-01 00:00:00+00' + i * INTERVAL 1 MINUTE AS tz,
+       [i, i + 1] AS children, {'value': i, 'label': 'key' || i} AS nested,
+       repeat(md5(i::VARCHAR), 8) AS payload
+FROM range(${rows}) t(i);
+
+load
+@create inlined_filters_${rows}
+@attach inlined_filters_${rows} AS lake (DATA_PATH '${BENCHMARK_DIR}/inlined_filters_${rows}_files', DATA_INLINING_ROW_LIMIT ${rows})
+CREATE TABLE lake.events AS SELECT * FROM reference LIMIT 0;
+ALTER TABLE lake.events SET PARTITIONED BY (year(tz), month(tz), day(tz), bucket(25, source_id));
+INSERT INTO lake.events FROM reference;
+SELECT CASE WHEN (SELECT count(*) FROM ducklake_list_files('lake', 'events')) <> 0
+OR (SELECT count(*) FROM lake.events) <> ${rows}
+THEN error('the benchmark requires all rows to be inlined') END;
+DETACH lake;
+@seal inlined_filters_${rows}
+COPY (SELECT 1) TO '${BENCHMARK_DIR}/inlined_filters_${rows}_ready.marker' (FORMAT CSV);
+@attach inlined_filters_${rows} AS lake (READ_ONLY)
+
+reload
+@attach inlined_filters_${rows} AS lake (READ_ONLY)

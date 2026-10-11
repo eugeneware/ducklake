@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/residual_and.benchmark
+# description: An integer range with a residual expression
+# group: [read]
+
+name Inlined Filter residual and
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE id >= 7000 AND id < 7100 AND id % 17 = 0;
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE id >= 7000 AND id < 7100 AND id % 17 = 0)
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/timestamp.benchmark
+# description: A TIMESTAMP range without an integer predicate
+# group: [read]
+
+name Inlined Filter timestamp
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE ts >= TIMESTAMP '2026-05-05' AND ts < TIMESTAMP '2026-05-06 12:00:00';
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE ts >= TIMESTAMP '2026-05-05' AND ts < TIMESTAMP '2026-05-06 12:00:00')
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

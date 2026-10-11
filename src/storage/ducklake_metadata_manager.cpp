@@ -1594,6 +1594,33 @@ string DuckLakeMetadataManager::GenerateConstantFilterDouble(ExpressionType comp
 	return GenerateConstantFilter(comparison_type, constant, type, referenced_stats, stats_alias);
 }
 
+string
+DuckLakeMetadataManager::FormatConjunctionFilter(const BoundConjunctionExpression &conjunction,
+                                                 const std::function<string(const Expression &)> &translate_child) {
+	string result;
+	const auto conjunction_type = conjunction.GetExpressionType();
+	for (auto &child : conjunction.GetChildren()) {
+		auto child_str = translate_child(*child);
+		if (child_str.empty()) {
+			if (conjunction_type == ExpressionType::CONJUNCTION_OR) {
+				return string();
+			}
+			continue;
+		}
+		if (!result.empty()) {
+			result += conjunction_type == ExpressionType::CONJUNCTION_OR ? " OR " : " AND ";
+		}
+		// Flatten associative chains to avoid excessive parser recursion over parentheses.
+		if (child->GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION &&
+		    child->GetExpressionType() == conjunction_type) {
+			result += child_str;
+		} else {
+			result += "(" + child_str + ")";
+		}
+	}
+	return result;
+}
+
 string DuckLakeMetadataManager::GenerateFilterFromExpression(const Expression &expr, const LogicalType *type,
                                                              unordered_set<string> &referenced_stats,
                                                              const string &stats_alias) {
@@ -1667,30 +1694,9 @@ string DuckLakeMetadataManager::GenerateFilterFromExpression(const Expression &e
 		}
 	}
 	case ExpressionClass::BOUND_CONJUNCTION: {
-		auto &conjunction = expr.Cast<BoundConjunctionExpression>();
-		string result;
-		const auto conjunction_type = expr.GetExpressionType();
-		for (auto &child : conjunction.GetChildren()) {
-			auto child_str = GenerateFilterFromExpression(*child, type, referenced_stats, stats_alias);
-			if (child_str.empty()) {
-				if (conjunction_type == ExpressionType::CONJUNCTION_OR) {
-					return string();
-				}
-				continue;
-			}
-			if (!result.empty()) {
-				result += conjunction_type == ExpressionType::CONJUNCTION_OR ? " OR " : " AND ";
-			}
-			// AND and OR are associative, so a same-type child can be spliced in rather than nested.
-			// DuckDB hands these to us as left-deep chains, and the parser recurses over the parens.
-			if (child->GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION &&
-			    child->GetExpressionType() == conjunction_type) {
-				result += child_str;
-			} else {
-				result += "(" + child_str + ")";
-			}
-		}
-		return result;
+		return FormatConjunctionFilter(expr.Cast<BoundConjunctionExpression>(), [&](const Expression &child) {
+			return GenerateFilterFromExpression(child, type, referenced_stats, stats_alias);
+		});
 	}
 	case ExpressionClass::BOUND_FUNCTION: {
 		auto optional_child = ExpressionFilter::GetOptionalFilterChild(expr);
@@ -3689,17 +3695,41 @@ static string GetProjection(const vector<string> &columns_to_read) {
 
 unique_ptr<QueryResult> DuckLakeMetadataManager::ReadInlinedData(DuckLakeSnapshot snapshot,
                                                                  const string &inlined_table_name,
-                                                                 const vector<string> &columns_to_read) {
-	auto projection = GetProjection(columns_to_read);
+                                                                 const vector<string> &storage_columns,
+                                                                 const vector<LogicalType> &output_types,
+                                                                 const string &filter, bool order_by_row_id) {
+	D_ASSERT(storage_columns.size() == output_types.size());
+	vector<string> output_columns;
+	for (idx_t i = 0; i < storage_columns.size(); i++) {
+		auto column = filter.empty() ? storage_columns[i] : StringUtil::Format("col%d", i + 1);
+		output_columns.push_back(CastColumnToTarget(column, output_types[i]));
+	}
+	if (filter.empty()) {
+		return Query(snapshot, GenerateInlinedDataQuery(inlined_table_name, output_columns, filter,
+		                                                "{METADATA_CATALOG}", order_by_row_id));
+	}
+	auto source =
+	    GenerateInlinedDataQuery(inlined_table_name, storage_columns, filter, "{METADATA_CATALOG}", order_by_row_id);
+	return Query(snapshot,
+	             StringUtil::Format("SELECT %s FROM (%s) inlined_data", GetProjection(output_columns), source));
+}
+
+string DuckLakeMetadataManager::InlinedDataVisibilitySql(const DuckLakeInlinedColNames &col_names) {
+	return StringUtil::Format("{SNAPSHOT_ID} >= %s AND ({SNAPSHOT_ID} < %s OR %s IS NULL)", col_names.begin_snapshot,
+	                          col_names.end_snapshot, col_names.end_snapshot);
+}
+
+string DuckLakeMetadataManager::GenerateInlinedDataQuery(const string &table_name, const vector<string> &column_sql,
+                                                         const string &filter, const string &metadata_table_prefix,
+                                                         bool order_by_row_id) {
 	auto col_names = InlinedColNames();
-	auto result = Query(snapshot, StringUtil::Format(R"(
+	return StringUtil::Format(R"(
 SELECT %s
-FROM {METADATA_CATALOG}.%s inlined_data
-WHERE {SNAPSHOT_ID} >= %s AND ({SNAPSHOT_ID} < %s OR %s IS NULL)
-ORDER BY %s;)",
-	                                                 projection, inlined_table_name, col_names.begin_snapshot,
-	                                                 col_names.end_snapshot, col_names.end_snapshot, col_names.row_id));
-	return result;
+FROM %s.%s
+WHERE %s%s%s)",
+	                          GetProjection(column_sql), metadata_table_prefix, SQLIdentifier(table_name),
+	                          InlinedDataVisibilitySql(col_names), filter.empty() ? "" : " AND (" + filter + ")",
+	                          order_by_row_id ? " ORDER BY " + col_names.row_id : "");
 }
 
 unique_ptr<QueryResult> DuckLakeMetadataManager::ReadInlinedDataChanges(DuckLakeSnapshot start_snapshot,

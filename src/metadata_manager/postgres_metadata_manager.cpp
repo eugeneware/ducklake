@@ -20,7 +20,7 @@ static string WithPostgresBinaryCollation(const string &expression) {
 	return "(" + expression + " COLLATE \"C\")";
 }
 
-static bool IsPostgresTemporalStatsType(const LogicalType &type) {
+static bool IsPostgresTemporalComparisonType(const LogicalType &type) {
 	switch (type.id()) {
 	case LogicalTypeId::DATE:
 	case LogicalTypeId::TIMESTAMP:
@@ -33,7 +33,7 @@ static bool IsPostgresTemporalStatsType(const LogicalType &type) {
 	}
 }
 
-static string GetPostgresStatsType(const LogicalType &type) {
+static string GetPostgresComparisonType(const LogicalType &type) {
 	switch (type.id()) {
 	case LogicalTypeId::BOOLEAN:
 		return "BOOLEAN";
@@ -71,12 +71,12 @@ static string GetPostgresStatsType(const LogicalType &type) {
 }
 
 static bool CanCastPostgresStatsForValueComparison(const LogicalType &type) {
-	return type.IsNumeric() || type.id() == LogicalTypeId::BOOLEAN || IsPostgresTemporalStatsType(type);
+	return type.IsNumeric() || type.id() == LogicalTypeId::BOOLEAN || IsPostgresTemporalComparisonType(type);
 }
 
 static bool CanCastPostgresTemporalValue(const Value &value, const LogicalType &type) {
 	auto string_value = value.ToString();
-	if (!HasFourDigitDatePrefix(string_value)) {
+	if (!HasFourDigitDatePrefix(string_value) || string_value.find("BC") != string::npos) {
 		return false;
 	}
 	return type.id() != LogicalTypeId::DATE || string_value.size() == 10;
@@ -92,12 +92,12 @@ string PostgresMetadataManager::CastValueToTarget(const Value &value, const Logi
 	if (!RequiresValueComparison(type) && type.id() != LogicalTypeId::VARCHAR) {
 		return string();
 	}
-	if (IsPostgresTemporalStatsType(type) && !CanCastPostgresTemporalValue(value, type)) {
+	if (IsPostgresTemporalComparisonType(type) && !CanCastPostgresTemporalValue(value, type)) {
 		return string();
 	}
 	if (type.id() == LogicalTypeId::FLOAT) {
 		// a bare number is NUMERIC, which compares with REAL bounds as DOUBLE PRECISION
-		return "CAST(" + value.ToString() + " AS " + GetPostgresStatsType(type) + ")";
+		return "CAST(" + value.ToString() + " AS " + GetPostgresComparisonType(type) + ")";
 	}
 	if (type.IsNumeric()) {
 		return value.ToString();
@@ -106,8 +106,8 @@ string PostgresMetadataManager::CastValueToTarget(const Value &value, const Logi
 	if (type.id() == LogicalTypeId::VARCHAR) {
 		return WithPostgresBinaryCollation(literal);
 	}
-	if (IsPostgresTemporalStatsType(type)) {
-		return literal + "::" + GetPostgresStatsType(type);
+	if (IsPostgresTemporalComparisonType(type)) {
+		return literal + "::" + GetPostgresComparisonType(type);
 	}
 	if (type.id() == LogicalTypeId::BOOLEAN) {
 		return literal + "::BOOLEAN";
@@ -137,25 +137,76 @@ static string PostgresSafeTemporalStatsCast(const string &stats, const LogicalTy
 	    month, year, year, year, month);
 	auto valid_date = StringUtil::Format("%s > 0 AND %s <= %s", year, day, max_day);
 	return StringUtil::Format("(CASE WHEN %s ~ %s THEN CASE WHEN %s THEN %s::%s END END)", stats, regex, valid_date,
-	                          stats, GetPostgresStatsType(type));
+	                          stats, GetPostgresComparisonType(type));
 }
 
 string PostgresMetadataManager::CastStatsToTarget(const string &stats, const LogicalType &type,
                                                   StatsCastType cast_type) {
-	if (IsPostgresTemporalStatsType(type)) {
+	if (IsPostgresTemporalComparisonType(type)) {
 		auto cast = PostgresSafeTemporalStatsCast(stats, type);
 		if (cast_type == StatsCastType::ORDERING) {
 			return cast;
 		}
-		return BoundOrInfinity(cast, GetPostgresStatsType(type), cast_type);
+		return BoundOrInfinity(cast, GetPostgresComparisonType(type), cast_type);
 	}
 	if (CanCastPostgresStatsForValueComparison(type)) {
-		return stats + "::" + GetPostgresStatsType(type);
+		return stats + "::" + GetPostgresComparisonType(type);
 	}
 	if (type.id() == LogicalTypeId::VARCHAR) {
 		return WithPostgresBinaryCollation(stats);
 	}
 	return string();
+}
+
+static bool CanCastPostgresTemporalColumn(const LogicalType &type, optional_ptr<const DuckLakeColumnStats> stats) {
+	if (!stats || stats->type != type || stats->bounds_unknown || !stats->has_min || !stats->has_max) {
+		return false;
+	}
+	auto min = TryCastStatsBound(stats->min, type);
+	auto max = TryCastStatsBound(stats->max, type);
+	return min && max && CanCastPostgresTemporalValue(*min, type) && CanCastPostgresTemporalValue(*max, type);
+}
+
+string PostgresMetadataManager::InlinedFilterToSQL(const Expression &expression, const string &column,
+                                                   const LogicalType &type,
+                                                   optional_ptr<const DuckLakeColumnStats> stats) {
+	auto target_type = GetPostgresComparisonType(type);
+	auto filter_column = column;
+	const auto temporal = IsPostgresTemporalComparisonType(type);
+	if (type.id() == LogicalTypeId::VARCHAR || type.id() == LogicalTypeId::BLOB) {
+		target_type = "BYTEA";
+	} else if (target_type.empty()) {
+		return string();
+	} else {
+		// Compare in the logical type, including FLOAT stored as DOUBLE PRECISION in older catalogs.
+		filter_column = "CAST(" + column + " AS " + target_type + ")";
+	}
+	if (expression.GetExpressionType() == ExpressionType::OPERATOR_IS_NULL ||
+	    expression.GetExpressionType() == ExpressionType::OPERATOR_IS_NOT_NULL) {
+		return FormatInlinedFilter(expression, column, [](const Value &) { return string(); });
+	}
+	auto filter = FormatInlinedFilter(expression, filter_column, [&](const Value &value) {
+		if (temporal && !value.IsNull()) {
+			return CastValueToTarget(value, type);
+		}
+		auto literal = DuckLakeUtil::ValueToSQL(*this, *transaction.GetConnection().context, value);
+		if (type.IsIntegral()) {
+			return literal;
+		}
+		return "CAST(" + literal + " AS " + target_type + ")";
+	});
+	if (temporal && !filter.empty()) {
+		if (CanCastPostgresTemporalColumn(type, stats)) {
+			// Current bounds do not cover expired rows; keep the cast behind snapshot visibility.
+			return StringUtil::Format("(CASE WHEN %s THEN (%s) ELSE true END)",
+			                          InlinedDataVisibilitySql(InlinedColNames()), filter);
+		}
+		// Inline values are serialized typed values; only the year range needs guarding before the cast.
+		return StringUtil::Format("(CASE WHEN substring(%s FROM 5 FOR 1) = '-' AND strpos(%s, 'BC') = 0 "
+		                          "THEN (%s) ELSE true END)",
+		                          column, column, filter);
+	}
+	return filter;
 }
 
 PostgresMetadataManager::PostgresMetadataManager(DuckLakeTransaction &transaction)
@@ -353,6 +404,20 @@ string PostgresMetadataManager::GetLatestSnapshotQuery() const {
 		     SELECT MAX(snapshot_id) FROM {METADATA_SCHEMA_ESCAPED}.ducklake_snapshot
 		 );')
 	)";
+}
+
+string PostgresMetadataManager::GenerateInlinedDataQuery(const string &table_name, const vector<string> &column_sql,
+                                                         const string &filter, const string &metadata_table_prefix,
+                                                         bool order_by_row_id) {
+	if (filter.empty()) {
+		return DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, column_sql, filter, metadata_table_prefix,
+		                                                         order_by_row_id);
+	}
+	auto remote_query = DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, column_sql, filter,
+	                                                                      "{METADATA_SCHEMA_ESCAPED}", order_by_row_id);
+	return StringUtil::Format(
+	    "SELECT * FROM postgres_query({METADATA_CATALOG_NAME_LITERAL}, %s, use_transaction = true)",
+	    SQLString(remote_query));
 }
 
 string PostgresMetadataManager::GenerateFileListQuery(DuckLakeTableEntry &table, const FilterPushdownInfo *filter_info,

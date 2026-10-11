@@ -1,0 +1,413 @@
+# name: test/sql/data_inlining/inlined_scalar_filter_edges.test
+# description: Inline scalar filtering preserves boundary values and residual predicates
+# group: [data_inlining]
+
+require ducklake
+
+require parquet
+
+require icu
+
+test-env DUCKLAKE_CONNECTION {TEST_DIR}/{UUID}.db
+
+test-env DATA_PATH {TEST_DIR}
+
+statement ok
+ATTACH 'ducklake:{DUCKLAKE_CONNECTION}' AS lake (DATA_PATH '{DATA_PATH}/inlined_scalar_filter_edges', DATA_INLINING_ROW_LIMIT 1000)
+
+statement ok
+SET TimeZone = 'Australia/Melbourne'
+
+statement ok
+CREATE TEMP TABLE ref_floating AS SELECT row_number() OVER () AS id, v::FLOAT AS f, v::DOUBLE AS d FROM unnest(['-infinity', '-3.4028235e38', '-0.1', '-0', '0', '1e-40', '0.1', '1.0000001', '3.4028235e38', 'infinity', 'NaN', NULL]) t(v)
+
+statement ok
+CREATE TABLE lake.floating AS SELECT * FROM ref_floating
+
+statement ok
+CREATE TEMP TABLE ref_strings AS SELECT row_number() OVER () AS id, v AS s, encode(v) AS b FROM unnest(['', 'a', 'a' || chr(0), 'a' || chr(0) || 'z', 'a''b', 'a\b', 'Å', '漢字', chr(127), NULL]) t(v)
+
+statement ok
+CREATE TABLE lake.strings AS SELECT * FROM ref_strings
+
+statement ok
+CREATE TEMP TABLE ref_integers AS SELECT row_number() OVER () AS id, v::UBIGINT AS u, v::HUGEINT AS h, v::UHUGEINT AS uh, v::DECIMAL(38, 0) AS n FROM unnest(['0', '1', '9223372036854775807', '9223372036854775808', '18446744073709551615', NULL]) t(v)
+
+statement ok
+CREATE TABLE lake.integers AS SELECT * FROM ref_integers
+
+statement ok
+CREATE TEMP TABLE ref_temporal AS SELECT row_number() OVER () AS id, v::DATE AS dt, v::TIMESTAMP AS ts, v::TIMESTAMPTZ AS tz FROM unnest(['-infinity', '0001-01-01 (BC)', '9999-01-01 (BC)', '0001-01-01', '0999-12-31', '2026-05-01 00:00:00', '2026-05-01 00:00:00.000001', '2026-05-01 00:00:00.999999', '9999-12-31 23:59:59.999999', '10000-01-01', 'infinity', NULL]) t(v)
+
+statement ok
+CREATE TABLE lake.temporal AS SELECT * FROM ref_temporal
+
+statement ok
+CREATE TEMP TABLE ref_precision AS SELECT row_number() OVER () AS id, v::TIMESTAMP_S AS s, v::TIMESTAMP_MS AS ms, v::TIMESTAMP_NS AS ns FROM unnest(['1678-01-01', '2026-05-01 00:00:00', '2026-05-01 00:00:00.000000001', '2026-05-01 00:00:00.123456789', '2260-01-01', NULL]) t(v)
+
+statement ok
+CREATE TABLE lake.precision AS SELECT * FROM ref_precision
+
+statement ok
+CREATE TEMP TABLE ref_wide AS
+SELECT id, h::HUGEINT AS h, uh::UHUGEINT AS uh, n::DECIMAL(38, 0) AS n
+FROM (VALUES
+    (1, '-170141183460469231731687303715884105728', '0', '-99999999999999999999999999999999999999'),
+    (2, '170141183460469231731687303715884105727', '340282366920938463463374607431768211455', '99999999999999999999999999999999999999'),
+    (3, '0', '1', '0'), (4, NULL, NULL, NULL)
+) t(id, h, uh, n)
+
+statement ok
+CREATE TABLE lake.wide AS SELECT * FROM ref_wide
+
+statement ok
+SET TimeZone = 'Asia/Kathmandu'
+
+foreach col f d
+
+foreach op = <> < <= > >=
+
+foreach val NaN -infinity infinity 0.1 1e-40 -0
+
+query I
+WITH actual AS (SELECT * FROM lake.floating WHERE {col} {op} '{val}'),
+expected AS (SELECT * FROM ref_floating WHERE {col} {op} '{val}')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+endloop
+
+foreach col,val s,'a' s,'a'||chr(0) s,'a''b' s,'a\b' s,'Å' b,encode('a') b,encode('a'||chr(0)) b,encode('Å')
+
+foreach op = <> < <= > >=
+
+query I
+WITH actual AS (SELECT * FROM lake.strings WHERE {col} {op} {val}),
+expected AS (SELECT * FROM ref_strings WHERE {col} {op} {val})
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+foreach col u h uh n
+
+foreach op = <> < <= > >=
+
+query I
+WITH actual AS (SELECT * FROM lake.integers WHERE {col} {op} '9223372036854775808'),
+expected AS (SELECT * FROM ref_integers WHERE {col} {op} '9223372036854775808')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+foreach col,type dt,DATE ts,TIMESTAMP tz,TIMESTAMPTZ
+
+foreach op = <> < <= > >=
+
+foreach val 2026-05-01 0001-01-01 10000-01-01
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE {col} {op} '{val}'::{type}),
+expected AS (SELECT * FROM ref_temporal WHERE {col} {op} '{val}'::{type})
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+endloop
+
+foreach col,type dt,DATE ts,TIMESTAMP tz,TIMESTAMPTZ
+
+foreach val 2026-05-01 0001-01-01 10000-01-01
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE {col} IS DISTINCT FROM '{val}'::{type}),
+expected AS (SELECT * FROM ref_temporal WHERE {col} IS DISTINCT FROM '{val}'::{type})
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+foreach col,type dt,DATE ts,TIMESTAMP tz,TIMESTAMPTZ
+
+foreach val 2026-05-01 0001-01-01 10000-01-01
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE {col} IS NOT DISTINCT FROM '{val}'::{type}),
+expected AS (SELECT * FROM ref_temporal WHERE {col} IS NOT DISTINCT FROM '{val}'::{type})
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+foreach col,type s,TIMESTAMP_S ms,TIMESTAMP_MS ns,TIMESTAMP_NS
+
+foreach op = <> < <= > >=
+
+query I
+WITH actual AS (SELECT * FROM lake.precision WHERE {col} {op} '2026-05-01 00:00:00.123456789'::{type}),
+expected AS (SELECT * FROM ref_precision WHERE {col} {op} '2026-05-01 00:00:00.123456789'::{type})
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+query I
+WITH actual AS (SELECT * FROM lake.strings WHERE s = 'a' OR length(s) = 2),
+expected AS (SELECT * FROM ref_strings WHERE s = 'a' OR length(s) = 2)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.strings WHERE s >= 'a' AND length(s) = 2),
+expected AS (SELECT * FROM ref_strings WHERE s >= 'a' AND length(s) = 2)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.strings WHERE s IN ('', 'Å', 'a''b', NULL)),
+expected AS (SELECT * FROM ref_strings WHERE s IN ('', 'Å', 'a''b', NULL))
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.strings WHERE s IS NULL),
+expected AS (SELECT * FROM ref_strings WHERE s IS NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.strings WHERE s IS NOT NULL),
+expected AS (SELECT * FROM ref_strings WHERE s IS NOT NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.integers WHERE u = '18446744073709551615'::UBIGINT),
+expected AS (SELECT * FROM ref_integers WHERE u = '18446744073709551615'::UBIGINT)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.integers WHERE h IS NULL),
+expected AS (SELECT * FROM ref_integers WHERE h IS NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE ts IS NULL),
+expected AS (SELECT * FROM ref_temporal WHERE ts IS NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE tz IS NOT NULL),
+expected AS (SELECT * FROM ref_temporal WHERE tz IS NOT NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE ts IN (TIMESTAMP '2026-05-01', TIMESTAMP '10000-01-01', NULL)),
+expected AS (SELECT * FROM ref_temporal WHERE ts IN (TIMESTAMP '2026-05-01', TIMESTAMP '10000-01-01', NULL))
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE ts < TIMESTAMP '2026-05-01' OR year(ts) = 10000),
+expected AS (SELECT * FROM ref_temporal WHERE ts < TIMESTAMP '2026-05-01' OR year(ts) = 10000)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE tz >= TIMESTAMPTZ '2026-05-01 10:00:00+10'),
+expected AS (SELECT * FROM ref_temporal WHERE tz >= TIMESTAMPTZ '2026-05-01 10:00:00+10')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+foreach col,type dt,DATE ts,TIMESTAMP tz,TIMESTAMPTZ
+
+foreach op = <> < <= > >=
+
+query I
+WITH actual AS (SELECT * FROM lake.temporal WHERE {col} {op} '9999-01-01 (BC)'::{type}),
+expected AS (SELECT * FROM ref_temporal WHERE {col} {op} '9999-01-01 (BC)'::{type})
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+foreach col,val h,'-170141183460469231731687303715884105728' h,'170141183460469231731687303715884105727' uh,'340282366920938463463374607431768211455' n,'99999999999999999999999999999999999999'
+
+foreach op = <> < <= > >=
+
+query I
+WITH actual AS (SELECT * FROM lake.wide WHERE {col} {op} {val}),
+expected AS (SELECT * FROM ref_wide WHERE {col} {op} {val})
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+endloop
+
+endloop
+
+statement ok
+BEGIN
+
+statement ok
+DELETE FROM lake.strings WHERE s = 'a'
+
+statement ok
+UPDATE lake.strings SET s = 'changed' WHERE s = 'Å'
+
+query I
+SELECT count(*) FROM lake.strings WHERE s IN ('a', 'Å')
+----
+0
+
+query I
+SELECT count(*) FROM lake.strings WHERE s = 'changed'
+----
+1
+
+statement ok
+ROLLBACK
+
+query I
+SELECT count(*) FROM lake.strings WHERE s IN ('a', 'Å')
+----
+2
+
+statement ok
+CALL lake.set_option('target_file_size', '1MB')
+
+statement ok
+CALL ducklake_flush_inlined_data('lake')
+
+query I
+SELECT count(*) FROM lake.strings WHERE s IN ('a', 'Å')
+----
+2

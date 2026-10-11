@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/timestamptz_broad.benchmark
+# description: A TIMESTAMPTZ predicate matching ninety percent of the buffer
+# group: [inlined_filters]
+
+name Inlined Filter timestamptz broad
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE tz < TIMESTAMPTZ '2026-05-01 00:00:00+00' + (${rows} * 9 // 10) * INTERVAL 1 MINUTE;
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE tz < TIMESTAMPTZ '2026-05-01 00:00:00+00' + (${rows} * 9 // 10) * INTERVAL 1 MINUTE)
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

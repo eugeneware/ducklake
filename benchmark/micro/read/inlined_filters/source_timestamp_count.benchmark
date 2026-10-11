@@ -1,0 +1,25 @@
+# name: benchmark/micro/read/inlined_filters/source_timestamp_count.benchmark
+# description: Count rows by source ID and timestamp range as in discussion 1134
+# group: [read]
+
+name Inlined Filter source timestamp count
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT count(*) AS count FROM lake.events
+WHERE source_id = 23 AND tz >= TIMESTAMPTZ '2026-05-05 00:00:00+00'
+AND tz < TIMESTAMPTZ '2026-05-06 12:00:00+02';
+
+result_query I
+SELECT (SELECT count FROM __answer) = (SELECT count(*) FROM reference
+WHERE source_id = 23 AND tz >= TIMESTAMPTZ '2026-05-05 00:00:00+00'
+AND tz < TIMESTAMPTZ '2026-05-06 12:00:00+02');
+----
+true

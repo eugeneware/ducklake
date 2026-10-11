@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/runtime_join.benchmark
+# description: An IN subquery that generates a runtime join filter
+# group: [read]
+
+name Inlined Filter runtime join
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE id IN (SELECT range * 97 + 73 FROM range(200));
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE id IN (SELECT range * 97 + 73 FROM range(200)))
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

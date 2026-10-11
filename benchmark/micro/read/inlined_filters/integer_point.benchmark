@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/integer_point.benchmark
+# description: A selective BIGINT lookup
+# group: [read]
+
+name Inlined Filter integer point
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id FROM lake.events WHERE id = 73;
+
+result_query I
+WITH expected AS (SELECT id FROM reference WHERE id = 73)
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

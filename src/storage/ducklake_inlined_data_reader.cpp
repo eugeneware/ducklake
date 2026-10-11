@@ -2,6 +2,7 @@
 #include "storage/ducklake_multi_file_reader.hpp"
 #include "storage/ducklake_transaction.hpp"
 #include "storage/ducklake_metadata_manager.hpp"
+#include "storage/ducklake_table_entry.hpp"
 #include "duckdb/storage/table/column_segment.hpp"
 #include "duckdb/planner/table_filter_state.hpp"
 #include "storage/ducklake_delete_filter.hpp"
@@ -9,6 +10,46 @@
 #include "duckdb/common/sql_identifier.hpp"
 
 namespace duckdb {
+
+string DuckLakeInlinedDataReader::GetInlinedFilter(DuckLakeMetadataManager &metadata_manager) const {
+	vector<string> conditions;
+	if (!filters) {
+		return string();
+	}
+	for (auto &entry : *filters) {
+		auto index = entry.GetIndex();
+		auto &filter = ExpressionFilter::GetExpressionFilter(entry.Filter(), "inlined filter pushdown");
+		if (index.GetIndex() >= column_indexes.size() || !filter.column_indexes.empty() ||
+		    expression_map.find(index) != expression_map.end()) {
+			continue;
+		}
+		auto &column = columns[column_indexes[index.GetIndex()].GetPrimaryIndex()];
+		if (!column.identifier.IsNull() && column.identifier.type().id() == LogicalTypeId::INTEGER) {
+			auto identifier = IntegerValue::Get(column.identifier);
+			if (identifier == MultiFileReader::ORDINAL_FIELD_ID || identifier == MultiFileReader::ROW_ID_FIELD_ID ||
+			    identifier == MultiFileReader::LAST_UPDATED_SEQUENCE_NUMBER_ID) {
+				continue;
+			}
+		}
+		shared_ptr<DuckLakeTableStats> table_stats;
+		optional_ptr<const DuckLakeColumnStats> stats;
+		if (column.type.IsTemporal() && read_info.CanUseGlobalStats() && !column.identifier.IsNull()) {
+			table_stats = read_info.table.GetTableStats(*read_info.GetTransaction());
+			if (table_stats) {
+				auto entry = table_stats->column_stats.find(FieldIndex(IntegerValue::Get(column.identifier)));
+				if (entry != table_stats->column_stats.end()) {
+					stats = &entry->second;
+				}
+			}
+		}
+		auto condition = metadata_manager.GenerateInlinedFilter(
+		    *filter.expr, SQLIdentifier::ToString(column.name.GetIdentifierName()), column.type, stats);
+		if (!condition.empty()) {
+			conditions.push_back("(" + condition + ")");
+		}
+	}
+	return StringUtil::Join(conditions, " AND ");
+}
 
 DuckLakeInlinedDataReader::DuckLakeInlinedDataReader(DuckLakeFunctionInfo &read_info, const OpenFileInfo &info,
                                                      string table_name_p, vector<MultiFileColumnDefinition> columns_p)
@@ -69,7 +110,8 @@ bool DuckLakeInlinedDataReader::TryInitializeScan(ClientContext &context, Global
 				}
 			}
 			auto column_name = SQLIdentifier::ToString(columns[index].name.GetIdentifierName());
-			if (read_info.scan_type != DuckLakeScanType::SCAN_FOR_FLUSH) {
+			if (read_info.scan_type != DuckLakeScanType::SCAN_FOR_FLUSH &&
+			    read_info.scan_type != DuckLakeScanType::SCAN_TABLE) {
 				// the flush source already casts its columns
 				column_name = metadata_manager.CastColumnToTarget(column_name, col.type);
 			}
@@ -103,7 +145,10 @@ bool DuckLakeInlinedDataReader::TryInitializeScan(ClientContext &context, Global
 		unique_ptr<QueryResult> query_result;
 		switch (read_info.scan_type) {
 		case DuckLakeScanType::SCAN_TABLE:
-			query_result = metadata_manager.ReadInlinedData(read_info.snapshot, table_name, columns_to_read);
+			// Pending deletions are merged with row ids in ascending order.
+			query_result =
+			    metadata_manager.ReadInlinedData(read_info.snapshot, table_name, columns_to_read, expected_types,
+			                                     GetInlinedFilter(metadata_manager), deletion_filter != nullptr);
 			break;
 		case DuckLakeScanType::SCAN_INSERTIONS:
 			query_result = metadata_manager.ReadInlinedDataInsertions(*read_info.start_snapshot, read_info.snapshot,
@@ -137,6 +182,9 @@ bool DuckLakeInlinedDataReader::TryInitializeScan(ClientContext &context, Global
 				auto row_id_data = FlatVector::GetData<int64_t>(row_id_vector);
 				for (idx_t r = 0; r < chunk.size(); r++) {
 					auto row_id = NumericCast<idx_t>(row_id_data[r]);
+					while (current_idx < deleted_row_ids.size() && deleted_row_ids[current_idx] < row_id) {
+						current_idx++;
+					}
 					if (current_idx < deleted_row_ids.size() && deleted_row_ids[current_idx] == row_id) {
 						deleted_ordinals.push_back(ordinal_position);
 						current_idx++;

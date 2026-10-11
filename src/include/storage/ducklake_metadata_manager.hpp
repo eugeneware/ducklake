@@ -38,6 +38,7 @@ class DuckLakeTransaction;
 struct DuckLakeRetryConfig;
 struct TransactionChangeInformation;
 class BoundAtClause;
+class BoundConjunctionExpression;
 class SQLStatement;
 class FileSystem;
 
@@ -252,6 +253,10 @@ public:
 
 	virtual string GetColumnTypeInternal(const LogicalType &column_type);
 	string CastColumnToTarget(const string &column, const LogicalType &type);
+	//! A conservative catalog predicate; the complete filter is still evaluated by the reader.
+	//! Optional bounds must describe the physical column at the scan snapshot.
+	string GenerateInlinedFilter(const Expression &expression, const string &column, const LogicalType &type,
+	                             optional_ptr<const DuckLakeColumnStats> stats);
 	//! The inlined rows to flush with typed columns, without those this transaction deleted
 	string InlinedFlushSource(const string &inlined_table_name, const DuckLakeTableEntry &table);
 	//! The order of the rows in a flushed file
@@ -491,8 +496,12 @@ public:
 	virtual unique_ptr<DuckLakeSnapshot> GetSnapshot(BoundAtClause &at_clause, SnapshotBound bound);
 
 	virtual idx_t GetNextColumnId(TableIndex table_id);
+	//! Read physical storage-column SQL expressions as logical output types, one type per column.
+	//! Filtered reads keep storage values until the outer DuckDB projection decodes them.
 	virtual unique_ptr<QueryResult> ReadInlinedData(DuckLakeSnapshot snapshot, const string &inlined_table_name,
-	                                                const vector<string> &columns_to_read);
+	                                                const vector<string> &storage_columns,
+	                                                const vector<LogicalType> &output_types, const string &filter,
+	                                                bool order_by_row_id);
 	virtual unique_ptr<QueryResult> ReadInlinedDataInsertions(DuckLakeSnapshot start_snapshot,
 	                                                          DuckLakeSnapshot end_snapshot,
 	                                                          const string &inlined_table_name,
@@ -555,6 +564,19 @@ protected:
 	enum class StatsCastType : uint8_t { ORDERING, MIN, MAX };
 
 	virtual string GetLatestSnapshotQuery() const;
+	//! Return DuckDB-executable SQL projecting column_sql as col1, col2, ... . Backends may wrap remote SQL.
+	//! With a filter, these expressions return storage values for ReadInlinedData's outer decoding projection.
+	virtual string GenerateInlinedDataQuery(const string &table_name, const vector<string> &column_sql,
+	                                        const string &filter, const string &metadata_table_prefix,
+	                                        bool order_by_row_id);
+	static string InlinedDataVisibilitySql(const DuckLakeInlinedColNames &col_names);
+
+	virtual string InlinedFilterToSQL(const Expression &expression, const string &column, const LogicalType &type,
+	                                  optional_ptr<const DuckLakeColumnStats> stats);
+	static string FormatInlinedFilter(const Expression &expression, const string &column,
+	                                  const std::function<string(const Value &)> &constant_to_sql);
+	static string FormatConjunctionFilter(const BoundConjunctionExpression &conjunction,
+	                                      const std::function<string(const Expression &)> &translate_child);
 
 	static string GenerateFileColumnStatsCTEBody(const CTERequirement &req, TableIndex table_id,
 	                                             const string &metadata_table_prefix);

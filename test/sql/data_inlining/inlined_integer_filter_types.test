@@ -1,0 +1,118 @@
+# name: test/sql/data_inlining/inlined_integer_filter_types.test
+# description: Inline integer filters retain NULL semantics, quoted names and residual expressions
+# group: [data_inlining]
+
+require ducklake
+
+require parquet
+
+test-env DUCKLAKE_CONNECTION {TEST_DIR}/{UUID}.db
+
+test-env DATA_PATH {TEST_DIR}
+
+statement ok
+ATTACH 'ducklake:{DUCKLAKE_CONNECTION}' AS ducklake (DATA_PATH '{DATA_PATH}/inlined_integer_filter_types', DATA_INLINING_ROW_LIMIT 1000)
+
+statement ok
+USE ducklake
+
+statement ok
+CREATE TABLE probe("key'quoted" BIGINT, t TINYINT, s SMALLINT, i INTEGER, text VARCHAR)
+
+statement ok
+INSERT INTO probe VALUES
+    (-9223372036854775808, -128, -32768, -2147483648, 'minimum'),
+    (9223372036854775807, 127, 32767, 2147483647, 'maximum'),
+    (3, 3, 3, 3, 'three'), (5, 5, 5, 5, 'five'), (NULL, NULL, NULL, NULL, 'null')
+
+query I
+SELECT count(*) FROM ducklake_list_files('ducklake', 'probe')
+----
+0
+
+query T
+SELECT text FROM probe WHERE "key'quoted" = -9223372036854775808
+----
+minimum
+
+query T
+SELECT text FROM probe WHERE "key'quoted" >= 9223372036854775807
+----
+maximum
+
+query T
+SELECT text FROM probe WHERE "key'quoted" IS NULL
+----
+null
+
+query I
+SELECT count(*) FROM probe WHERE "key'quoted" IS NOT NULL
+----
+4
+
+query T
+SELECT text FROM probe WHERE "key'quoted" IN (NULL, 3)
+----
+three
+
+query T rowsort
+SELECT text FROM probe WHERE "key'quoted" IS NULL OR "key'quoted" = 3
+----
+null
+three
+
+query T
+SELECT text FROM probe WHERE t = -128 AND s = -32768 AND i = -2147483648
+----
+minimum
+
+query T
+SELECT text FROM probe WHERE t = 127 AND s = 32767 AND i = 2147483647
+----
+maximum
+
+# An unsupported branch of an OR cannot be dropped; an AND may still use its supported branch.
+query T rowsort
+SELECT text FROM probe WHERE i = 3 OR i % 5 = 0
+----
+five
+three
+
+query T
+SELECT text FROM probe WHERE i > 0 AND i % 5 = 0
+----
+five
+
+query T
+SELECT text FROM probe WHERE i < 10 AND t > 3.5
+----
+five
+
+# The pushed predicate must retain the original row identity.
+query II
+SELECT rowid, "key'quoted" FROM probe WHERE "key'quoted" = 5
+----
+3	5
+
+query T
+SELECT text FROM probe WHERE "key'quoted" = 4
+----
+
+statement ok
+BEGIN
+
+statement ok
+DELETE FROM probe WHERE "key'quoted" IN (-9223372036854775808, 5)
+
+query T
+SELECT text FROM probe WHERE "key'quoted" > 0 AND "key'quoted" < 10
+----
+three
+
+statement ok
+COMMIT
+
+query T
+SELECT text FROM probe WHERE "key'quoted" > 0 AND "key'quoted" < 10
+----
+three

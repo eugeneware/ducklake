@@ -1,0 +1,189 @@
+# name: test/sql/data_inlining/inlined_integer_filter_pushdown.test
+# description: Selective inline reads preserve filters, row identities and pending deletes
+# group: [data_inlining]
+
+require ducklake
+
+require parquet
+
+test-env DUCKLAKE_CONNECTION {TEST_DIR}/{UUID}.db
+
+test-env DATA_PATH {TEST_DIR}
+
+statement ok
+ATTACH 'ducklake:{DUCKLAKE_CONNECTION}' AS ducklake (DATA_PATH '{DATA_PATH}/inlined_integer_filter_pushdown', DATA_INLINING_ROW_LIMIT 1000)
+
+statement ok
+USE ducklake
+
+statement ok
+CREATE TABLE items(id BIGINT, parent INTEGER, text VARCHAR, kids BIGINT[])
+
+statement ok
+INSERT INTO items SELECT i, i // 10, 'item ' || i, [i + 1, i + 2] FROM range(100) t(i)
+
+query I
+SELECT count(*) FROM ducklake_list_files('ducklake', 'items')
+----
+0
+
+statement ok
+SET VARIABLE original = (SELECT max(snapshot_id) FROM snapshots())
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query ITT
+SELECT id, text, kids FROM items WHERE id = 73
+----
+73	item 73	[74, 75]
+
+# The predicate must reach the catalog read, including when the PostgreSQL scanner disables pushdown.
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'id"?( AS BIGINT\))? = 73')
+  AND CASE WHEN (SELECT catalog_type FROM settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+# Projecting a different column must not change the filter's column binding.
+query T
+SELECT text FROM items WHERE id IN (2, 73, 98) ORDER BY id
+----
+item 2
+item 73
+item 98
+
+query I
+SELECT id FROM items WHERE (id > 70 AND id < 74) OR id = 98 ORDER BY id
+----
+71
+72
+73
+98
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+# Large IN lists become optional scan filters below a join.
+query I
+SELECT count(*) FROM items WHERE id IN (1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55, 58)
+----
+20
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND query LIKE '% IN (%'
+  AND CASE WHEN (SELECT catalog_type FROM settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+BEGIN
+
+# A deleted row omitted by the pushed filter must not hide later pending deletions.
+statement ok
+DELETE FROM items WHERE id IN (2, 73)
+
+query I
+SELECT id FROM items WHERE id >= 70 AND id <= 74 ORDER BY id
+----
+70
+71
+72
+74
+
+statement ok
+UPDATE items SET text = 'updated', parent = 123 WHERE id = 74
+
+query IT
+SELECT parent, text FROM items WHERE id = 74
+----
+123	updated
+
+statement ok
+INSERT INTO items VALUES (101, NULL, 'local', [])
+
+query IT
+SELECT id, text FROM items WHERE id IN (73, 74, 101) ORDER BY id
+----
+74	updated
+101	local
+
+statement ok
+ROLLBACK
+
+query IT
+SELECT id, text FROM items WHERE id IN (2, 73, 74, 101) ORDER BY id
+----
+2	item 2
+73	item 73
+74	item 74
+
+statement ok
+DELETE FROM items WHERE id = 73
+
+statement ok
+UPDATE items SET text = 'committed' WHERE id = 74
+
+# A committed update can append an older row id after newer rows in the catalog.
+statement ok
+BEGIN
+
+statement ok
+DELETE FROM items WHERE id IN (2, 74)
+
+query I
+SELECT id FROM items WHERE id >= 73 AND id <= 75 ORDER BY id
+----
+75
+
+statement ok
+ROLLBACK
+
+query IT
+SELECT id, text FROM items WHERE id IN (73, 74) ORDER BY id
+----
+74	committed
+
+query IT
+SELECT id, text FROM items AT (VERSION => getvariable('original')) WHERE id IN (73, 74) ORDER BY id
+----
+73	item 73
+74	item 74
+
+# Schema casts retain their existing evaluation path.
+statement ok
+ALTER TABLE items ALTER COLUMN parent TYPE BIGINT
+
+query I
+SELECT count(*) FROM items WHERE parent = 7
+----
+9
+
+statement ok
+ALTER TABLE items SET SORTED BY (id DESC)
+
+statement ok
+CALL ducklake_flush_inlined_data('ducklake')
+
+query IT
+SELECT id, text FROM items WHERE id IN (73, 74) ORDER BY id
+----
+74	committed
+
+query IT
+SELECT id, text FROM items AT (VERSION => getvariable('original')) WHERE id IN (73, 74) ORDER BY id
+----
+73	item 73
+74	item 74

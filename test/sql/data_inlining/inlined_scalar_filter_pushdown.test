@@ -1,0 +1,228 @@
+# name: test/sql/data_inlining/inlined_scalar_filter_pushdown.test
+# description: Scalar inline predicates reach the metadata query across physical encodings
+# group: [data_inlining]
+
+require ducklake
+
+require parquet
+
+require icu
+
+test-env DUCKLAKE_CONNECTION {TEST_DIR}/{UUID}.db
+
+test-env DATA_PATH {TEST_DIR}
+
+statement ok
+ATTACH 'ducklake:{DUCKLAKE_CONNECTION}' AS lake (DATA_PATH '{DATA_PATH}/inlined_scalar_filter_pushdown', DATA_INLINING_ROW_LIMIT 1000)
+
+statement ok
+CREATE TABLE lake.events AS
+SELECT i AS id, i % 2 = 0 AS flag, (i + 0.25)::DECIMAL(18, 2) AS amount,
+       (i + 0.25)::FLOAT AS single_value, (i + 0.25)::DOUBLE AS double_value,
+       'key' || i AS label, encode('key' || i) AS bytes,
+       DATE '2026-05-01' + i::INTEGER AS event_date,
+       TIMESTAMP '2026-05-01' + i * INTERVAL 1 HOUR AS ts,
+       TIMESTAMPTZ '2026-05-01 00:00:00+00' + i * INTERVAL 1 HOUR AS tz
+FROM range(100) t(i)
+
+query I
+SELECT count(*) FROM ducklake_list_files('lake', 'events')
+----
+0
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE flag = true
+----
+50
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*flag')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE amount = 73.25
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*amount')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE single_value = 73.25::FLOAT
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*single_value')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE double_value = 73.25::DOUBLE
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*double_value')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE label = 'key73'
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*label')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE bytes = encode('key73')
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*bytes')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE event_date = DATE '2026-07-13'
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*event_date')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE ts = TIMESTAMP '2026-05-04 01:00:00'
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*ts')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+statement ok
+CALL disable_logging()
+
+statement ok
+CALL enable_logging('DuckLakeMetadata')
+
+query I
+SELECT count(*) FROM lake.events WHERE tz = TIMESTAMPTZ '2026-05-04 01:00:00+00'
+----
+1
+
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*tz')
+  AND CASE WHEN (SELECT catalog_type FROM lake.settings()) = 'postgres'
+      THEN query LIKE '%postgres_query(%' ELSE true END
+----
+true
+
+# A typed literal lets PostgreSQL parse the bound once, instead of casting text for every row.
+query I
+SELECT count(*) = 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND query LIKE '%AS VARCHAR) AS TIMESTAMPTZ)%'
+----
+true
+
+# Ordinary reads do not need the row-id sort used to merge pending deletions.
+query I
+SELECT count(*) > 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
+WHERE query LIKE '%ducklake_inlined_data_%'
+  AND regexp_matches(query, 'AND.*tz')
+  AND query NOT LIKE '%ORDER BY%'
+----
+true
+
+statement ok
+CALL disable_logging()

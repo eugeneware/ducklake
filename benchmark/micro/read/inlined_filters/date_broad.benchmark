@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/date_broad.benchmark
+# description: A DATE predicate matching thirty of thirty-one days
+# group: [inlined_filters]
+
+name Inlined Filter date broad
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE event_date >= DATE '2026-05-02';
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE event_date >= DATE '2026-05-02')
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true
