@@ -6,6 +6,8 @@ This branch contains reproducibility artifacts, separate from the implementation
 
 ## Results
 
+- [Final-source hosted CI](CI.md): all nine pull-request workflows passed, including full catalog, platform, sanitizer and both 84-case benchmark jobs.
+
 - [Current architecture follow-up](ARCHITECTURE.md): contracts, expired-row regression, exact-head correctness and performance evidence.
 
 - [First review correctness, c970d628](CORRECTNESS.md): the legacy regression's baseline-pass/old-head-fail/fixed-head-pass sequence, 42 focused invocations, and the native/PostgreSQL statistics and related suites.
@@ -13,8 +15,7 @@ This branch contains reproducibility artifacts, separate from the implementation
 - [First review latency, c970d628](LATENCY.md): both complete 27-case `-O1` comparisons passed the unchanged gate, as did the eight-case Release confirmation. Costs, including the broad timestamp regression, remain visible.
 - [MinSizeRel manifest](results/review-build-manifest.json) and [Release manifest](results/review-release-build-manifest.json): source pins, exact flags, source/binary hashes and measurement settings.
 
-Full GitHub Actions status is tracked on the PR. These local results do not waive
-the catalog, sanitizer or platform jobs that are still running.
+Full GitHub Actions results for the current source are recorded in [CI.md](CI.md) and tracked on the PR. Local selected suites and hosted CI retain their separate scopes.
 
 ## Source and measurement boundaries
 
