@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/integer_null.benchmark
+# description: A nullable BIGINT predicate
+# group: [read]
+
+name Inlined Filter integer null
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE optional_id IS NULL;
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE optional_id IS NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

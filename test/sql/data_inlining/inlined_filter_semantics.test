@@ -1,0 +1,433 @@
+# name: test/sql/data_inlining/inlined_filter_semantics.test
+# description: Inline predicates agree with native rows across types and residual expressions
+# group: [data_inlining]
+
+require ducklake
+
+require parquet
+
+require icu
+
+test-env DUCKLAKE_CONNECTION {TEST_DIR}/{UUID}.db
+
+test-env DATA_PATH {TEST_DIR}
+
+statement ok
+ATTACH 'ducklake:{DUCKLAKE_CONNECTION}' AS lake (DATA_PATH '{DATA_PATH}/inlined_filter_semantics', DATA_INLINING_ROW_LIMIT 1000)
+
+statement ok
+SET TimeZone = 'UTC'
+
+statement ok
+CREATE TEMP TABLE reference AS
+SELECT i AS id, (i % 100)::INTEGER AS source_id,
+       CASE WHEN i % 100 = 0 THEN NULL ELSE i END AS optional_id,
+       i % 100 = 0 AS flag, i::DECIMAL(18, 2) + 0.25 AS amount,
+       (i + 0.25)::FLOAT AS single_value, (i + 0.25)::DOUBLE AS double_value,
+       'key' || i AS label, encode('key' || i) AS bytes,
+       DATE '2026-05-01' + (i % 31)::INTEGER AS event_date,
+       TIMESTAMP '2026-05-01' + i * INTERVAL 1 MINUTE AS ts,
+       TIMESTAMPTZ '2026-05-01 00:00:00+00' + i * INTERVAL 1 MINUTE AS tz,
+       [i, i + 1] AS children, {'value': i, 'label': 'key' || i} AS nested,
+       md5(i::VARCHAR) AS payload
+FROM range(100) t(i)
+
+statement ok
+INSERT INTO reference
+SELECT * REPLACE (-1 AS id, NULL AS optional_id, NULL AS amount, NULL AS label, NULL AS bytes,
+                  NULL AS single_value, NULL AS double_value, NULL AS event_date, NULL AS ts, NULL AS tz)
+FROM reference WHERE id = 73
+
+statement ok
+INSERT INTO reference
+SELECT * REPLACE (-2 AS id, 'NaN'::FLOAT AS single_value, 'NaN'::DOUBLE AS double_value,
+                  'a' || chr(0) || 'z' AS label, '\x00\xFF'::BLOB AS bytes,
+                  'infinity'::DATE AS event_date, 'infinity'::TIMESTAMP AS ts, 'infinity'::TIMESTAMPTZ AS tz)
+FROM reference WHERE id = 73
+
+statement ok
+INSERT INTO reference
+SELECT * REPLACE (-3 AS id, '-infinity'::FLOAT AS single_value, '-infinity'::DOUBLE AS double_value,
+                  'Å' AS label, encode('Å') AS bytes, DATE '10000-01-01' AS event_date,
+                  TIMESTAMP '10000-01-01' AS ts, TIMESTAMPTZ '10000-01-01 00:00:00+00' AS tz)
+FROM reference WHERE id = 73
+
+statement ok
+CREATE TABLE lake.events AS SELECT * FROM reference
+
+query I
+SELECT count(*) FROM ducklake_list_files('lake', 'events')
+----
+0
+
+# A selective BIGINT lookup
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id = 73),
+expected AS (SELECT * FROM reference WHERE id = 73)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A short BIGINT range
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id >= 70 AND id < 90),
+expected AS (SELECT * FROM reference WHERE id >= 70 AND id < 90)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# An optional filter generated from a large IN list
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id IN (3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 67, 71, 75, 79)),
+expected AS (SELECT * FROM reference WHERE id IN (3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 67, 71, 75, 79))
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A BIGINT lookup with no matching rows
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id = -100),
+expected AS (SELECT * FROM reference WHERE id = -100)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A nullable BIGINT predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE optional_id IS NULL),
+expected AS (SELECT * FROM reference WHERE optional_id IS NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A BIGINT predicate matching ninety percent of the buffer
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id < 100 * 9 // 10),
+expected AS (SELECT * FROM reference WHERE id < 100 * 9 // 10)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A selective INTEGER source key
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE source_id = 23),
+expected AS (SELECT * FROM reference WHERE source_id = 23)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A selective BOOLEAN predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE flag = true),
+expected AS (SELECT * FROM reference WHERE flag = true)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A selective DECIMAL predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE amount = 73.25),
+expected AS (SELECT * FROM reference WHERE amount = 73.25)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A selective FLOAT predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE single_value = 73.25::FLOAT),
+expected AS (SELECT * FROM reference WHERE single_value = 73.25::FLOAT)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A short DOUBLE range
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE double_value >= 73.25 AND double_value < 83.25),
+expected AS (SELECT * FROM reference WHERE double_value >= 73.25 AND double_value < 83.25)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A selective VARCHAR predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE label = 'key73'),
+expected AS (SELECT * FROM reference WHERE label = 'key73')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A selective BLOB predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE bytes = encode('key73')),
+expected AS (SELECT * FROM reference WHERE bytes = encode('key73'))
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A DATE predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE event_date = DATE '2026-05-05'),
+expected AS (SELECT * FROM reference WHERE event_date = DATE '2026-05-05')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A TIMESTAMP range without an integer predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE ts >= TIMESTAMP '2026-05-01 00:20:00' AND ts < TIMESTAMP '2026-05-01 00:40:00'),
+expected AS (SELECT * FROM reference WHERE ts >= TIMESTAMP '2026-05-01 00:20:00' AND ts < TIMESTAMP '2026-05-01 00:40:00')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A TIMESTAMPTZ range without an integer predicate
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE tz >= TIMESTAMPTZ '2026-05-01 00:20:00+00' AND tz < TIMESTAMPTZ '2026-05-01 02:40:00+02'),
+expected AS (SELECT * FROM reference WHERE tz >= TIMESTAMPTZ '2026-05-01 00:20:00+00' AND tz < TIMESTAMPTZ '2026-05-01 02:40:00+02')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# The source ID and timestamp range from discussion 1134
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE source_id = 23 AND tz >= TIMESTAMPTZ '2026-05-01 00:20:00+00' AND tz < TIMESTAMPTZ '2026-05-01 02:40:00+02'),
+expected AS (SELECT * FROM reference WHERE source_id = 23 AND tz >= TIMESTAMPTZ '2026-05-01 00:20:00+00' AND tz < TIMESTAMPTZ '2026-05-01 02:40:00+02')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# An integer range with a residual expression
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id >= 70 AND id < 90 AND id % 17 = 0),
+expected AS (SELECT * FROM reference WHERE id >= 70 AND id < 90 AND id % 17 = 0)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A disjunction with an unsupported branch
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id = 73 OR id % 997 = 0),
+expected AS (SELECT * FROM reference WHERE id = 73 OR id % 997 = 0)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# A predicate on a nested value
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE nested.value = 73),
+expected AS (SELECT * FROM reference WHERE nested.value = 73)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# An IN subquery that generates a runtime join filter
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id IN (SELECT range * 97 + 73 FROM range(200))),
+expected AS (SELECT * FROM reference WHERE id IN (SELECT range * 97 + 73 FROM range(200)))
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# NaN comparisons
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE double_value = 'NaN'::DOUBLE),
+expected AS (SELECT * FROM reference WHERE double_value = 'NaN'::DOUBLE)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# FLOAT negative infinity comparisons
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE single_value = '-infinity'::FLOAT),
+expected AS (SELECT * FROM reference WHERE single_value = '-infinity'::FLOAT)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# DOUBLE negative infinity comparisons
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE double_value = '-infinity'::DOUBLE),
+expected AS (SELECT * FROM reference WHERE double_value = '-infinity'::DOUBLE)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# Embedded zero bytes
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE label = 'a' || chr(0) || 'z'),
+expected AS (SELECT * FROM reference WHERE label = 'a' || chr(0) || 'z')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# Binary constants
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE bytes = '\x00\xFF'::BLOB),
+expected AS (SELECT * FROM reference WHERE bytes = '\x00\xFF'::BLOB)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# Infinite dates
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE event_date = 'infinity'::DATE),
+expected AS (SELECT * FROM reference WHERE event_date = 'infinity'::DATE)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# Large timestamp years
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE ts >= TIMESTAMP '10000-01-01'),
+expected AS (SELECT * FROM reference WHERE ts >= TIMESTAMP '10000-01-01')
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# Unicode text and NULLs
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE label IN ('Å', 'key73', NULL)),
+expected AS (SELECT * FROM reference WHERE label IN ('Å', 'key73', NULL))
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# Residual OR with NULLs
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id = 73 OR label IS NULL),
+expected AS (SELECT * FROM reference WHERE id = 73 OR label IS NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true
+
+# Residual AND with encoded values
+query I
+WITH actual AS (SELECT * FROM lake.events WHERE id < 0 AND bytes IS NOT NULL),
+expected AS (SELECT * FROM reference WHERE id < 0 AND bytes IS NOT NULL)
+SELECT NOT EXISTS (
+    (SELECT * FROM actual EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM actual)
+)
+----
+true

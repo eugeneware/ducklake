@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/date.benchmark
+# description: A DATE predicate
+# group: [read]
+
+name Inlined Filter date
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE event_date = DATE '2026-05-05';
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE event_date = DATE '2026-05-05')
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

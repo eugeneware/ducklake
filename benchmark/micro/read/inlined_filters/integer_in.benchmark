@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/integer_in.benchmark
+# description: An optional filter generated from a large IN list
+# group: [read]
+
+name Inlined Filter integer in
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE id IN (73, 170, 267, 364, 461, 558, 655, 752, 849, 946, 1043, 1140, 1237, 1334, 1431, 1528, 1625, 1722, 1819, 1916);
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE id IN (73, 170, 267, 364, 461, 558, 655, 752, 849, 946, 1043, 1140, 1237, 1334, 1431, 1528, 1625, 1722, 1819, 1916))
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

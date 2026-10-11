@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/source_timestamp.benchmark
+# description: The source ID and timestamp range from discussion 1134
+# group: [read]
+
+name Inlined Filter source timestamp
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE source_id = 23 AND tz >= TIMESTAMPTZ '2026-05-05 00:00:00+00' AND tz < TIMESTAMPTZ '2026-05-06 12:00:00+02';
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE source_id = 23 AND tz >= TIMESTAMPTZ '2026-05-05 00:00:00+00' AND tz < TIMESTAMPTZ '2026-05-06 12:00:00+02')
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/full_scan.benchmark
+# description: An unfiltered scan control
+# group: [read]
+
+name Inlined Filter full scan
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE true;
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE true)
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true

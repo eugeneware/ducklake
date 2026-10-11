@@ -1,0 +1,26 @@
+# name: benchmark/micro/read/inlined_filters/integer_missing.benchmark
+# description: A BIGINT lookup with no matching rows
+# group: [read]
+
+name Inlined Filter integer missing
+group micro
+subgroup read
+
+require ducklake
+
+require parquet
+
+include benchmark/micro/fixtures/inlined_filters.benchmark.in
+
+run
+SELECT id, payload FROM lake.events WHERE id = -1;
+
+result_query I
+WITH expected AS (SELECT id, payload FROM reference WHERE id = -1)
+SELECT NOT EXISTS (
+    (SELECT * FROM __answer EXCEPT ALL SELECT * FROM expected)
+    UNION ALL
+    (SELECT * FROM expected EXCEPT ALL SELECT * FROM __answer)
+);
+----
+true
