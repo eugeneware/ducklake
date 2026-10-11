@@ -61,25 +61,9 @@ string DuckLakeMetadataManager::GenerateInlinedFilter(const Expression &expressi
 			return string();
 		}
 	} else if (expression.GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION) {
-		auto &conjunction = expression.Cast<BoundConjunctionExpression>();
-		vector<string> children;
-		for (auto &child : conjunction.GetChildren()) {
-			auto filter = GenerateInlinedFilter(*child, column, type, stats);
-			if (filter.empty()) {
-				if (expression.GetExpressionType() == ExpressionType::CONJUNCTION_OR) {
-					return string();
-				}
-				continue;
-			}
-			if (child->GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION &&
-			    child->GetExpressionType() == expression.GetExpressionType()) {
-				children.push_back(std::move(filter));
-			} else {
-				children.push_back("(" + filter + ")");
-			}
-		}
-		return StringUtil::Join(children,
-		                        expression.GetExpressionType() == ExpressionType::CONJUNCTION_OR ? " OR " : " AND ");
+		return FormatConjunctionFilter(expression.Cast<BoundConjunctionExpression>(), [&](const Expression &child) {
+			return GenerateInlinedFilter(child, column, type, stats);
+		});
 	} else {
 		return string();
 	}

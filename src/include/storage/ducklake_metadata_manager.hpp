@@ -38,6 +38,7 @@ class DuckLakeTransaction;
 struct DuckLakeRetryConfig;
 struct TransactionChangeInformation;
 class BoundAtClause;
+class BoundConjunctionExpression;
 class SQLStatement;
 class FileSystem;
 
@@ -569,6 +570,8 @@ protected:
 	                                  optional_ptr<const DuckLakeColumnStats> stats);
 	static string FormatInlinedFilter(const Expression &expression, const string &column,
 	                                  const std::function<string(const Value &)> &constant_to_sql);
+	static string FormatConjunctionFilter(const BoundConjunctionExpression &conjunction,
+	                                      const std::function<string(const Expression &)> &translate_child);
 
 	static string GenerateFileColumnStatsCTEBody(const CTERequirement &req, TableIndex table_id,
 	                                             const string &metadata_table_prefix);

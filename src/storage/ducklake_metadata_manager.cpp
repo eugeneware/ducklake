@@ -1594,6 +1594,33 @@ string DuckLakeMetadataManager::GenerateConstantFilterDouble(ExpressionType comp
 	return GenerateConstantFilter(comparison_type, constant, type, referenced_stats, stats_alias);
 }
 
+string
+DuckLakeMetadataManager::FormatConjunctionFilter(const BoundConjunctionExpression &conjunction,
+                                                 const std::function<string(const Expression &)> &translate_child) {
+	string result;
+	const auto conjunction_type = conjunction.GetExpressionType();
+	for (auto &child : conjunction.GetChildren()) {
+		auto child_str = translate_child(*child);
+		if (child_str.empty()) {
+			if (conjunction_type == ExpressionType::CONJUNCTION_OR) {
+				return string();
+			}
+			continue;
+		}
+		if (!result.empty()) {
+			result += conjunction_type == ExpressionType::CONJUNCTION_OR ? " OR " : " AND ";
+		}
+		// Flatten associative chains to avoid excessive parser recursion over parentheses.
+		if (child->GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION &&
+		    child->GetExpressionType() == conjunction_type) {
+			result += child_str;
+		} else {
+			result += "(" + child_str + ")";
+		}
+	}
+	return result;
+}
+
 string DuckLakeMetadataManager::GenerateFilterFromExpression(const Expression &expr, const LogicalType *type,
                                                              unordered_set<string> &referenced_stats,
                                                              const string &stats_alias) {
@@ -1667,30 +1694,9 @@ string DuckLakeMetadataManager::GenerateFilterFromExpression(const Expression &e
 		}
 	}
 	case ExpressionClass::BOUND_CONJUNCTION: {
-		auto &conjunction = expr.Cast<BoundConjunctionExpression>();
-		string result;
-		const auto conjunction_type = expr.GetExpressionType();
-		for (auto &child : conjunction.GetChildren()) {
-			auto child_str = GenerateFilterFromExpression(*child, type, referenced_stats, stats_alias);
-			if (child_str.empty()) {
-				if (conjunction_type == ExpressionType::CONJUNCTION_OR) {
-					return string();
-				}
-				continue;
-			}
-			if (!result.empty()) {
-				result += conjunction_type == ExpressionType::CONJUNCTION_OR ? " OR " : " AND ";
-			}
-			// AND and OR are associative, so a same-type child can be spliced in rather than nested.
-			// DuckDB hands these to us as left-deep chains, and the parser recurses over the parens.
-			if (child->GetExpressionClass() == ExpressionClass::BOUND_CONJUNCTION &&
-			    child->GetExpressionType() == conjunction_type) {
-				result += child_str;
-			} else {
-				result += "(" + child_str + ")";
-			}
-		}
-		return result;
+		return FormatConjunctionFilter(expr.Cast<BoundConjunctionExpression>(), [&](const Expression &child) {
+			return GenerateFilterFromExpression(child, type, referenced_stats, stats_alias);
+		});
 	}
 	case ExpressionClass::BOUND_FUNCTION: {
 		auto optional_child = ExpressionFilter::GetOptionalFilterChild(expr);
