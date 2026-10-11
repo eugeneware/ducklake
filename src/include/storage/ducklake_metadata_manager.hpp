@@ -496,9 +496,11 @@ public:
 	virtual unique_ptr<DuckLakeSnapshot> GetSnapshot(BoundAtClause &at_clause, SnapshotBound bound);
 
 	virtual idx_t GetNextColumnId(TableIndex table_id);
+	//! Read physical storage-column SQL expressions as logical output types, one type per column.
+	//! Filtered reads keep storage values until the outer DuckDB projection decodes them.
 	virtual unique_ptr<QueryResult> ReadInlinedData(DuckLakeSnapshot snapshot, const string &inlined_table_name,
-	                                                const vector<string> &columns_to_read,
-	                                                const vector<LogicalType> &types, const string &filter,
+	                                                const vector<string> &storage_columns,
+	                                                const vector<LogicalType> &output_types, const string &filter,
 	                                                bool order_by_row_id);
 	virtual unique_ptr<QueryResult> ReadInlinedDataInsertions(DuckLakeSnapshot start_snapshot,
 	                                                          DuckLakeSnapshot end_snapshot,
@@ -562,9 +564,12 @@ protected:
 	enum class StatsCastType : uint8_t { ORDERING, MIN, MAX };
 
 	virtual string GetLatestSnapshotQuery() const;
-	virtual string GenerateInlinedDataQuery(const string &table_name, const vector<string> &columns_to_read,
+	//! Return DuckDB-executable SQL projecting column_sql as col1, col2, ... . Backends may wrap remote SQL.
+	//! With a filter, these expressions return storage values for ReadInlinedData's outer decoding projection.
+	virtual string GenerateInlinedDataQuery(const string &table_name, const vector<string> &column_sql,
 	                                        const string &filter, const string &metadata_table_prefix,
 	                                        bool order_by_row_id);
+	static string InlinedDataVisibilitySql(const DuckLakeInlinedColNames &col_names);
 
 	virtual string InlinedFilterToSQL(const Expression &expression, const string &column, const LogicalType &type,
 	                                  optional_ptr<const DuckLakeColumnStats> stats);

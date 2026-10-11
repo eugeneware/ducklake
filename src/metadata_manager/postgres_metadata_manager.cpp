@@ -198,10 +198,8 @@ string PostgresMetadataManager::InlinedFilterToSQL(const Expression &expression,
 	if (temporal && !filter.empty()) {
 		if (CanCastPostgresTemporalColumn(type, stats)) {
 			// Current bounds do not cover expired rows; keep the cast behind snapshot visibility.
-			auto names = InlinedColNames();
-			return StringUtil::Format("(CASE WHEN {SNAPSHOT_ID} >= %s AND "
-			                          "({SNAPSHOT_ID} < %s OR %s IS NULL) THEN (%s) ELSE true END)",
-			                          names.begin_snapshot, names.end_snapshot, names.end_snapshot, filter);
+			return StringUtil::Format("(CASE WHEN %s THEN (%s) ELSE true END)",
+			                          InlinedDataVisibilitySql(InlinedColNames()), filter);
 		}
 		// Inline values are serialized typed values; only the year range needs guarding before the cast.
 		return StringUtil::Format("(CASE WHEN substring(%s FROM 5 FOR 1) = '-' AND strpos(%s, 'BC') = 0 "
@@ -408,14 +406,14 @@ string PostgresMetadataManager::GetLatestSnapshotQuery() const {
 	)";
 }
 
-string PostgresMetadataManager::GenerateInlinedDataQuery(const string &table_name,
-                                                         const vector<string> &columns_to_read, const string &filter,
-                                                         const string &metadata_table_prefix, bool order_by_row_id) {
+string PostgresMetadataManager::GenerateInlinedDataQuery(const string &table_name, const vector<string> &column_sql,
+                                                         const string &filter, const string &metadata_table_prefix,
+                                                         bool order_by_row_id) {
 	if (filter.empty()) {
-		return DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, columns_to_read, filter,
-		                                                         metadata_table_prefix, order_by_row_id);
+		return DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, column_sql, filter, metadata_table_prefix,
+		                                                         order_by_row_id);
 	}
-	auto remote_query = DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, columns_to_read, filter,
+	auto remote_query = DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, column_sql, filter,
 	                                                                      "{METADATA_SCHEMA_ESCAPED}", order_by_row_id);
 	return StringUtil::Format(
 	    "SELECT * FROM postgres_query({METADATA_CATALOG_NAME_LITERAL}, %s, use_transaction = true)",

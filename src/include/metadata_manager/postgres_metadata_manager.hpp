@@ -44,9 +44,8 @@ protected:
 	string GetLatestSnapshotQuery() const override;
 	string InlinedFilterToSQL(const Expression &expression, const string &column, const LogicalType &type,
 	                          optional_ptr<const DuckLakeColumnStats> stats) override;
-	string GenerateInlinedDataQuery(const string &table_name, const vector<string> &columns_to_read,
-	                                const string &filter, const string &metadata_table_prefix,
-	                                bool order_by_row_id) override;
+	string GenerateInlinedDataQuery(const string &table_name, const vector<string> &column_sql, const string &filter,
+	                                const string &metadata_table_prefix, bool order_by_row_id) override;
 	string GenerateFileListQuery(DuckLakeTableEntry &table, const FilterPushdownInfo *filter_info,
 	                             const vector<DuckLakeFileListDynamicFilter> &dynamic_filters,
 	                             const vector<idx_t> &runtime_filter_stats_columns, FileListType file_list_type,

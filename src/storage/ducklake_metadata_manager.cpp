@@ -3695,34 +3695,40 @@ static string GetProjection(const vector<string> &columns_to_read) {
 
 unique_ptr<QueryResult> DuckLakeMetadataManager::ReadInlinedData(DuckLakeSnapshot snapshot,
                                                                  const string &inlined_table_name,
-                                                                 const vector<string> &columns_to_read,
-                                                                 const vector<LogicalType> &types, const string &filter,
-                                                                 bool order_by_row_id) {
-	vector<string> projection;
-	for (idx_t i = 0; i < columns_to_read.size(); i++) {
-		auto column = filter.empty() ? columns_to_read[i] : StringUtil::Format("col%d", i + 1);
-		projection.push_back(CastColumnToTarget(column, types[i]));
+                                                                 const vector<string> &storage_columns,
+                                                                 const vector<LogicalType> &output_types,
+                                                                 const string &filter, bool order_by_row_id) {
+	D_ASSERT(storage_columns.size() == output_types.size());
+	vector<string> output_columns;
+	for (idx_t i = 0; i < storage_columns.size(); i++) {
+		auto column = filter.empty() ? storage_columns[i] : StringUtil::Format("col%d", i + 1);
+		output_columns.push_back(CastColumnToTarget(column, output_types[i]));
 	}
 	if (filter.empty()) {
-		return Query(snapshot, GenerateInlinedDataQuery(inlined_table_name, projection, filter, "{METADATA_CATALOG}",
-		                                                order_by_row_id));
+		return Query(snapshot, GenerateInlinedDataQuery(inlined_table_name, output_columns, filter,
+		                                                "{METADATA_CATALOG}", order_by_row_id));
 	}
 	auto source =
-	    GenerateInlinedDataQuery(inlined_table_name, columns_to_read, filter, "{METADATA_CATALOG}", order_by_row_id);
-	return Query(snapshot, StringUtil::Format("SELECT %s FROM (%s) inlined_data", GetProjection(projection), source));
+	    GenerateInlinedDataQuery(inlined_table_name, storage_columns, filter, "{METADATA_CATALOG}", order_by_row_id);
+	return Query(snapshot,
+	             StringUtil::Format("SELECT %s FROM (%s) inlined_data", GetProjection(output_columns), source));
 }
 
-string DuckLakeMetadataManager::GenerateInlinedDataQuery(const string &table_name,
-                                                         const vector<string> &columns_to_read, const string &filter,
-                                                         const string &metadata_table_prefix, bool order_by_row_id) {
+string DuckLakeMetadataManager::InlinedDataVisibilitySql(const DuckLakeInlinedColNames &col_names) {
+	return StringUtil::Format("{SNAPSHOT_ID} >= %s AND ({SNAPSHOT_ID} < %s OR %s IS NULL)", col_names.begin_snapshot,
+	                          col_names.end_snapshot, col_names.end_snapshot);
+}
+
+string DuckLakeMetadataManager::GenerateInlinedDataQuery(const string &table_name, const vector<string> &column_sql,
+                                                         const string &filter, const string &metadata_table_prefix,
+                                                         bool order_by_row_id) {
 	auto col_names = InlinedColNames();
 	return StringUtil::Format(R"(
 SELECT %s
 FROM %s.%s
-WHERE {SNAPSHOT_ID} >= %s AND ({SNAPSHOT_ID} < %s OR %s IS NULL)%s%s)",
-	                          GetProjection(columns_to_read), metadata_table_prefix, SQLIdentifier(table_name),
-	                          col_names.begin_snapshot, col_names.end_snapshot, col_names.end_snapshot,
-	                          filter.empty() ? "" : " AND (" + filter + ")",
+WHERE %s%s%s)",
+	                          GetProjection(column_sql), metadata_table_prefix, SQLIdentifier(table_name),
+	                          InlinedDataVisibilitySql(col_names), filter.empty() ? "" : " AND (" + filter + ")",
 	                          order_by_row_id ? " ORDER BY " + col_names.row_id : "");
 }
 

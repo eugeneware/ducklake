@@ -103,3 +103,53 @@ The implementation reuses DuckDB's expression and comparison helpers,
 `CastColumnToTarget`, the inline writer's `DuckLakeUtil::ValueToSQL`, and the
 PostgreSQL comparison type mapping and `CastValueToTarget` used for statistics. PostgreSQL SQL
 executes through `postgres_query`, leaving its execution to that storage engine.
+
+Every backend translation has two correctness obligations. A visible row that
+matches the original predicate after decoding must pass the pushed predicate;
+returning extra rows is safe because DuckDB retains the complete local filter.
+Casts must also be safe on physically retained, invisible rows: SQL does not
+guarantee `WHERE` evaluation order. The temporal `CASE` supplies that safety
+boundary using the same visibility expression as the inline read.
+
+## Execution placement and reuse
+
+Correct results across catalog backends do not establish equivalent pushdown or
+performance. The execution paths are:
+
+| Catalog | Predicate execution | Evidence required for backend performance claims |
+| --- | --- | --- |
+| Native DuckDB | Typed predicate in the DuckDB metadata query. | Profile the metadata scan and compare selective and broad cases. |
+| PostgreSQL | Storage-aware remote predicate through `postgres_query`, using the existing transaction. | Inspect the remote SQL and measure rows transferred, decoding and query time. |
+| SQLite | Typed expression through DuckDB's attached-table scan. The pinned SQLite scanner supports projection pushdown, but does not enable engine filter pushdown. | Passing result tests does not demonstrate SQLite-engine filtering; a native optimization would need a mechanism check and measurements. |
+| Quack | The metadata manager sends DuckDB SQL to remote DuckDB through `quack_query_by_name`. | Catalog correctness coverage does not establish performance; no Quack speedup is claimed here. |
+
+Additional backend optimizations should reuse the correctness fixtures and
+include a mechanism check showing where filtering occurs. Measure rows fetched
+or materialized and broad controls as well as latency. Each backend must
+establish comparison equivalence for its storage encoding: SQLite, for example,
+stores floats as text to preserve NaN, so PostgreSQL's casts cannot be reused
+without that analysis.
+
+DuckDB's `database-connector` provides a shared `FilterPushdown` implementation,
+but at revision `73d27b75117ca9f3134a7c9badd6c8a97998f2bd` its configuration lacks
+arbitrary constant encoding and storage-aware leaf translation. DuckLake needs
+binary string encoding, logical FLOAT normalization and guarded text-to-temporal
+comparisons. That revision also omits unsupported `OR` children and loses the
+sign of negative DOUBLE infinity; a local residual cannot recover discarded
+rows. The scanner's private connector object target is not a public DuckLake API.
+
+The current small formatter stays within the existing metadata-manager boundary.
+A shared follow-up can start from the connector's `TransformFilterExpression`
+entry point, add caller-supplied constant encoding and only the leaf hook these
+cases require, and validate conservative composition and non-finite values
+through an existing scanner and DuckLake. Storage casts and temporal guards
+remain with the backend caller. This follows the maintainer's preference for
+[caller-side configuration](https://github.com/duckdb/database-connector/issues/23#issuecomment-4994310521)
+instead of a dialect hierarchy. A direct source dependency needs a separate
+build decision; this cross-repository work is not required by the current patch.
+
+DuckDB's `RemotePushdownOptimizer` and catalog capability interfaces are a future
+direction for broader remote subqueries or aggregates. They do not supply
+DuckLake's storage decoding or snapshot semantics. The pinned bound-expression
+SQL exporter also rejects ordinary physical scan references and reconstructs
+DuckDB expressions, so it is not a replacement for storage-aware translation.

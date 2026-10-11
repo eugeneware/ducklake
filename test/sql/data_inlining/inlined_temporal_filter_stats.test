@@ -11,7 +11,7 @@ test-env DUCKLAKE_CONNECTION {TEST_DIR}/{UUID}.db
 test-env DATA_PATH {TEST_DIR}
 
 statement ok
-ATTACH 'ducklake:{DUCKLAKE_CONNECTION}' AS lake (DATA_PATH '{DATA_PATH}/inlined_temporal_filter_stats', DATA_INLINING_ROW_LIMIT 1000)
+ATTACH 'ducklake:{DUCKLAKE_CONNECTION}' AS lake (DATA_PATH '{DATA_PATH}/inlined_temporal_filter_stats', METADATA_CATALOG 'inline_meta', DATA_INLINING_ROW_LIMIT 1000)
 
 statement ok
 CREATE TABLE lake.events (id INTEGER, ts TIMESTAMP)
@@ -25,6 +25,37 @@ SET VARIABLE historical = (SELECT max(snapshot_id) FROM lake.snapshots())
 statement ok
 INSERT INTO lake.events VALUES (4, TIMESTAMP '2026-05-03')
 
+# Seed an expired version of row 0 without changing the live rows or their bounds.
+# Deleting an outlier through DuckLake can leave global bounds wide. This synthetic
+# catalog keeps valid narrow current bounds alongside physical history they do not cover.
+# The first three storage columns are row_id, begin_snapshot and end_snapshot in both versions.
+statement ok
+INSERT INTO inline_meta.ducklake_inlined_data_1_1
+VALUES (0, getvariable('historical') - 1, getvariable('historical'), 99, CAST(TIMESTAMP '9999-01-01 (BC)' AS VARCHAR))
+
+query I
+SELECT count(*) = 1 FROM (
+    SELECT id, ts, COLUMNS('.*begin_snapshot$') AS visible_from, COLUMNS('.*end_snapshot$') AS visible_until
+    FROM inline_meta.ducklake_inlined_data_1_1
+) expired
+WHERE id = 99 AND year(ts::TIMESTAMP) < -4713
+  AND visible_from < visible_until AND visible_until = getvariable('historical')
+----
+true
+
+query I
+SELECT min_value::TIMESTAMP = TIMESTAMP '2026-05-01' AND max_value::TIMESTAMP = TIMESTAMP '2026-05-03'
+FROM inline_meta.ducklake_table_column_stats WHERE table_id = 1 AND column_id = 2
+----
+true
+
+query IT
+SELECT id, ts FROM lake.events ORDER BY id
+----
+2	2026-05-01 00:00:00
+3	2026-05-02 00:00:00
+4	2026-05-03 00:00:00
+
 statement ok
 CALL enable_logging('DuckLakeMetadata')
 
@@ -34,7 +65,7 @@ SELECT id FROM lake.events WHERE ts > TIMESTAMP '2026-05-01' ORDER BY id
 3
 4
 
-# Current bounds prove that PostgreSQL can cast every non-null value.
+# Current bounds prove that PostgreSQL can cast every visible non-null value.
 query I
 SELECT count(*) = 0 FROM duckdb_logs_parsed('DuckLakeMetadata')
 WHERE query LIKE '%ducklake_inlined_data_%' AND query LIKE '%CASE WHEN substring(ts%'
