@@ -2,6 +2,7 @@
 #include "storage/ducklake_multi_file_reader.hpp"
 #include "storage/ducklake_transaction.hpp"
 #include "storage/ducklake_metadata_manager.hpp"
+#include "storage/ducklake_table_entry.hpp"
 #include "duckdb/storage/table/column_segment.hpp"
 #include "duckdb/planner/table_filter_state.hpp"
 #include "storage/ducklake_delete_filter.hpp"
@@ -30,8 +31,19 @@ string DuckLakeInlinedDataReader::GetInlinedFilter(DuckLakeMetadataManager &meta
 				continue;
 			}
 		}
+		shared_ptr<DuckLakeTableStats> table_stats;
+		optional_ptr<const DuckLakeColumnStats> stats;
+		if (column.type.IsTemporal() && read_info.CanUseGlobalStats() && !column.identifier.IsNull()) {
+			table_stats = read_info.table.GetTableStats(*read_info.GetTransaction());
+			if (table_stats) {
+				auto entry = table_stats->column_stats.find(FieldIndex(IntegerValue::Get(column.identifier)));
+				if (entry != table_stats->column_stats.end()) {
+					stats = &entry->second;
+				}
+			}
+		}
 		auto condition = metadata_manager.GenerateInlinedFilter(
-		    *filter.expr, SQLIdentifier::ToString(column.name.GetIdentifierName()), column.type);
+		    *filter.expr, SQLIdentifier::ToString(column.name.GetIdentifierName()), column.type, stats);
 		if (!condition.empty()) {
 			conditions.push_back("(" + condition + ")");
 		}
@@ -133,8 +145,10 @@ bool DuckLakeInlinedDataReader::TryInitializeScan(ClientContext &context, Global
 		unique_ptr<QueryResult> query_result;
 		switch (read_info.scan_type) {
 		case DuckLakeScanType::SCAN_TABLE:
-			query_result = metadata_manager.ReadInlinedData(read_info.snapshot, table_name, columns_to_read,
-			                                                expected_types, GetInlinedFilter(metadata_manager));
+			// Pending deletions are merged with row ids in ascending order.
+			query_result =
+			    metadata_manager.ReadInlinedData(read_info.snapshot, table_name, columns_to_read, expected_types,
+			                                     GetInlinedFilter(metadata_manager), deletion_filter != nullptr);
 			break;
 		case DuckLakeScanType::SCAN_INSERTIONS:
 			query_result = metadata_manager.ReadInlinedDataInsertions(*read_info.start_snapshot, read_info.snapshot,

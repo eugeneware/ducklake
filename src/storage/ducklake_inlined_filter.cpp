@@ -13,12 +13,13 @@
 namespace duckdb {
 
 string DuckLakeMetadataManager::GenerateInlinedFilter(const Expression &expression, const string &column,
-                                                      const LogicalType &type) {
+                                                      const LogicalType &type,
+                                                      optional_ptr<const DuckLakeColumnStats> stats) {
 	if (type.HasAlias() || (type.id() == LogicalTypeId::VARCHAR && !StringType::GetCollation(type).empty())) {
 		return string();
 	}
 	if (auto child = ExpressionFilter::GetOptionalFilterChild(expression)) {
-		return GenerateInlinedFilter(*child, column, type);
+		return GenerateInlinedFilter(*child, column, type, stats);
 	}
 	auto is_column = [&](const Expression &expr) {
 		return expr.GetExpressionClass() == ExpressionClass::BOUND_REF &&
@@ -63,7 +64,7 @@ string DuckLakeMetadataManager::GenerateInlinedFilter(const Expression &expressi
 		auto &conjunction = expression.Cast<BoundConjunctionExpression>();
 		vector<string> children;
 		for (auto &child : conjunction.GetChildren()) {
-			auto filter = GenerateInlinedFilter(*child, column, type);
+			auto filter = GenerateInlinedFilter(*child, column, type, stats);
 			if (filter.empty()) {
 				if (expression.GetExpressionType() == ExpressionType::CONJUNCTION_OR) {
 					return string();
@@ -83,7 +84,7 @@ string DuckLakeMetadataManager::GenerateInlinedFilter(const Expression &expressi
 		return string();
 	}
 	try {
-		return InlinedFilterToSQL(expression, column, type);
+		return InlinedFilterToSQL(expression, column, type, stats);
 	} catch (ConversionException &) {
 		return string();
 	}
@@ -118,7 +119,7 @@ string DuckLakeMetadataManager::FormatInlinedFilter(const Expression &expression
 }
 
 string DuckLakeMetadataManager::InlinedFilterToSQL(const Expression &expression, const string &column,
-                                                   const LogicalType &type) {
+                                                   const LogicalType &type, optional_ptr<const DuckLakeColumnStats>) {
 	switch (type.id()) {
 	case LogicalTypeId::BOOLEAN:
 	case LogicalTypeId::TINYINT:

@@ -60,19 +60,27 @@ manager. A shared validator accepts direct comparisons, `IN`, null checks and
 conjunctions. It unwraps DuckDB's optional filters and uses its comparison
 helpers, including reversed operands. An unsupported `AND` child may be omitted;
 an unsupported `OR` child makes the whole disjunction ineligible. The complete
-DuckDB filter remains in the reader in every case.
+DuckDB filter remains in the reader in every case. The reader requests row-id
+ordering only when merging pending deletions. Other reads avoid that internal
+sort; callers still use SQL `ORDER BY` when they need ordered results.
 
 The default metadata path evaluates typed expressions through DuckDB. PostgreSQL
-uses its existing transaction-preserving remote-query path, with the same value
-encoding used for inline writes. This supports booleans, signed and unsigned
+uses its existing transaction-preserving remote-query path and inline value
+encoding. Temporal bounds use the metadata manager's directly typed comparison
+literals, so PostgreSQL can parse them once instead of casting text for every row.
+This supports booleans, signed and unsigned
 integers, wide integers, decimals, floats, doubles, strings, blobs, dates and
 microsecond-or-coarser timestamps, including timestamps with time zones. String
 and blob comparisons use their binary storage; floating constants retain their
 precision and infinity sign.
 
 PostgreSQL stores temporal values as text because DuckDB's date and timestamp
-ranges are wider. A guarded `CASE` casts only finite AD values with four-digit
-years, and retains other values for DuckDB's residual evaluation. This uses the
+ranges are wider. When the scan's table statistics prove both bounds fit the
+backend range, a `CASE` only checks snapshot visibility before casting: expired
+rows need not fit current bounds. Otherwise a guarded `CASE` casts only finite AD values with four-digit years, retaining other values
+for DuckDB's residual evaluation. The reader uses DuckLake's existing snapshot
+and transaction-local statistics checks; current bounds cannot certify an older
+snapshot or a differently typed column. This uses the
 inline writer's canonical, already validated temporal encoding; it does not
 re-validate the calendar of every row using the more expensive statistics
 parser. Nanosecond temporal types remain local on PostgreSQL. Nested paths,
@@ -93,5 +101,5 @@ The metadata manager owns SQL generation because it also owns the physical type
 mapping and inline value encoding. The reader has no PostgreSQL type rules.
 The implementation reuses DuckDB's expression and comparison helpers,
 `CastColumnToTarget`, the inline writer's `DuckLakeUtil::ValueToSQL`, and the
-PostgreSQL comparison type mapping already used for statistics. PostgreSQL SQL
+PostgreSQL comparison type mapping and `CastValueToTarget` used for statistics. PostgreSQL SQL
 executes through `postgres_query`, leaving its execution to that storage engine.

@@ -253,7 +253,9 @@ public:
 	virtual string GetColumnTypeInternal(const LogicalType &column_type);
 	string CastColumnToTarget(const string &column, const LogicalType &type);
 	//! A conservative catalog predicate; the complete filter is still evaluated by the reader.
-	string GenerateInlinedFilter(const Expression &expression, const string &column, const LogicalType &type);
+	//! Optional bounds must describe the physical column at the scan snapshot.
+	string GenerateInlinedFilter(const Expression &expression, const string &column, const LogicalType &type,
+	                             optional_ptr<const DuckLakeColumnStats> stats);
 	//! The inlined rows to flush with typed columns, without those this transaction deleted
 	string InlinedFlushSource(const string &inlined_table_name, const DuckLakeTableEntry &table);
 	//! The order of the rows in a flushed file
@@ -495,7 +497,8 @@ public:
 	virtual idx_t GetNextColumnId(TableIndex table_id);
 	virtual unique_ptr<QueryResult> ReadInlinedData(DuckLakeSnapshot snapshot, const string &inlined_table_name,
 	                                                const vector<string> &columns_to_read,
-	                                                const vector<LogicalType> &types, const string &filter);
+	                                                const vector<LogicalType> &types, const string &filter,
+	                                                bool order_by_row_id);
 	virtual unique_ptr<QueryResult> ReadInlinedDataInsertions(DuckLakeSnapshot start_snapshot,
 	                                                          DuckLakeSnapshot end_snapshot,
 	                                                          const string &inlined_table_name,
@@ -559,9 +562,11 @@ protected:
 
 	virtual string GetLatestSnapshotQuery() const;
 	virtual string GenerateInlinedDataQuery(const string &table_name, const vector<string> &columns_to_read,
-	                                        const string &filter, const string &metadata_table_prefix);
+	                                        const string &filter, const string &metadata_table_prefix,
+	                                        bool order_by_row_id);
 
-	virtual string InlinedFilterToSQL(const Expression &expression, const string &column, const LogicalType &type);
+	virtual string InlinedFilterToSQL(const Expression &expression, const string &column, const LogicalType &type,
+	                                  optional_ptr<const DuckLakeColumnStats> stats);
 	static string FormatInlinedFilter(const Expression &expression, const string &column,
 	                                  const std::function<string(const Value &)> &constant_to_sql);
 

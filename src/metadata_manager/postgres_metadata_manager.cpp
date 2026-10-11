@@ -115,7 +115,7 @@ string PostgresMetadataManager::CastValueToTarget(const Value &value, const Logi
 	return string();
 }
 
-static string PostgresSafeTemporalCast(const string &stats, const LogicalType &type) {
+static string PostgresSafeTemporalStatsCast(const string &stats, const LogicalType &type) {
 	string regex;
 	if (type.id() == LogicalTypeId::DATE) {
 		regex = "'^[0-9]{4}-(0[1-9]|1[0-2])-([0][1-9]|[12][0-9]|3[01])$'";
@@ -143,7 +143,7 @@ static string PostgresSafeTemporalCast(const string &stats, const LogicalType &t
 string PostgresMetadataManager::CastStatsToTarget(const string &stats, const LogicalType &type,
                                                   StatsCastType cast_type) {
 	if (IsPostgresTemporalComparisonType(type)) {
-		auto cast = PostgresSafeTemporalCast(stats, type);
+		auto cast = PostgresSafeTemporalStatsCast(stats, type);
 		if (cast_type == StatsCastType::ORDERING) {
 			return cast;
 		}
@@ -158,8 +158,18 @@ string PostgresMetadataManager::CastStatsToTarget(const string &stats, const Log
 	return string();
 }
 
+static bool CanCastPostgresTemporalColumn(const LogicalType &type, optional_ptr<const DuckLakeColumnStats> stats) {
+	if (!stats || stats->type != type || stats->bounds_unknown || !stats->has_min || !stats->has_max) {
+		return false;
+	}
+	auto min = TryCastStatsBound(stats->min, type);
+	auto max = TryCastStatsBound(stats->max, type);
+	return min && max && CanCastPostgresTemporalValue(*min, type) && CanCastPostgresTemporalValue(*max, type);
+}
+
 string PostgresMetadataManager::InlinedFilterToSQL(const Expression &expression, const string &column,
-                                                   const LogicalType &type) {
+                                                   const LogicalType &type,
+                                                   optional_ptr<const DuckLakeColumnStats> stats) {
 	auto target_type = GetPostgresComparisonType(type);
 	auto filter_column = column;
 	const auto temporal = IsPostgresTemporalComparisonType(type);
@@ -175,8 +185,8 @@ string PostgresMetadataManager::InlinedFilterToSQL(const Expression &expression,
 		return FormatInlinedFilter(expression, column, [](const Value &) { return string(); });
 	}
 	auto filter = FormatInlinedFilter(expression, filter_column, [&](const Value &value) {
-		if (temporal && !value.IsNull() && !CanCastPostgresTemporalValue(value, type)) {
-			return string();
+		if (temporal && !value.IsNull()) {
+			return CastValueToTarget(value, type);
 		}
 		auto literal = DuckLakeUtil::ValueToSQL(*this, *transaction.GetConnection().context, value);
 		if (type.IsIntegral()) {
@@ -185,6 +195,13 @@ string PostgresMetadataManager::InlinedFilterToSQL(const Expression &expression,
 		return "CAST(" + literal + " AS " + target_type + ")";
 	});
 	if (temporal && !filter.empty()) {
+		if (CanCastPostgresTemporalColumn(type, stats)) {
+			// Current bounds do not cover expired rows; keep the cast behind snapshot visibility.
+			auto names = InlinedColNames();
+			return StringUtil::Format("(CASE WHEN {SNAPSHOT_ID} >= %s AND "
+			                          "({SNAPSHOT_ID} < %s OR %s IS NULL) THEN (%s) ELSE true END)",
+			                          names.begin_snapshot, names.end_snapshot, names.end_snapshot, filter);
+		}
 		// Inline values are serialized typed values; only the year range needs guarding before the cast.
 		return StringUtil::Format("(CASE WHEN substring(%s FROM 5 FOR 1) = '-' AND strpos(%s, 'BC') = 0 "
 		                          "THEN (%s) ELSE true END)",
@@ -392,13 +409,13 @@ string PostgresMetadataManager::GetLatestSnapshotQuery() const {
 
 string PostgresMetadataManager::GenerateInlinedDataQuery(const string &table_name,
                                                          const vector<string> &columns_to_read, const string &filter,
-                                                         const string &metadata_table_prefix) {
+                                                         const string &metadata_table_prefix, bool order_by_row_id) {
 	if (filter.empty()) {
 		return DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, columns_to_read, filter,
-		                                                         metadata_table_prefix);
+		                                                         metadata_table_prefix, order_by_row_id);
 	}
 	auto remote_query = DuckLakeMetadataManager::GenerateInlinedDataQuery(table_name, columns_to_read, filter,
-	                                                                      "{METADATA_SCHEMA_ESCAPED}");
+	                                                                      "{METADATA_SCHEMA_ESCAPED}", order_by_row_id);
 	return StringUtil::Format(
 	    "SELECT * FROM postgres_query({METADATA_CATALOG_NAME_LITERAL}, %s, use_transaction = true)",
 	    SQLString(remote_query));

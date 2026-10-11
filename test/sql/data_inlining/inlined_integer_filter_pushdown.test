@@ -136,6 +136,21 @@ DELETE FROM items WHERE id = 73
 statement ok
 UPDATE items SET text = 'committed' WHERE id = 74
 
+# A committed update can append an older row id after newer rows in the catalog.
+statement ok
+BEGIN
+
+statement ok
+DELETE FROM items WHERE id IN (2, 74)
+
+query I
+SELECT id FROM items WHERE id >= 73 AND id <= 75 ORDER BY id
+----
+75
+
+statement ok
+ROLLBACK
+
 query IT
 SELECT id, text FROM items WHERE id IN (73, 74) ORDER BY id
 ----
